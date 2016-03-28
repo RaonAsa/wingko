@@ -1,0 +1,6 @@
+/target
+/.svn
+/.setting
+.DS_Store
+/src/main/webapp/resources/img/main/*.png
+

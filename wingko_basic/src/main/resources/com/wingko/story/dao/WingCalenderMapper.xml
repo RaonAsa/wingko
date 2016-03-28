@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="WingCalenderMapper">
+
+	<insert id="insert" parameterType="WingCalender">
+		insert tb_wing_calender (wing_date, wing_type, wing_name, used)
+		values(#{wing_date}, #{wing_type}, #{wing_name}, #{used})
+	</insert>
+	
+	<update id="update" parameterType="WingCalender">
+		update tb_wing_calender
+		set wing_date = #{wing_date}, wing_type = #{wing_type}, wing_name = #{wing_name}, used = #{used}
+		where calender_id = #{calender_id}
+	</update>
+	
+	<delete id="delete" parameterType="WingCalender">
+		delete from tb_wing_calender where calender_id = #{calender_id}
+	</delete>
+	
+	<select id="select" parameterType="WingCalender" resultType="WingCalender">
+		select * from tb_wing_calender where calender_id = #{calender_id}
+	</select>
+	
+	<select id="search_list" parameterType="WingCalender" resultType="WingCalender">
+		select * from tb_wing_calender
+		order by wing_date desc
+		limit #{start_no}, #{pageSize}
+	</select>
+	
+	<select id="search_count" parameterType="WingCalender" resultType="Integer">
+		select count(*) from tb_wing_calender
+	</select>
+
+	<select id="list_date" parameterType="WingCalender" resultType="WingCalender">
+		select * from tb_wing_calender
+		where used = 'Y' and wing_date = #{wing_date}
+		order by wing_type asc
+	</select>
+	
+	<select id="list_month" parameterType="WingCalender" resultType="WingCalender">
+		select * from tb_wing_calender
+		where used = 'Y' and date_format(wing_date, '%Y%m') = date_format(#{wing_date}, '%Y%m')
+		order by wing_date asc, wing_type asc
+	</select>
+	
+</mapper>

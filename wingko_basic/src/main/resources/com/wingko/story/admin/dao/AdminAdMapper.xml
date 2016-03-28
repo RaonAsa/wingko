@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminAdMapper">
+
+	<select id="list" parameterType="AdData" resultType="AdData">
+		select
+			*
+		from tb_ad A
+			join tb_ad_manage B on A.ad_no = B.ad_no
+		where A.no > 0
+		<if test="ad_no != null and ad_no > 0">
+			and A.ad_no = #{ad_no}
+		</if>
+		<if test="use_flag != null and use_flag != ''">
+			and A.use_flag = #{use_flag}
+		</if>
+		order by A.no desc
+	</select>
+	
+	<select id="listCount" parameterType="AdData" resultType="Integer">
+		select
+			count(*)
+		from tb_ad A
+			join tb_ad_manage B on A.ad_no = B.ad_no
+		where A.no > 0
+		<if test="ad_no != null and ad_no > 0">
+			and A.ad_no = #{ad_no}
+		</if>
+		<if test="use_flag != null and use_flag != ''">
+			and A.use_flag = #{use_flag}
+		</if>
+	</select>
+	
+	<select id="select" parameterType="AdData" resultType="AdData">
+		select * from tb_ad where no = #{no}
+	</select>
+
+	<insert id="insert" parameterType="AdData">
+		insert tb_ad (ad_no, title, content, link, image, use_flag, edit_date, reg_date)
+		values(#{ad_no}, #{title},  #{content}, #{link},  #{image}, 'N', sysdate(), sysdate())
+	</insert>
+
+	<update id="update" parameterType="AdData">
+		update tb_ad
+		set ad_no = #{ad_no}, title = #{title}, content = #{content}, link = #{link}, use_flag = #{use_flag}, edit_date = sysdate()
+			<if test="image != null and image != ''">
+				, image = #{image}
+			</if>
+		where no = #{no}
+	</update>
+	
+	<delete id="delete" parameterType="AdData">
+		delete from tb_ad
+		where no = #{no}
+	</delete>
+	
+	
+	
+	<select id="adManageList" resultType="SelectData">
+		select
+		  	concat(ad_name, '(', image_size, ')') as title
+		  , ad_no as value
+		from tb_ad_manage
+		where parent_ad_no > 0
+		order by ad_no asc
+	</select>
+	
+	
+	
+	
+	<select id="wordList" resultType="TopWord">
+		select * from tb_top_word order by rank
+	</select>
+	<update id="wordUpdate" parameterType="TopWord">
+		update tb_top_word
+		set word = #{word}, edit_date = sysdate()
+		where rank = #{rank}
+	</update>
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminInfoMapper">
+
+	<select id="infoList" parameterType="Info" resultType="Info">
+		select * from tb_info order by no asc
+	</select>
+	<select id="info" parameterType="Info" resultType="Info">
+		select * from tb_info where no = #{no}
+	</select>
+	<insert id="infoInsert" parameterType="Info">
+		insert into tb_info (menu, content, title, reg_date)
+		values(#{menu}, #{content}, #{title}, sysdate())
+	</insert>
+	<update id="infoUpdate" parameterType="Info">
+		update tb_info
+		set menu = #{menu}, content = #{content}, title = #{title}, reg_date = sysdate()
+		where no = #{no}
+	</update>
+	<delete id="infoDelete" parameterType="Info">
+		delete from tb_info where no = #{no}
+	</delete>
+
+</mapper>

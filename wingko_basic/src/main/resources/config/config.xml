@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
+<properties>
+
+	<comment>Upload Environment</comment>
+	<entry key="uploadTempPath">/Users/baesunghan/git/wingko/wingko_basic/src/main/webapp/upload</entry>
+	<entry key="urlPath">http://localhost:8080/upload/</entry>
+	<entry key="fileSize">10000001</entry>
+	
+
+</properties>

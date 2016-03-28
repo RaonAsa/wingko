@@ -1,0 +1,157 @@
+@charset "utf-8";
+/* CSS Document */
+* { padding: 0; margin: 0; }
+/*Common*/
+form, p, blockquote, dl, dd, dt { margin:0; padding:0; }
+ul {list-style:none; margin:0; padding:0;}
+li {list-style:none; margin:0; padding:0;}
+ol {list-style:none; margin:0; padding:0;}
+fieldset { margin: 0; padding: 0; border: 0; }
+table{padding:0; margin:0; border-collapse:collapse;}
+caption{display:none;}
+img{border:0;}
+
+/*LINK*/
+ a:link { color:#7d7d7d; text-decoration: none; white-space: nowrap;} 
+ a:visited{ color:#7d7d7d; text-decoration: none; } 
+ a:active{ color:#0082d4;text-decoration: none; } 
+ a:hover{ color:#0082d4; text-decoration: none; }
+
+/*input*/
+.s_txt{height:26px; width:260px; .vertical-align:bottom; .width:160px; border:0; color:#333; font-size:16px; font-weight:bold; margin-bottom:2px; margin-bottom:0 \0/IE8;}/*메인검색*/
+@media screen and (-webkit-min-device-pixel-ratio:0){
+.s_txt{height:26px; width:260px; .vertical-align:bottom; .width:160px; border:0; color:#333; font-size:16px; font-weight:bold; margin-bottom:4px;}/*메인검색 - 크롬*/
+}
+.ex_txt{width:113px; height:19px; padding-top:3px; color:#333; text-indent:5px; font-size:12px; border-top:1px solid #dedede; border-right:1px solid #dedede; border-bottom:1px solid #dedede; border-left:none;}/*나라별 환율*/
+.w_txt{width:122px; height:20px; padding-top:7px; color:#333; text-indent:5px; font-size:12px; border:1px solid #dedede; border-right:none;}
+
+
+/*Layout*/
+html{margin:0; padding:0;}
+body{background:url(../../img/main/bg_main.png) repeat-x; margin:0; padding:0; font-family:SimHei, Simsun, Tahoma;}
+#Wrapper{width:1036px; margin:0 auto;}
+#Top{}
+#Left{float:left; width:213px; .margin-top:-5px;}
+#Center{float:left; width:592px; margin-left:9px; margin-top:8px; margin-bottom:30px; }
+#Right{float:right; width:213px; background:url(../../img/main/bg_right.png) no-repeat; .margin-top:-4px;}
+#Bottom{width:100%; clear:both; height:150px; background:url(../../img/main/bg_bottom.png) repeat-x;}
+
+/*------------------------절대값 버튼--------------------*/
+.m_pic_prev{width:48px; height:48px; background:url(../../img/main/m_pic_prev.png) no-repeat; z-index:2; position:absolute; cursor:pointer; margin-top:106px; margin-left:15px;}
+.m_pic_next{width:48px; height:48px; background:url(../../img/main/m_pic_next.png) no-repeat; z-index:2; position:absolute; cursor:pointer; margin-top:106px; margin-left:973px;}
+.b_pic_prev{width:14px; height:14px; background:url(../../img/menu/top_banner_prev.png) no-repeat;z-index:2; position:absolute; cursor:pointer; margin-top:75px;}
+.b_pic_next{width:13px; height:14px; background:url(../../img/menu/top_banner_next.png) no-repeat;z-index:2; position:absolute; cursor:pointer; margin-top:75px; margin-left:14px;}
+.toon_off{width:11px; height:11px; background:url(../../img/toon_off.png) no-repeat;z-index:2; position:absolute; cursor:pointer; margin-top:12px; margin-left:250px;}
+.toon_on{width:11px; height:11px; background:url(../../img/toon_on.png) no-repeat;z-index:2; position:absolute; cursor:pointer; margin-top:12px; margin-left:267px;}
+
+/*-------------------------------------------------Top----------------------------------------------------*/
+ul.header{width:100%; text-align:right; margin-right:30px; margin-top:8px;}/*header menu*/
+ul.header li{display:inline; background:url(../../img/menu/top_line.png) no-repeat 0 50%; padding-left:19px; margin-right:18px;}
+ul.header li.first{background:none; margin-right:18px;}
+ul.header li.end{margin-right:0;}
+
+.logo{float:left; width:222px; margin-top:20px;} /*로고*/
+.search{float:left; width:353px; height:34px; border:3px solid #0082d4; margin-top:45px; margin-left:95px; text-align:right;}/*검색*/
+.top_banner{float:right; width:222px; margin-top:4px; margin-top:/*\**/6px;.margin-top:4px;}/*배너*/
+@media screen and (-webkit-min-device-pixel-ratio:0){
+.top_banner{float:right; width:222px; margin-top:5px;}/*배너*/
+}
+ 
+ul.m_menu{clear:both; width:100%; }/*메인메뉴*/
+ul.m_menu li{float:left; background:url(../../img/menu/m_line.png) no-repeat 0 50%; background-size:1px 13px; padding-left:20px; margin-right:20px; margin-top:-1px; }
+ul.m_menu li.first{background:none; padding-left:0;}
+ul.m_menu li.second{background:none;}
+ul.m_menu li.end{ background:none; padding-left:40px;}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.main_picture{clear:both; padding-top:-1; padding-top:/*\**/2px; .margin-top:-6px; }/*메인이미지*/
+@media screen and (-webkit-min-device-pixel-ratio:0){
+.main_picture{clear:both; padding-top:0;}/*메인이미지*/
+}
+/*-------------------------------------------------Left----------------------------------------------------*/
+.traffic{width:184px; margin-left:27px; background:#fff; border-left:1px solid #dedede; border-right:1px solid #dedede; border-bottom:1px solid #dedede; text-align:center; padding:11px 0 8px 0; .margin-top:-4px;}/*교통*/
+.traffic img{margin-bottom:7px;}
+
+.exchange_rate{width:168px; margin-left:27px; background:#fff; border-left:1px solid #dedede; border-right:1px solid #dedede; border-bottom:1px solid #dedede; padding-left:18px; padding:16px 0 0 16px;
+				font-size:12px; color:#797979; .margin-top:-4px;}
+.exchange_rate ul{margin-top:7px; margin-bottom:22px;}/*나라별 환율검색*/
+.exchange_rate ul li{margin-bottom:5px;}
+
+table.ex_rate{width:147px; margin-bottom:20px;} /*환율*/
+table.ex_rate th{text-align:left; padding-bottom:4px;}
+table.ex_rate td{padding-bottom:8px; color:#333;}
+table.ex_rate td.date{font-size:14px; font-family:Arial, Helvetica, sans-serif;}
+table.ex_rate td.rate{height:38px; background:url(../../img/main/bg_exchange.png) no-repeat; font-size:14px; color:#fff; text-align:center; letter-spacing:3px;}
+table.ex_rate td.won{font-size:12px; font-weight:bold; text-align:right; font-family:Verdana, Arial, Helvetica, sans-serif;}
+
+.map{width:184px; margin-left:27px; background:#fff; border-left:1px solid #dedede; border-right:1px solid #dedede; border-bottom:1px solid #dedede; text-align:center; .margin-top:-4px;}/*지도*/
+
+.weather{width:184px; margin-left:27px; text-align:center; background:#fff; border-left:1px solid #dedede; border-right:1px solid #dedede; border-bottom:1px solid #dedede;  padding:12px 0 18px 0; .margin-top:-4px;}/*날씨*/
+table.weather_list{width:120px; margin:0 auto;}
+table.weather_list td{color:#333; font-size:11px; font-family:Verdana, Arial, Helvetica, sans-serif; height:20px; text-align:left; padding-left:10px;}
+table.weather_list td span{font-size:20px; font-weight:bold;}
+table.weather_list td.pic{height:60px; padding-left:0;}
+table.weather_list td.space{height:12px;}
+
+.time{width:184px; margin-left:27px; margin-top:12px;}/*시간위젯*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------Center----------------------------------------------------*/
+.korea_news{float:left; width:281px; height:261px; border:1px solid #dedede; background:#fff; padding:15px 0 15px 15px; margin-bottom:8px;}/*한국뉴스*/
+.more01{float:right; margin-right:12px; .float:none; .margin-left:170px;}
+table.news{width:100%; margin-top:20px;}
+table.news th{text-align:left; padding-bottom:20px;}
+table.news th img{width:70px; height:58px;}
+table.news td{font-size:11px; color:#7d7d7d; line-height:15px; padding-bottom:20px; padding-right:12px;}
+table.news td span{font-size:12px; color:#252525;}
+table.news th.end{padding-bottom:0;}
+table.news td.end{padding-bottom:0;}
+
+.toon{float:right; width:293px; height:291px; border:1px solid #dedede; border-left:none; background:#fff;}/*만화*/
+
+.propose{clear:both; margin-bottom:8px;}/*vs,로드맵*/
+
+ul.add_tab{height:36px;}/*뉴스탭 메뉴*/
+ul.add_tab li{float:left;}
+.add_news{border:1px solid #dedede; background:#fff; padding:0 0 15px 15px; margin-bottom:8px; _margin-top:-4px; _border-top:1px solid #fff;}/*한국뉴스*/
+.m_title{background:#fff; border:1px solid #dedede; padding:12px; .padding:10px; .padding-bottom:5px;}/*공지사항, 예약, 뉴스 타이틀*/
+.more02{float:right; .float:none; .margin-left:485px;}
+.more03{float:right; .float:none; .margin-left:470px;}
+ul.notice{background:#fff; border:1px solid #dedede; padding:15px; height:44px; border-top:none;}/*공지사항 리스트*/
+ul.notice li{float:left; width:46%; background:url(../../img/main/dot.png) no-repeat 0 50%; padding-left:10px; color:#707070; font-size:12px; margin-bottom:13px; padding-right:10px;}
+ul.notice li.end{margin-bottom:0;}
+.c_banner{margin-top:8px; margin-bottom:8px; }/*배너*/
+@media screen and (-webkit-min-device-pixel-ratio:0){
+.c_banner{margin-top:8px; margin-bottom:8px; }/*배너*/
+}
+.toon2{margin-bottom:8px; .margin-bottom:3px; _margin-bottom:1px;}/*웹툰2*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------Right----------------------------------------------------*/
+
+.coupon{width:154px; background:#fff; padding:16px 15px; border:1px solid #dedede; border-top:none;} /*쿠폰*/
+.coupon ol li{color:#4e4d52; font-size:12px; margin-bottom:12px; height:15px; padding-top:3px;}
+.coupon ol li.one{padding-left:22px; background:url(../../img/main/n1.png) no-repeat 0 50%;}
+.coupon ol li.two{padding-left:22px; background:url(../../img/main/n2.png) no-repeat 0 50%;}
+.coupon ol li.three{padding-left:22px; margin-bottom:0; background:url(../../img/main/n3.png) no-repeat 0 50%;}
+
+.weibo{width:164px; padding:7px 10px 0 10px; background:#fff; border:1px solid #dedede; border-top:none; .margin-top:-4px;}/*웨이보*/
+table.weibo_view{width:100%;}
+table.weibo_view th{padding-bottom:17px; text-align:left;}
+table.weibo_view td{padding-bottom:17px; color:#7d7d7d; font-size:11px; line-height:16px;}
+
+.rail_pass{width:164px; padding:11px 10px 27px 10px; background:#fff; border:1px solid #dedede; border-top:none; .margin-top:-4px;}/*레일패스*/
+.rail_pass img{border:1px solid #dedede;}
+.rail_pass dl{margin-top:12px;}
+.rail_pass dl dt{font-size:12px; color:#252525; margin-bottom:6px; letter-spacing:1px;}
+.rail_pass dl dd{font-size:11px; color:#707070;}
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*-------------------------------------------------Bottom----------------------------------------------------*/
+.copyright{width:1036px; margin:0 auto;}
+ul.company{padding-top:12px; margin-bottom:40px;}
+@media screen and (-webkit-min-device-pixel-ratio:0){
+ul.company{padding-top:8px; margin-bottom:40px;}
+}
+ul.company li{float:left; background:url(../../img/main/b_line.png) no-repeat 0 50%; padding-left:14px; margin-right:14px;}
+ul.company li.first{background:none; padding-left:0;}
+
+

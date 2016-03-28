@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ScrapMapper">
+
+	<insert id="insert" parameterType="Scrap">
+		insert into tb_scrap(parent_no, parent_code, user_no, reg_date)
+		values (#{parent_no}, #{parent_code}, #{user_no}, sysdate())
+	</insert>
+	
+	<delete id="delete" parameterType="Scrap">
+		delete from tb_scrap
+		where no = #{no} and user_no = #{user_no}
+	</delete>
+	
+	<select id="check" parameterType="Scrap" resultType="Integer">
+		select IFNULL(count(no), 0) from tb_scrap where user_no = #{user_no} and parent_no = #{parent_no} and parent_code = #{parent_code}
+	</select>
+	
+</mapper>

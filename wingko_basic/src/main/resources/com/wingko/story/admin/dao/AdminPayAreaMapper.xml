@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminPayAreaMapper">
+
+	<insert id="insert" parameterType="PayArea">
+		insert pay_area (pid, name, phone, area, address)
+		values(#{pid}, #{name}, #{phone}, #{area}, #{address} )
+	</insert>
+	
+	<update id="update" parameterType="PayArea">
+		update pay_area
+		set name = #{name}, phone = #{phone}, area = #{area}, address = #{address} 
+		where pid = #{pid}
+	</update>
+	
+	<select id="select" parameterType="PayArea" resultType="PayArea">
+		select * from pay_area where pid = #{pid}
+	</select>
+	
+</mapper>

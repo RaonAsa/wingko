@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdMapper">
+
+	<select id="getMainTopAd" resultType="AdData">
+		select
+			*
+		from tb_ad A
+			join tb_ad_manage B on A.ad_no = B.ad_no
+		where A.ad_no = 1
+			and A.use_flag = 'Y'
+		order by rand()
+	</select>
+	
+	<select id="getMainTopRightAd" resultType="AdData">
+		select
+			*
+		from tb_ad A
+			join tb_ad_manage B on A.ad_no = B.ad_no
+		where A.ad_no = 70
+			and A.use_flag = 'Y'
+		order by rand()
+	</select>
+	
+	<select id="getMainTopBottomAd" resultType="AdData">
+		select
+			*
+		from tb_ad A
+			join tb_ad_manage B on A.ad_no = B.ad_no
+		where A.ad_no = 71
+			and A.use_flag = 'Y'
+		order by rand()
+	</select>
+
+	<select id="getAdList" parameterType="Integer" resultType="AdData">
+		select
+			A.*, B.position
+		from
+			tb_ad A,
+			(
+				select A.ad_no,
+					(select no from tb_ad where ad_no = A.ad_no and use_flag ='Y' order by rand() limit 1) as no
+					, B.position
+				from tb_ad A, tb_ad_manage B
+				where A.ad_no = B.ad_no
+					and B.parent_ad_no = #{parent_ad_no}
+					and use_flag ='Y'
+				group by A.ad_no
+				order by A.ad_no
+			) B
+		where A.no = B.no
+		order by A.ad_no
+	</select>
+	
+	<select id="getAd" parameterType="Integer" resultType="AdData">
+		select
+			*
+		from tb_ad A
+			join tb_ad_manage B on A.ad_no = B.ad_no
+		where A.ad_no = #{adNo}
+			and A.use_flag = 'Y'
+		order by rand() limit 1
+	</select>
+
+	<insert id="insert" parameterType="AdData">
+		insert tb_ad (ad_no, title, content, link, image, use_flag, edit_date, reg_date)
+		values(#{ad_no}, #{title},  #{content}, #{link},  #{image}, 'N', sysdate(), sysdate())
+	</insert>
+
+	<update id="update" parameterType="AdData">
+		update tb_ad
+		set ad_no = #{ad_no}, title = #{title}, content = #{content}, link = #{link}, use_flag = #{use_flag}, edit_date = sysdate()
+			<if test="image != null and image != ''">
+				, image = #{image}
+			</if>
+		where no = #{no}
+	</update>
+	
+	<delete id="delete" parameterType="AdData">
+		delete from tb_ad
+		where no = #{no}
+	</delete>
+	
+	
+	
+	<select id="adManageList" resultType="SelectData">
+		select
+		  	concat(ad_name, '(', image_size, ')') as title
+		  , ad_no as value
+		from tb_ad_manage
+		order by ad_no asc
+	</select>
+	
+	<insert id="hitLog" parameterType="HashMap">
+		insert into tb_ad_log(tb_ad_no, user_no, reg_date)
+		values(#{tb_ad_no}, #{user_no}, sysdate())
+	</insert>
+	
+	
+	
+	<select id="getRank" resultType="TopWord">
+		select * from tb_top_word order by rank asc
+	</select>
+
+</mapper>

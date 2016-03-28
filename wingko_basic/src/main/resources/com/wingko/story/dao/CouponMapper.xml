@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CouponMapper">
+
+	
+
+	<select id="getStoreCouponList" parameterType="HashMap" resultType="StoreCoupon">
+	
+		<if test="best == 1">
+			select
+				*
+			from
+				tb_store_coupon A,
+				(
+					select 
+						A.coupon_no
+					from 
+						tb_store_coupon A,
+						tb_store B
+					where A.store_no = B.store_no
+						and A.use_flag = 'Y' and B.use_flag = 'Y'
+						order by print_count desc
+					limit #{start_no}, #{pageSize}
+				) B
+			where A.coupon_no = B.coupon_no
+			order by print_count desc
+		</if>
+		<if test="best == 0">
+			select
+				*
+			from
+				tb_store_coupon A,
+				(
+					select 
+						A.coupon_no
+					from 
+						tb_store_coupon A,
+						tb_store B
+					where A.store_no = B.store_no
+						and A.use_flag = 'Y' and B.use_flag = 'Y'
+						<if test="location_no != ''">
+							and B.location_no in (select location_no from tb_location where parent_location_no = #{location_no})
+						</if>
+						<if test="category_no != ''">
+							and B.category_no in (select category_no from tb_category where parent_category_no = #{category_no})
+						</if>
+						order by A.reg_date desc
+					limit #{start_no}, #{pageSize}
+				) B
+			where A.coupon_no = B.coupon_no
+			order by reg_date desc
+		</if>
+	</select>
+	
+	<select id="getStoreCouponListCount" parameterType="HashMap" resultType="Integer">
+		select 
+			count(A.coupon_no)
+		from 
+			tb_store_coupon A,
+			tb_store B
+		where A.store_no = B.store_no
+			and A.use_flag = 'Y' and B.use_flag = 'Y'
+			<if test="location_no != ''">
+				and B.location_no in (select location_no from tb_location where parent_location_no = #{location_no})
+			</if>
+			<if test="category_no != ''">
+				and B.category_no in (select category_no from tb_category where parent_category_no = #{category_no})
+			</if>
+	</select>
+	
+
+</mapper>

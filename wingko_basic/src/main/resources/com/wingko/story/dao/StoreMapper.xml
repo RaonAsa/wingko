@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="StoreMapper">
+
+	<select id="getStore" parameterType="Store" resultType="Store">
+		select
+			A.*, B.parent_category_no
+		from
+			tb_store A,
+			tb_category B
+		where A.category_no = B.category_no and store_no = #{store_no}
+	</select>
+	
+	
+	<select id="getStoreList" parameterType="Store" resultType="Store">
+		select
+			A.*
+		from
+			tb_store A,
+			(
+				select
+					store_no
+				from	tb_store A,
+						tb_location B
+				where 
+						A.location_no = B.location_no
+					and B.parent_location_no = #{location_no}
+					and category_no = #{category_no}
+					and use_flag = 'Y'
+				order by store_no desc
+				limit #{start_no}, #{pageSize}
+			) B
+		where A.store_no = B.store_no
+		order by A.store_no desc
+	</select>
+	
+	<select id="getStoreListCount" parameterType="Store" resultType="Integer">
+		select
+			count(A.store_no)
+		from	tb_store A,
+				tb_location B
+		where 
+				A.location_no = B.location_no
+			and B.parent_location_no = #{location_no}
+			and category_no = #{category_no}
+			and use_flag = 'Y'
+	</select>
+	
+	
+	<select id="getStoreRippleList" parameterType="Ripple" resultType="Ripple">
+		select length(ifnull(reply_order, ''))/2 level, A.*, B.user_id 
+		  from tb_ripple A, tb_member B
+		 where A.user_no = B.user_no and parent_no = #{parent_no} and parent_code = #{parent_code}
+		 order by reply_order asc, no asc
+	</select>
+
+	<select id="getStoreRippleListCount" parameterType="Ripple" resultType="Integer">
+		select count(A.no) from tb_ripple A, tb_member B
+		where A.user_no = B.user_no and parent_no = #{parent_no} and parent_code = #{parent_code}
+	</select>
+
+	<select id="getNewReplyOrder" parameterType="Ripple" resultType="String">
+		select lpad(ifnull(max(reply_order), concat(#{reply_order}, '00')) + 1, length(#{reply_order})+2, '0')
+		  from tb_ripple
+		 where parent_no = #{parent_no} 
+		   and parent_code = #{parent_code}
+		   and reply_order like concat(#{reply_order}, '%')
+		   and length(reply_order) = length(#{reply_order})+2
+   	</select>
+
+	<insert id="setStoreRippleInsert" parameterType="Ripple">
+		insert tb_ripple(parent_no, parent_code, user_no, content, reply_order, reg_date)
+		values(#{parent_no}, #{parent_code}, #{user_no}, #{content}, #{reply_order}, sysdate())
+	</insert>
+
+	<update id="setStoreRippleUpdate" parameterType="Ripple">
+		update tb_ripple
+		set content = #{content}
+		where no = #{no}
+	</update>
+
+	<delete id="setStoreRippleDelete" parameterType="Ripple">
+		delete from tb_ripple where no = #{no} and user_no = #{user_no}
+	</delete>
+	
+	
+	<select id="getStoreMenuList" parameterType="Store" resultType="StoreMenu">
+		select * from tb_store_menu where store_no = #{store_no} and use_flag='Y' order by menu_no asc
+	</select>
+	
+	<select id="getStoreCouponList" parameterType="Store" resultType="StoreCoupon">
+		select * from tb_store_coupon where store_no = #{store_no} and use_flag='Y' order by coupon_no asc
+	</select>
+
+
+	<select id="getCategoryLocationInfo" parameterType="HashMap" resultType="CategoryLocation">
+		select * from tb_category_location_info
+		where category_no = #{category_no}
+			and location_no = #{location_no}
+	</select>
+	
+	<select id="getNewsRand" parameterType="String" resultType="News">
+		select 
+			A.*
+		from 
+			tb_news A,
+			tb_store B
+		where A.store_no = B.store_no
+			and B.category_no = #{category_no}
+			and A.use_flag = 'Y'
+			and B.use_flag = 'Y'
+		order by rand()
+		limit 3
+	</select>
+	
+	<select id="getStoreRand" parameterType="String" resultType="Store">
+		select 
+			*
+		from 
+			tb_store
+		where location_no = #{location_no}
+			and use_flag = 'Y'
+		order by rand()
+		limit 3;
+	</select>
+	
+	<select id="getLocationForSelect" parameterType="HashMap" resultType="SelectData">
+		select
+			name as title
+		  , location_no as value
+		from tb_location
+		where depth = #{depth}
+			<if test="depth == 2">
+				and parent_location_no = #{location_no}
+			</if>
+		order by parent_location_no asc, location_no asc
+	</select>
+
+	<select id="getCategoryForSelect" parameterType="HashMap" resultType="SelectData">
+		select
+			name as title
+		  , category_no as value
+		from tb_category
+		where depth = #{depth}
+			<if test="depth == 2">
+				and parent_category_no = #{category_no}
+			</if>
+		order by parent_category_no asc, category_no asc
+	</select>
+</mapper>

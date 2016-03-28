@@ -1,0 +1,75 @@
+@charset "utf-8";
+/* CSS Document */
+* { padding: 0; margin: 0; }
+/*Common*/
+form, p, blockquote, dl, dd, dt { margin:0; padding:0; }
+ul {list-style:none; margin:0; padding:0;}
+li {list-style:none; margin:0; padding:0;}
+ol {list-style:none; margin:0; padding:0;}
+fieldset { margin: 0; padding: 0; border: 0; }
+table{padding:0; margin:0; border-collapse:collapse;}
+caption{display:none;}
+img{border:0;}
+
+/*LINK*/
+ a:link { color:#7d7d7d; text-decoration: none; white-space: nowrap;} 
+ a:visited{ color:#7d7d7d; text-decoration: none; } 
+ a:active{ color:#0082d4;text-decoration: none; } 
+ a:hover{ color:#0082d4; text-decoration: none; }
+
+
+
+/*Layout*/
+html{margin:0; padding:0;}
+body{background:url(/resources/img/main/bg_main_onlytop.png) repeat-x; margin:0; padding:0; font-family: Microsoft-yahei, SimHei, Simsun, Tahoma;}
+#Wrapper{width:1036px; margin:0 auto;}
+#Top{position:relative; height:150px; }
+#Left{float:left; width:213px; background:url(/resources/img/main/tit_traffic.png) 0 0 no-repeat;}
+#Center{float:left; width:592px; margin-left:9px; margin-top:8px; margin-bottom:30px; }
+#Right{float:right; width:213px; background:url(/resources/img/main/bg_right.png) no-repeat; .margin-top:-4px;}
+#Bottom{width:100%; clear:both; height:150px; background:url(/resources/img/main/bg_bottom.png) repeat-x;}
+
+
+/*절대값 전체메뉴*/
+.m_all{width:1000px; height:230px; background:#fff; z-index:3; position:absolute; margin-top:0; margin-left:16px;
+		border-left:4px solid #1268b3; border-right:4px solid #1268b3; border-bottom:4px solid #1268b3;}
+table.all_menu{width:100%;}
+table.all_menu th{font-size:16px; font-weight:bold; color:#0082d4; background:#f2f1f1; border-bottom:1px solid #dfdfdf; padding:13px 0;}
+table.all_menu td{font-size:14px; color:#555555; text-align:center; line-height:20px; border-right:1px solid #dedede; vertical-align:top;}
+table.all_menu td.space{padding:0; height:20px;}
+table.all_menu td.ss{}
+table.all_menu td.end{border-right:hidden; .border-right:none;}
+
+
+/*절대값 2뎁스 메뉴*/
+.a1{margin-top:0; margin-left: -5px; z-index:4; position:absolute; top:192px; background:#fff; padding:0 0 20px 0; border-left:4px solid #1268b3; border-right:4px solid #1268b3; border-bottom:4px solid #1268b3; }/*한국관광정보*/
+.a2{margin-top:0; margin-left: -16px; z-index:4; position:absolute; top:192px; background:#fff; padding:0 0 20px 0; border-left:4px solid #1268b3; border-right:4px solid #1268b3; border-bottom:4px solid #1268b3; }/*지역*/
+.a3{margin-top:0; margin-left: -30px; z-index:4; position:absolute; top:192px; background:#fff; padding:0 0 20px 0; border-left:4px solid #1268b3; border-right:4px solid #1268b3; border-bottom:4px solid #1268b3; }/*쇼핑*/
+.a4{margin-top:0; margin-left: -16px; z-index:4; position:absolute; top:192px; background:#fff; padding:0 0 20px 0; border-left:4px solid #1268b3; border-right:4px solid #1268b3; border-bottom:4px solid #1268b3; }/*숙박*/
+.a5{margin-top:0; margin-left: -16px; z-index:4; position:absolute; top:192px; background:#fff; padding:0 0 20px 0; border-left:4px solid #1268b3; border-right:4px solid #1268b3; border-bottom:4px solid #1268b3; }/*맛집*/
+.a6{margin-top:0; margin-left: -16px; z-index:4; position:absolute; top:192px; background:#fff; padding:0 0 20px 0; border-left:4px solid #1268b3; border-right:4px solid #1268b3; border-bottom:4px solid #1268b3; }/*뷰티*/
+.a7{margin-top:0; margin-left: -16px; z-index:4; position:absolute; top:192px; background:#fff; padding:0 0 20px 0; border-left:4px solid #1268b3; border-right:4px solid #1268b3; border-bottom:4px solid #1268b3; }/*의료*/
+.a8{margin-top:0; margin-left: -16px; z-index:4; position:absolute; top:192px; background:#fff; padding:0 0 20px 0; border-left:4px solid #1268b3; border-right:4px solid #1268b3; border-bottom:4px solid #1268b3; }/*컬쳐*/
+.detial_m{ }
+table.memu_d{width:100%;}
+table.menu_d td{color:#555; font-size:14px; font-weight:bold;  padding:8px 20px 8px 20px; cursor:pointer; text-align:center;}
+table.menu_d td:active{color:#fff;}
+table.menu_d td:hover{color:#fff;background:#1268b3;}
+
+
+/*-------------------------------------------------Top----------------------------------------------------*/
+ul.header{position:absolute; top:0; right:0; height:32px;}
+ul.header li{float:left;}
+ul.header li.first{}
+ul.header li.end{}
+
+.logo{clear:both; float:left; width:263px; height:77px; margin:1px 20px 21px 0;} /*로고*/
+
+
+ul.m_menu{clear:both; width:100%; height:42px;  }/*메인메뉴*/
+ul.m_menu li{height:42px; float:left; vertical-align:top;  }
+ul.m_menu li.on{height:42px;}
+ul.m_menu li.first{background:none; margin-right:32px;}
+ul.m_menu li.second{background:none; padding-left:0;}
+.wingend{position:absolute; top:94px; right:0; width:200px; height:47px;}
+

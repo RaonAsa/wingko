@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TravelMapper">
+
+	<select id="travelInfo" parameterType="TravelInfo" resultType="TravelInfo">
+		select * from tb_travel_info where no = #{no} and menu = #{menu}
+	</select>
+	
+	
+	<select id="travelList" parameterType="Travel" resultType="Travel">
+		select 
+			A.*, B.travel_category_name, C.name as location_name
+		from 
+			tb_travel A
+			inner join tb_travel_category B on A.travel_category_no = B.travel_category_no
+			inner join tb_location C on A.location_no = C.location_no
+			join (
+					select travel_no from tb_travel
+					where travel_category_no = #{travel_category_no}
+						<if test="location_no != null">
+							and location_no = #{location_no}
+						</if>
+					<if test="sort == 'ripple_count'">
+						order by ripple_count desc
+					</if>
+					<if test="sort == 'recommend'">
+						order by recommend desc
+					</if>
+					<if test="sort == 'travel_no'">
+						order by travel_no desc
+					</if>
+					limit #{start_no}, #{pageSize}
+				) D
+				on A.travel_no = D.travel_no
+		where A.travel_category_no = #{travel_category_no}
+			<if test="location_no != null">
+				and A.location_no = #{location_no}
+			</if>
+		<if test="sort == 'ripple_count'">
+			order by ripple_count desc
+		</if>
+		<if test="sort == 'recommend'">
+			order by recommend desc
+		</if>
+		<if test="sort == 'travel_no'">
+			order by travel_no desc
+		</if>
+	</select>
+	
+	<select id="travelListCount" parameterType="Travel" resultType="Integer">
+		select 
+			count(A.travel_no)
+		from 
+			tb_travel A
+			inner join tb_travel_category B on A.travel_category_no = B.travel_category_no
+			inner join tb_location C on A.location_no = C.location_no
+		where A.travel_category_no = #{travel_category_no}
+		<if test="location_no != null">
+			and A.location_no = #{location_no}
+		</if>
+	</select>
+	
+	<select id="travel" parameterType="Travel" resultType="Travel">
+		select 
+			*
+		from 
+			tb_travel A
+			inner join tb_travel_category B on A.travel_category_no = B.travel_category_no
+			inner join tb_location C on A.location_no = C.location_no
+		where A.travel_no = #{travel_no}
+	</select>
+	
+	<update id="travelRippleCountPlus" parameterType="Integer">
+		update tb_travel set ripple_count = ripple_count + 1 where travel_no = #{travel_no}
+	</update>
+	<update id="tarvelRippleCountMinus" parameterType="Integer">
+		update tb_travel set ripple_count = ripple_count - 1 where travel_no = #{travel_no}
+	</update>
+	
+	
+	<select id="travelRailOne" resultType="Travel">
+		select 
+			*
+		from 
+			tb_travel A
+		where travel_category_no = 9
+		order by rand()
+		limit 1
+	</select>
+
+</mapper>

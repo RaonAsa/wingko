@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>WingkoStory</title>
+<style type="text/css">
+body{margin:0; padding:0;}
+.event{width:360px; margin:0 auto;}
+.bt{width:360px; height:67px; background:url(img/p_event02.png) no-repeat; text-align:center;}
+</style>
+<script>
+
+	function setCookie(name, value, expiredays) {
+		var today = new Date();
+	    today.setDate(today.getDate() + expiredays);
+
+	    document.cookie = name + '=' + escape(value) + '; path=/; expires=' + today.toGMTString() + ';'
+	}
+
+	function closeWin() {
+		setCookie("event", "1", 1);
+	}
+
+	function go() {
+		open.close();
+		window.open("/company/event.do?no=13", "_blank"); 
+	}
+</script>
+</head>
+
+<body>
+<div class="event">	
+<img src="img/event_pop.jpg" width="360" height="500" usemap="#Map" border="0" />
+<map name="Map" id="Map">
+  <area shape="rect" coords="81,418,286,459" href="http://www.wingkostory.com/community/notice_view.do?page=1&amp;no=18" target="_blank"javascript:closeWin();" />
+</map>
+</div>
+</body>
+</html>

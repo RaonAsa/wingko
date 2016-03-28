@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NewsMapper">
+
+	<select id="newsTopThree" parameterType="HashMap" resultType="News">
+		select
+			*
+		from tb_news A
+		where A.news_no > 0
+			and A.news_category_no = #{news_category_no}
+			and A.use_flag = 'Y'
+		order by rand() limit #{top}
+	</select>
+	
+	<select id="list" parameterType="News" resultType="News">
+		select
+			A.*
+		from tb_news A,
+			(
+				select news_no from tb_news
+				where news_category_no = #{news_category_no} and use_flag = 'Y'
+				order by news_no desc
+				limit #{start_no}, #{pageSize}
+			) B
+		where
+				A.news_no = B.news_no
+		order by A.news_no desc
+	</select>
+
+	<select id="listCount" parameterType="News" resultType="Integer">
+		select count(news_no) from tb_news
+		where news_category_no = #{news_category_no} and use_flag = 'Y'
+		order by news_no desc
+	</select>
+	
+	
+	<select id="topList" parameterType="News" resultType="News">
+		select
+			A.*
+		from tb_news A,
+			(
+				select news_no from tb_news
+				where news_category_no = #{news_category_no} and use_flag = 'Y' and top_use_flag = 'Y'
+				order by news_no desc
+				limit 4
+			) B
+		where
+				A.news_no = B.news_no
+		order by A.news_no desc
+	</select>	
+	
+	<select id="select" parameterType="News" resultType="News">
+		select * from tb_news where news_no = #{news_no}
+	</select>
+	
+	<update id="newsRippleCount" parameterType="Map">
+		update tb_news
+		set ripple_count = ripple_count + #{increase} 
+		where news_no = #{news_no}
+	</update>
+	
+	<update id="newsHitCount" parameterType="Integer">
+		update tb_news
+		set hit = hit + 1 
+		where news_no = #{news_no}
+	</update>
+
+</mapper>

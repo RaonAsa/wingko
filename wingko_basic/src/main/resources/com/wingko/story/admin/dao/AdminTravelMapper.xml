@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminTravelMapper">
+
+	<select id="list" parameterType="Travel" resultType="Travel">
+		(
+		select
+			A.*,
+			B.name as location_name, B.name_ko as location_name_ko,
+			C.travel_category_name , C.travel_category_name_ko
+		from
+			tb_travel A
+			inner join tb_location B
+				on A.location_no = B.location_no
+			inner join tb_travel_category C
+				on A.travel_category_no = C.travel_category_no  
+		where A.travel_no > 0
+			<if test="travel_category_no != null and travel_category_no != ''">
+				and A.travel_category_no = #{travel_category_no}
+			</if>
+			<if test="location_no != null and location_no != ''">
+				and A.location_no = #{location_no}
+			</if>
+			<if test="search_title != null and search_title != ''">
+				and title like '%${search_title}%'
+			</if>
+		order by A.travel_no desc
+		) limit #{start_no}, #{pageSize}
+	</select>
+	
+	<select id="listCount" parameterType="Travel" resultType="Integer">
+		select
+			count(A.travel_no)
+		from
+			tb_travel A
+			inner join tb_location B
+				on A.location_no = B.location_no
+			inner join tb_travel_category C
+				on A.travel_category_no = C.travel_category_no 
+		where A.travel_no > 0
+			<if test="travel_category_no != null and travel_category_no != ''">
+				and A.travel_category_no = #{travel_category_no}
+			</if>
+			<if test="location_no != null and location_no != ''">
+				and A.location_no = #{location_no}
+			</if>
+			<if test="search_title != null and search_title != ''">
+				and title like '%${search_title}%'
+			</if>
+	</select>
+	
+	<select id="travel" parameterType="Travel" resultType="Travel">
+		select * from tb_travel where travel_no = #{travel_no}
+	</select>
+	
+	<insert id="insert" parameterType="HashMap">
+		insert tb_travel (location_no, travel_category_no, title, content, image, use_flag, ripple_count, hit, recommend, edit_date, reg_date)
+		values(#{location_no}, #{travel_category_no}, #{title}, #{content}, #{image}, 'Y', '0', '0', '0', sysdate(), sysdate() )
+	</insert>
+
+	<update id="update" parameterType="HashMap">
+		update tb_travel
+		set location_no = #{location_no}, travel_category_no = #{travel_category_no}, title = #{title}, content = #{content},  
+			use_flag = #{use_flag}
+			<if test="image != null">
+				, image = #{image}
+			</if>
+		where travel_no = #{travel_no} 
+	</update>
+	
+	<delete id="delete" parameterType="Travel">
+		delete from tb_travel where travel_no = #{travel_no}
+	</delete>
+	
+	
+	
+	<select id="getLocationForSelect" resultType="SelectData">
+		select
+		  (case depth
+		    when 1 then concat('1뎁스: ',name, '(', name_ko, ')')
+		    when 2 then concat('2뎁스: ', (select concat(name, '(', name_ko, ')') from tb_location where location_no = A.parent_location_no ), ' > ', name, '(', name_ko, ')' )
+		    else concat('3뎁스: ', (select concat(name, '(', name_ko, ')') from tb_location where location_no = A.parent_location_no ), ' > ', name, '(', name_ko, ')' )
+		  end) as title
+		  , location_no as value
+		from tb_location A
+		where depth = '1'
+		order by parent_location_no asc, location_no asc
+	</select>
+	
+	<select id="getTravelCategoryForSelect" resultType="SelectData">
+		select
+		  concat(travel_category_name, '(', travel_category_name_ko, ')') as title
+		  , travel_category_no as value
+		from tb_travel_category A
+		order by travel_category_no asc
+	</select>
+	
+
+
+
+
+	<select id="travelInfoList" parameterType="TravelInfo" resultType="TravelInfo">
+		select * from tb_travel_info order by no asc
+	</select>
+	<select id="travelInfo" parameterType="TravelInfo" resultType="TravelInfo">
+		select * from tb_travel_info where no = #{no}
+	</select>
+	<insert id="travelInfoInsert" parameterType="TravelInfo">
+		insert into tb_travel_info (menu, content, title, reg_date)
+		values(#{menu}, #{content}, #{title}, sysdate())
+	</insert>
+	<update id="travelInfoUpdate" parameterType="TravelInfo">
+		update tb_travel_info
+		set menu = #{menu}, content = #{content}, title = #{title}, reg_date = sysdate()
+		where no = #{no}
+	</update>
+	<delete id="travelInfoDelete" parameterType="TravelInfo">
+		delete from tb_travel_info where no = #{no}
+	</delete>
+
+</mapper>

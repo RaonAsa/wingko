@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminPayRefundMapper">
+
+	<select id="list" parameterType="PayRefund" resultType="PayRefund">
+		select * from pay_refund
+		<if test="pid != null">
+			where pid = #{pid}
+		</if>
+	</select>
+	
+	
+	<select id="select" parameterType="String" resultType="PayRefund">
+		select * from pay_refund where pid = #{pid}
+	</select>
+
+	<insert id="insert" parameterType="PayRefund">
+		insert pay_refund (pid, bank_name, bank_number, bank_owner)
+		values( #{pid}, #{bank_name}, #{bank_number}, #{bank_owner} )
+	</insert>
+	
+	<update id="update" parameterType="PayRefund">
+		update pay_refund
+		set bank_name = #{bank_name}, bank_number = #{bank_number}, bank_owner = #{bank_owner}
+		where pid = #{pid}
+	</update>
+	
+</mapper>

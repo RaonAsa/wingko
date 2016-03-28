@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminCouponMapper">
+
+	<select id="list" parameterType="CouponInfo" resultType="Coupon">
+		select * from tb_coupon
+		<if test="idx != null">
+			where info_idx = #{idx}
+		</if>
+		
+	</select>
+	
+	
+	<select id="select" parameterType="String" resultType="Coupon">
+		select * from tb_coupon where coupon_id = #{coupon_id}
+	</select>
+
+	<insert id="insert" parameterType="Coupon">
+		insert tb_coupon (coupon_id, info_idx, user_no, used, payment_id, give_desc, give_date, used_date, reg_date)
+		values(#{coupon_id}, #{info_idx}, #{user_no}, #{used},  #{payment_id}, #{give_desc}, #{give_date}, #{used_date}, sysdate())
+	</insert>
+	
+	<update id="update" parameterType="Coupon">
+		update tb_coupon
+		set info_idx = #{info_idx}, user_no = #{user_no}, used = #{used}, payment_id = #{payment_id}, give_desc = #{give_desc}, give_date = #{give_date}, give_date = #{give_date}, used_date = #{used_date}
+		where info_idx = #{info_idx}
+	</update>
+	
+</mapper>

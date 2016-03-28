@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminPayItemMapper">
+
+	<insert id="insert" parameterType="PayItem">
+		insert pay_item (pid, menu_no, menu_cnt, item_type, item_location, item_store, item_name, used_date, coupon_value, pay_price_ko, pay_price_cn, cancel_yn, reg_date)
+		values(#{pid}, #{menu_no}, #{menu_cnt}, #{item_type}, #{item_location}, #{item_store}, #{item_name}, #{used_date}, #{coupon_value}, #{pay_price_ko}, #{pay_price_cn}, 'N', sysdate() )
+	</insert>
+	
+	<update id="update" parameterType="PayItem">
+		update pay_item
+		set pid = #{pid}, menu_no = #{menu_no}, menu_cnt = #{menu_cnt}, item_type = #{item_type}, item_location = #{item_location}, item_store = #{item_store}, item_name = #{item_name}, used_date = #{used_date}, coupon_value = #{coupon_value}, pay_price_ko = #{pay_price_ko}, pay_price_cn = #{pay_price_cn}, cancel_yn = #{cancel_yn} 
+		where item_id = #{item_id}
+	</update>
+	
+	<update id="set_cancel_yn" parameterType="PayItem">
+		update pay_item
+		set cancel_yn = #{cancel_yn}
+		where pid = #{pid}
+	</update>
+	
+	<select id="select" parameterType="PayItem" resultType="PayItem">
+		select * from pay_item where item_id = #{item_id}
+	</select>
+	
+	<select id="list_item" parameterType="PayItem" resultType="PayItem">
+		select * from pay_item where pid = #{pid} and cancel_yn = 'N'
+		order by item_id asc
+	</select>	
+	
+	<select id="list_item_all" parameterType="PayItem" resultType="PayItem">
+		select * from pay_item where pid = #{pid}
+		order by item_id asc
+	</select>
+	
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminDealMainMapper">
+  
+  	<insert id="insert" parameterType="DealMain">
+		insert tb_deal_main (title, content, summary, start_date, end_date, info_origin, info_transfer, info_faq, discount, cost_sale, cost_discount, image, image_thumb, limit_count, sale_count, used_sort, reg_date)
+		values(#{title}, #{content}, #{summary}, #{start_date}, #{end_date}, #{info_origin}, #{info_transfer}, #{info_faq}, #{discount}, #{cost_sale}, #{cost_discount}, #{image}, #{image_thumb}, #{limit_count}, '0', '0', sysdate() )
+	</insert>
+	
+	<update id="update" parameterType="DealMain">
+		update tb_deal_main
+		set title = #{title}, content = #{content}, summary = #{summary}, start_date = #{start_date}, end_date = #{end_date}, info_origin = #{info_origin}, info_transfer = #{info_transfer}, info_faq = #{info_faq} 
+		, discount = #{discount}, cost_sale = #{cost_sale}, cost_discount = #{cost_discount}, limit_count = #{limit_count}, sale_count = #{sale_count}, used_sort = #{used_sort}
+		<if test="image != null and image != '' ">, image = #{image}</if>
+		<if test="image_thumb != null and image_thumb != '' ">, image_thumb = #{image_thumb}</if>
+		where deal_id = #{deal_id}
+	</update>
+	
+	<delete id="delete" parameterType="DealMain">
+		delete from tb_deal_main
+		where deal_id = #{deal_id} 
+	</delete>
+	
+	<select id="select" parameterType="DealMain" resultType="DealMain">
+		select * from tb_deal_main where deal_id = #{deal_id}
+	</select>
+	
+	<select id="select_top" resultType="DealMain">
+		select * from tb_deal_main 
+		order by deal_id desc
+		limit 1
+	</select>
+	
+	<select id="list_seach_all" parameterType="DealMain" resultType="DealMain">
+		select * from tb_deal_main 
+		<where>
+			<if test="title != null and title != '' ">and title like '%${title}%'</if>
+		</where>
+		order by used_sort desc
+		limit #{start_no}, #{pageSize}
+	</select>
+	
+	<select id="list_seach_count" parameterType="DealMain" resultType="Integer">
+		select count(*) from tb_deal_main 
+		<where>
+			<if test="title != null and title != '' ">and title like '%${title}%'</if>
+		</where>
+	</select>
+	
+	
+</mapper>

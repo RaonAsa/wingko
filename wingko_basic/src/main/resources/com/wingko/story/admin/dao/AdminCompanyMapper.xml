@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminCompanyMapper">
+
+	<select id="companyNewsList" parameterType="CompanyNews" resultType="CompanyNews">
+		select
+			A.*, C.user_nickname
+		from 
+			tb_company_news A,
+			(
+				select
+					no
+				from tb_company_news
+				where no > 0
+				<if test="search_type != null and search_type != ''">
+					and ${search_type} like '%${search_string}%'
+				</if>
+				order by no desc
+				limit #{start_no}, #{pageSize}
+			) B,
+			tb_member C
+		where A.no = B.no and A.user_no = C.user_no
+		order by A.no desc
+	</select>
+	
+	<select id="companyNewsListCount" parameterType="CompanyNews" resultType="Integer">
+		select
+			count(no)
+		from tb_company_news
+		where no > 0
+		<if test="search_type != null and search_type != ''">
+			and ${search_type} like '%${search_string}%'
+		</if>
+	</select>
+	
+	<select id="companyNews" parameterType="CompanyNews" resultType="CompanyNews">
+		select * from tb_company_news where no = #{no}
+	</select>
+	
+	<insert id="companyNewsInsert" parameterType="CompanyNews">
+		insert into tb_company_news (title, content, user_no, hit, edit_date, reg_date, use_flag)
+		values(#{title}, #{content}, #{user_no}, 0, sysdate(), sysdate(), 'Y')
+	</insert>
+	
+	<update id="companyNewsUpdate" parameterType="CompanyNews">
+		update tb_company_news
+		set title = #{title}, content = #{content}, edit_date = sysdate(), use_flag = #{use_flag}
+		where no = #{no}
+	</update>
+	
+	<delete id="companyNewsDelete" parameterType="CompanyNews">
+		delete from tb_company_news where no = #{no}
+	</delete>
+	
+	
+	
+	<select id="CompanyQuestionList" parameterType="CompanyQuestion" resultType="CompanyQuestion">
+		select
+			A.*
+		from 
+			tb_question_bbs A,
+			(
+				select
+					no
+				from tb_question_bbs
+				where no > 0
+				<if test="search_type != null and search_type != ''">
+					and ${search_type} like '%${search_string}%'
+				</if>
+				order by no desc
+				limit #{start_no}, #{pageSize}
+			) B
+		where A.no = B.no
+		order by A.no desc
+	</select>
+	
+	<select id="CompanyQuestionListCount" parameterType="CompanyQuestion" resultType="Integer">
+		select
+			count(no)
+		from tb_question_bbs
+		where no > 0
+		<if test="search_type != null and search_type != ''">
+			and ${search_type} like '%${search_string}%'
+		</if>
+	</select>
+	
+	<select id="CompanyQuestion" parameterType="Integer" resultType="CompanyQuestion">
+		select
+			*
+		from tb_question_bbs
+		where no = #{no}
+	</select>
+
+
+</mapper>

@@ -1,0 +1,31 @@
+ps) 저의가 사용했던 개발툴은 윈도우 버전이라 
+    미팅 때 mac을 사용하셔서 관련 정보를 아래와 같이 남깁니다.
+
+
+
+이클립스 Tool
+
+STS : Spring Tool Suite
+download : http://spring.io/tools/sts/all
+
+1. 사용하는 o/s 버전 zip파일 다운로드
+
+2. 압축경로\springsource\sts-3.3.0.RELEASE\STS.exe 실행
+ - 개발시 사용한 버전 : sts 3.3버전
+
+3. STS 적용된 이클립스 실행되면 프로젝트 소스 import
+
+
+
+
+STS 톰캣 서버 연동 - 블러그 참조
+[윙코 개발은 톰캣6.0 으로 하였습니다]
+
+http://blog.naver.com/wlsdud9111?Redirect=Log&logNo=10187404371
+
+
+
+이 외에 네이버 sts 설치 관련 검색시 다수 블러그 나오니 참고 하셔도 됩니다.
+
+잘 안되는점 있으시면 연락 주시기 바랍니다.
+

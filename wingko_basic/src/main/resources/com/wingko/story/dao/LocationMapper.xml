@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LocationMapper">
+
+	<select id="headerInfo" parameterType="String" resultType="Location">
+		select
+			name, header_info, parent_location_no, x, y,
+		    ( case parent_location_no
+		      when '0' then ''
+		      else (select name from tb_location where location_no = A.parent_location_no)
+		      end
+		    ) as parent_location_name
+		from tb_location A where location_no = #{location_no}
+	</select>
+
+	<select id="subList" parameterType="String" resultType="HashMap">
+		select location_no, name from tb_location where parent_location_no = #{parent_location_no}
+	</select>
+	
+	<select id="hotPlace" parameterType="String" resultType="HotPlace">
+		select 
+			A.*, B.name as location_name, B.image, B.memo
+		from
+			tb_hot_place A,
+			tb_location B
+		where A.location_no = B.location_no and A.parent_location_no = #{parent_location_no}
+		order by sort asc
+		limit 9
+	</select>
+
+
+	<select id="storeList" parameterType="HashMap" resultType="Store">
+		select
+			A.*
+		from tb_store A,
+			(
+				select 
+					A.store_no
+				from tb_store A
+					, tb_category B
+					, tb_location C
+				where
+						A.category_no = B.category_no
+					and A.location_no = C.location_no
+					and A.location_no = #{location_no}
+					and B.parent_category_no = #{parent_category_no}
+					and A.use_flag = 'Y'
+				order by store_no desc
+				limit #{start_no}, #{pageSize}
+			) B
+		where A.store_no = B.store_no
+		order by store_no desc 
+	</select>
+	
+	
+	<select id="storeListCount" parameterType="HashMap" resultType="Integer">
+		select 
+			count(A.store_no)
+		from tb_store A
+			, tb_category B
+			, tb_location C
+		where
+				A.category_no = B.category_no
+			and A.location_no = C.location_no
+			and A.location_no = #{location_no}
+			and B.parent_category_no = #{parent_category_no}
+			and A.use_flag = 'Y'
+	</select>
+	
+	
+	<select id="newsList" parameterType="News" resultType="News">
+		select 
+			A.*
+		from tb_news A,
+			(
+				select 
+					A.news_no
+				from 
+					tb_news A,
+					tb_store B,
+					tb_location C
+				where A.store_no = B.store_no
+					and B.location_no = C.location_no
+					and C.location_no = #{location_no}
+					and A.use_flag = 'Y'
+					and B.use_flag = 'Y'
+				order by news_no desc
+				limit #{start_no}, #{pageSize}
+			) B
+		where A.news_no = B.news_no
+		order by A.news_no desc
+	</select>
+	
+	<select id="newsListCount" parameterType="News" resultType="Integer">
+		select 
+			count(A.news_no)
+		from 
+			tb_news A,
+			tb_store B,
+			tb_location C
+		where A.store_no = B.store_no
+			and B.location_no = C.location_no
+			and C.location_no = #{location_no}
+			and A.use_flag = 'Y'
+			and B.use_flag = 'Y'
+	</select>
+	
+	
+	<select id="travelList" parameterType="Travel" resultType="Travel">
+		select 
+			A.*
+		from tb_travel A,
+			(
+				select 
+					A.travel_no
+				from tb_travel A,
+					tb_location B
+				where A.location_no = B.parent_location_no and B.location_no = #{location_no}
+				order by travel_no desc
+				limit #{start_no}, #{pageSize}
+			) B
+		where A.travel_no = B.travel_no
+		order by A.travel_no desc
+	</select>
+
+	<select id="travelListCount" parameterType="Travel" resultType="Integer">
+		select 
+			count(A.travel_no)
+		from tb_travel A,
+			tb_location B
+		where A.location_no = B.parent_location_no and B.location_no = #{location_no}
+	</select>
+	
+	
+	<select id="blogList" parameterType="Community" resultType="Community">
+		select 
+			A.*
+		from tb_community A,
+			(
+				select no from tb_community
+				where category='blog' and use_flag = 'Y' and location_no = #{location_no}
+				order by no desc
+				limit #{start_no}, #{pageSize}
+			) B
+		where A.no = B.no
+		order by A.no desc
+	</select>
+
+	<select id="blogListCount" parameterType="Community" resultType="Integer">
+		select count(no) from tb_community
+		where category='blog' and use_flag = 'Y' and location_no = #{location_no}
+		order by no desc
+	</select>
+	
+	
+	<select id="newsPickupList" parameterType="News" resultType="News">
+		<![CDATA[
+		select 
+			A.*
+		from tb_news A,
+			(
+				select 
+					news_no
+				from 
+					tb_news
+				where use_flag = 'Y' and news_category_no >= 5 and news_category_no <= 10
+				order by news_no desc
+				limit #{start_no}, #{pageSize}
+			) B
+		where A.news_no = B.news_no
+		order by A.news_no desc
+		]]>
+	</select>
+	
+	<select id="newsPickupListCount" parameterType="News" resultType="Integer">
+		<![CDATA[
+			select 
+				count(news_no)
+			from 
+				tb_news
+			where use_flag = 'Y' and news_category_no >= 5 and news_category_no <= 10
+		]]>
+	</select>
+</mapper>

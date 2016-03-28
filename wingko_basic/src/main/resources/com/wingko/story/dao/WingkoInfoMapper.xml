@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="WingkoInfoMapper">
+  
+	<insert id="insert" parameterType="WingkoInfo">
+		insert tb_wingko_info (bank_info, faq_tel, faq_email, cancel_pay_day, cancel_reservation_day)
+		values(#{bank_info}, #{faq_tel}, #{faq_email}, #{cancel_pay_day}, #{cancel_reservation_day} )
+	</insert>
+  
+	<update id="update" parameterType="WingkoInfo">
+		update tb_wingko_info
+		set bank_info = #{bank_info}, faq_tel = #{faq_tel}, faq_email = #{faq_email}, cancel_pay_day = #{cancel_pay_day}, cancel_reservation_day = #{cancel_reservation_day}
+		where idx = #{idx}
+	</update>
+	
+	<delete id="delete" parameterType="WingkoInfo">
+		delete from tb_wingko_info where idx = #{idx}
+	</delete>
+	
+	<select id="select" parameterType="WingkoInfo" resultType="WingkoInfo">
+		select * from tb_wingko_info where idx = #{idx}
+	</select>
+	
+	<select id="select_info" parameterType="WingkoInfo"  resultType="WingkoInfo">
+		select * from tb_wingko_info limit 0, 1
+	</select>
+	
+		
+</mapper>

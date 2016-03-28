@@ -1,0 +1,24 @@
+@charset "utf-8";
+
+
+.div_file {width: 100%; height: 100%; position: relative;}
+.span_file {display:inline-block; width:71px; height:70px;  background:url(/resources/admin/img/photo.gif) 0 0 no-repeat;}
+.input_file {filter:alpha(opacity:0); opacity:0; width:71px; height:70px;}
+
+.div_count { padding-top: 20px; }
+
+
+.span_coupon_file {display:inline-block; width:300px; height:50px; background-color: #DDDDDD;}
+.input_coupon_file {filter:alpha(opacity:0); opacity:0; width:300px; height:50px;}
+
+
+.img32 {width: 32px; height: 32px}
+.img50 {width: 50px; height: 50px}
+.img70 {width: 70px; height: 58px}
+.img80 {width: 80px; height: 55px}
+.img150 {width: 150px; height: 95px}
+.red {color: #ff0000}
+
+
+table td.title{text-align:left; padding:8px 6px; color:#666;}
+table td.reply{background:url(/resources/img/icon/reply.png) no-repeat 20px 50%; padding-left:35px; text-align:left;}

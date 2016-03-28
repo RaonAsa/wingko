@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminNewsMapper">
+
+	<select id="list" parameterType="News" resultType="News">
+		select
+			A.*, B.news_category_title
+		from 
+			tb_news A,
+			(
+				select
+					A.news_no, B.title as news_category_title
+				from tb_news A
+					join tb_news_category B on A.news_category_no = B.news_category_no
+				where A.news_no > 0
+				<if test="news_category_no != null and news_category_no > 0">
+					and A.news_category_no = #{news_category_no}
+				</if>
+				<if test="use_flag != null and use_flag != ''">
+					and A.use_flag = #{use_flag}
+				</if>
+				<if test="search_type != null and search_type != ''">
+					and A.${search_type} like '%${search_string}%'
+				</if>
+				order by A.news_no desc
+				limit #{start_no}, #{pageSize}
+			) B
+		where A.news_no = B.news_no
+		order by A.news_no desc
+	</select>
+	<!-- , C.title as store_title -->
+	<!-- join tb_store C on A.store_no = C.store_no -->
+
+	<select id="listCount" parameterType="News" resultType="Integer">
+		select
+			count(*)
+		from tb_news A
+			join tb_news_category B on A.news_category_no = B.news_category_no
+		where A.news_no > 0
+		<if test="news_category_no != null and news_category_no > 0">
+			and A.news_category_no = #{news_category_no}
+		</if>
+		<if test="use_flag != null and use_flag != ''">
+			and A.use_flag = #{use_flag}
+		</if>
+		<if test="search_type != null and search_type != ''">
+			and A.${search_type} like '%${search_string}%'
+		</if>
+	</select>
+	<!-- join tb_store C on A.store_no = C.store_no -->
+	
+	<select id="select" parameterType="News" resultType="News">
+		select * from tb_news where news_no = #{news_no}
+	</select>
+
+	<insert id="insert" parameterType="News">
+		insert tb_news (news_category_no, store_no, title, content, thumb_image, thumb_image_top, thumb_image_location, top_use_flag, use_flag, ripple_count, hit, recommend, edit_date, reg_date)
+		values(#{news_category_no}, #{store_no},  #{title}, #{content}, #{thumb_image}, #{thumb_image_top}, #{thumb_image_location}, 'N', 'N', 0, 0, 0, sysdate(), sysdate())
+	</insert>
+
+	<update id="update" parameterType="News">
+		update tb_news
+		set news_category_no = #{news_category_no}, store_no = #{store_no}, title = #{title}, content = #{content},
+			top_use_flag = #{top_use_flag}, use_flag = #{use_flag}, edit_date = sysdate()
+			<if test="thumb_image != null and thumb_image != ''">
+				, thumb_image = #{thumb_image}
+			</if>
+			<if test="thumb_image_top != null and thumb_image_top != ''">
+				, thumb_image_top = #{thumb_image_top}
+			</if>
+			<if test="thumb_image_location != null and thumb_image_location != ''">
+				, thumb_image_location = #{thumb_image_location}
+			</if>
+		where news_no = #{news_no}
+	</update>
+	
+	<delete id="delete" parameterType="News">
+		delete from tb_news
+		where news_no = #{news_no}
+	</delete>
+	
+	
+	<select id="storeList" resultType="SelectData">
+		select title, store_no as value from tb_store where use_flag = 'Y' order by store_no desc
+	</select>
+	
+	<select id="newsCategoryList" resultType="SelectData">
+		select
+		  	concat(title, '(', title_ko, ')') as title
+		  , news_category_no as value
+		from tb_news_category
+		order by news_category_no asc
+	</select>
+
+</mapper>

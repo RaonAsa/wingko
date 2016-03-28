@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<properties resource="db.properties"/>
+
+	<!-- model 객체 이름 설정 -->
+	<typeAliases>
+		<typeAlias alias="AdData" 			type="com.wingko.story.domain.AdData"/>
+		<typeAlias alias="AdManage" 		type="com.wingko.story.domain.AdManage"/>
+		<typeAlias alias="Location" 		type="com.wingko.story.domain.Location"/>
+		<typeAlias alias="HotPlace" 		type="com.wingko.story.domain.HotPlace"/>
+		<typeAlias alias="Community" 		type="com.wingko.story.domain.Community"/>
+		<typeAlias alias="Category" 		type="com.wingko.story.domain.Category"/>
+		<typeAlias alias="CategoryLocation"	type="com.wingko.story.domain.CategoryLocation"/>
+		<typeAlias alias="Company" 			type="com.wingko.story.domain.Company"/>
+		<typeAlias alias="CompanyNews"		type="com.wingko.story.domain.CompanyNews"/>
+		<typeAlias alias="CompanyQuestion"	type="com.wingko.story.domain.CompanyQuestion"/>
+		<typeAlias alias="Community"		type="com.wingko.story.domain.Community"/>
+		<typeAlias alias="Store"	 		type="com.wingko.story.domain.Store"/>
+		<typeAlias alias="StoreMenu"		type="com.wingko.story.domain.StoreMenu"/>
+		<typeAlias alias="StoreCoupon" 		type="com.wingko.story.domain.StoreCoupon"/>
+		<typeAlias alias="SelectData" 		type="com.wingko.story.domain.SelectData"/>
+		<typeAlias alias="Search" 			type="com.wingko.story.domain.Search"/>
+		<typeAlias alias="Scrap" 			type="com.wingko.story.domain.Scrap"/>
+		<typeAlias alias="User" 			type="com.wingko.story.domain.User"/>
+		<typeAlias alias="Job" 				type="com.wingko.story.domain.Job"/>
+		<typeAlias alias="Join" 			type="com.wingko.story.domain.Join"/>
+		<typeAlias alias="JoinCode" 		type="com.wingko.story.domain.JoinCode"/>
+		<typeAlias alias="Login" 			type="com.wingko.story.domain.Login"/>
+		<typeAlias alias="Info" 			type="com.wingko.story.domain.Info"/>
+		<typeAlias alias="Member" 			type="com.wingko.story.domain.Member"/>
+		<typeAlias alias="Market" 			type="com.wingko.story.domain.Market"/>
+		<typeAlias alias="News"				type="com.wingko.story.domain.News"/>
+		<typeAlias alias="NewsCategory"		type="com.wingko.story.domain.NewsCategory"/>
+		<typeAlias alias="Notice"			type="com.wingko.story.domain.Notice"/>
+		<typeAlias alias="Board" 			type="com.wingko.story.domain.Board"/>
+		<typeAlias alias="Ripple" 			type="com.wingko.story.domain.Ripple"/>
+		<typeAlias alias="Recommend"		type="com.wingko.story.domain.Recommend"/>
+		<typeAlias alias="Travel" 			type="com.wingko.story.domain.Travel"/>
+		<typeAlias alias="TravelInfo"		type="com.wingko.story.domain.TravelInfo"/>
+		<typeAlias alias="TravelCategory"	type="com.wingko.story.domain.TravelCategory"/>
+		<typeAlias alias="Coupon"			type="com.wingko.story.domain.Coupon"/>
+		<typeAlias alias="CouponInfo"		type="com.wingko.story.domain.CouponInfo"/>
+		<typeAlias alias="PayMain"			type="com.wingko.story.domain.PayMain"/>
+		<typeAlias alias="PayItem"			type="com.wingko.story.domain.PayItem"/>
+		<typeAlias alias="PayMainSearch"	type="com.wingko.story.domain.PayMainSearch"/>
+		<typeAlias alias="PayCard"			type="com.wingko.story.domain.PayCard"/>
+		<typeAlias alias="PayRefund"		type="com.wingko.story.domain.PayRefund"/>
+		<typeAlias alias="PayArea"		type="com.wingko.story.domain.PayArea"/>
+		<typeAlias alias="PayAcount"		type="com.wingko.story.domain.PayAcount"/>
+		<typeAlias alias="WingCalender"		type="com.wingko.story.domain.WingCalender"/>
+		<typeAlias alias="MyCart"			type="com.wingko.story.domain.MyCart"/>
+		<typeAlias alias="WingShow"			type="com.wingko.story.domain.WingShow"/>
+		<typeAlias alias="WingMyItem"		type="com.wingko.story.domain.WingMyItem"/>
+		<typeAlias alias="WingkoInfo"		type="com.wingko.story.domain.WingkoInfo"/>
+		<typeAlias alias="TopWord"			type="com.wingko.story.domain.TopWord"/>
+		<typeAlias alias="Qna"				type="com.wingko.story.domain.Qna"/>
+		<typeAlias alias="DealMain"				type="com.wingko.story.domain.DealMain"/>
+		<typeAlias alias="DealItem"				type="com.wingko.story.domain.DealItem"/>
+		<typeAlias alias="DealEms"				type="com.wingko.story.domain.DealEms"/>
+		<typeAlias alias="MailData"				type="com.wingko.story.domain.MailData"/>
+		
+	</typeAliases>
+
+
+	<!-- JDBC 설정 -->	
+	<environments default="wingko">
+		<environment id="wingko">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+				<!-- 
+				<property name="poolMaximumActiveConnections" value="20"/>  
+				<property name="poolMaximumIdleConnections" value="20"/>  
+				<property name="poolMaximumCheckoutTime" value="20000"/>  
+				<property name="poolPingEnabled" value="true"/>  
+				<property name="poolPingQuery" value="select 1"/>  
+				<property name="poolPingConnectionsNotUsedFor" value="43200"/>  
+				<property name="poolTimeToWait" value="30000"/>  
+				 -->
+			</dataSource>
+		</environment>
+	</environments>
+
+
+	<!-- mapper 경로 설정 -->
+	<mappers>
+		<mapper resource="com/wingko/story/admin/dao/AdminAdMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminLocationMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminCategoryMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminCompanyMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminCommunityMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminMemberMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminNewsMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminStoreMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminTravelMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminCouponInfoMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminCouponMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminPayMainMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminPayItemMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminPayCardMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminPayRefundMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminPayAreaMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminDealMainMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminDealItemMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminDealEmsMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminInfoMapper.xml"/>
+		<mapper resource="com/wingko/story/admin/dao/AdminMailDataMapper.xml"/>
+		
+
+		
+		<mapper resource="com/wingko/story/dao/AdMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/UserMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/BoardMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/CompanyMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/CommunityMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/CouponMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/JsonMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/NewsMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/StoreMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/SearchMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/LocationMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/TravelMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/WingCalenderMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/MyCartMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/WingShowMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/WingkoInfoMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/DealShopMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/InfoMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/RecommendMapper.xml"/>
+		<mapper resource="com/wingko/story/dao/ScrapMapper.xml"/>
+		
+	</mappers>
+	
+</configuration>

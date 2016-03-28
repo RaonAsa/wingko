@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminMemberMapper">
+
+	<select id="login" parameterType="Member" resultType="Member">
+		select * from tb_member where user_id = #{user_id} and user_password = #{user_password}
+	</select>
+	
+	
+	<select id="list" parameterType="Member" resultType="Member">
+		(
+		select
+			A.*,
+			B.join_no, B.title,
+			(select province from hat_province where provinceID = A.provinceID ) as province,
+			(select city from hat_city where cityID = A.cityID ) as city,
+			(select area from hat_area where areaID = A.areaID ) as area
+		from
+			tb_member A
+			inner join tb_member_joincode B on A.join_no = B.join_no
+		where A.user_no > 0
+			<if test="level > 0">
+				and level = #{level}
+			</if>
+			<if test="join_no > 0">
+				and A.join_no = #{join_no}
+			</if>
+			<if test="search_id != null and search_id != ''">
+				and user_id like '%${search_id}%'
+			</if>
+			<if test="start_date != null and start_date != '' "><![CDATA[
+				and str_to_date(#{start_date}, '%Y-%m-%d') <= date_format(A.reg_date, '%Y-%m-%d') 
+			]]></if>
+			<if test="end_date != null and end_date != '' "><![CDATA[
+				and date_format(A.reg_date, '%Y-%m-%d') <= str_to_date(#{end_date}, '%Y-%m-%d') 
+			]]></if>
+		order by A.user_no desc
+		) limit #{start_no}, #{pageSize}
+	</select>
+	
+	<select id="listCount" parameterType="Member" resultType="Integer">
+		select
+			count(*)
+		from
+			tb_member A
+			inner join tb_member_joincode B
+				on A.join_no = B.join_no
+		where A.user_no > 0
+			<if test="level > 0">
+				and level = #{level}
+			</if>
+			<if test="join_no > 0">
+				and A.join_no = #{join_no}
+			</if>
+			<if test="search_id != null and search_id != ''">
+				and user_id like '%${search_id}%'
+			</if>
+			<if test="start_date != null and start_date != '' "><![CDATA[
+				and str_to_date(#{start_date}, '%Y-%m-%d') <= date_format(A.reg_date, '%Y-%m-%d') 
+			]]></if>
+			<if test="end_date != null and end_date != '' "><![CDATA[
+				and date_format(A.reg_date, '%Y-%m-%d') <= str_to_date(#{end_date}, '%Y-%m-%d') 
+			]]></if>
+	</select>
+	<select id="member" parameterType="Member" resultType="Member">
+		select
+			A.*,
+			B.join_no, B.title,
+			(select province from hat_province where provinceID = A.provinceID ) as province,
+			(select city from hat_city where cityID = A.cityID ) as city,
+			(select area from hat_area where areaID = A.areaID ) as area
+		from
+			tb_member A
+			inner join tb_member_joincode B on A.join_no = B.join_no
+		where A.user_no = #{user_no}
+	</select>
+	<select id="update" parameterType="Member" resultType="Member">
+		update tb_member
+		set level = #{level}, `leave` = #{leave}
+		where user_no = #{user_no}
+	</select>
+
+	<select id="joinList" parameterType="JoinCode" resultType="JoinCode">
+		(
+		select
+			*
+		from
+			tb_member_joincode
+		order by join_no desc
+		) limit #{start_no}, #{pageSize}
+	</select>
+	
+	<select id="joinListCount" parameterType="JoinCode" resultType="Integer">
+		select count(*) from tb_member_joincode
+	</select>
+	
+	<select id="join" parameterType="JoinCode" resultType="JoinCode">
+		select * from tb_member_joincode where join_no = #{join_no}
+	</select>
+	
+	<insert id="joinInsert" parameterType="JoinCode">
+		insert into tb_member_joincode (title, description, use_flag, edit_date, reg_date)
+		values(#{title}, #{description}, 'Y', sysdate(), sysdate())
+	</insert>
+	<update id="joinUpdate" parameterType="JoinCode">
+		update tb_member_joincode
+		set title = #{title}, description = #{description}, edit_date = sysdate()
+		where join_no = #{join_no}
+	</update>
+	<delete id="joinDelete" parameterType="JoinCode">
+		delete from tb_member_joincode where join_no = #{join_no}
+	</delete>
+	
+	<select id="selectDataJoinList" resultType="SelectData">
+		select
+			join_no as value, title
+		from
+			tb_member_joincode
+		order by join_no desc
+	</select>
+
+</mapper>

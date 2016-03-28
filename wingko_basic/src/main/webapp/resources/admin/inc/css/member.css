@@ -1,0 +1,72 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*Common*/
+@font-face{font-family:ngttf; src:url(/resources/admin/img/font/NanumGothic.ttf); format("truetype");}
+@font-face{font-family:ngeot; src:url(/resources/admin/img/font/NanumGothic.eot); format("truetype");}
+
+* { padding: 0; margin: 0; }
+body{background:#ebe9ea;}
+
+table{padding:0; margin:0; border-collapse:collapse;}
+img{border:0;}
+ul {list-style: none; margin: 0; padding: 0;}
+li {list-style: none; margin: 0; padding: 0;}
+ol {list-style: none; margin: 0; padding: 0;}
+
+
+
+#login{margin:0 auto; width:890px; height:430px; background:url(/resources/admin/img/bg_main.png) no-repeat; margin-top:160px; font-family:NanumGothic, "나눔고딕", ngttf, ngeot, Dotum,"돋움", sans-serif;}
+.login_con{width:400px; margin-left:45px; color:#382224;}
+.login_con a {color:#382224; font-size:12px; text-decoration:none;}
+
+.txt1{width:265px; height:25px; padding-top:10px; background:#f5f5f5; border:1px solid #d7d7d7; margin-left:46px; *margin-left:0; text-indent:5px; font-size:14px;}
+@media screen and (-webkit-min-device-pixel-ratio:0){
+.txt1{width:265px; height:35px; padding-top:0; background:#f5f5f5; border:1px solid #d7d7d7; margin-left:46px; *margin-left:0; text-indent:5px; font-size:14px;}
+}
+.sp01{margin:8px 0 16px 46px;}
+.login_con h1{padding-top:70px; font-size:30px; padding-bottom:15px; color:#382224;}
+.login_con h2{font-size:14px; padding-bottom:40px; line-height:18px; color:#707070; font-weight:normal;}
+
+
+#login a:link, visited { font-size:12px; color:#382224; text-decoration: none;} 
+#login a:hover{font-size:12px; color:#382224; text-decoration: underline; } 
+
+
+#member{width:880px; margin:0 auto; font-family:NanumGothic, "나눔고딕";}
+.member_con{background:src:url(/resources/admin/img/bg_center.gif) repeat-y; padding:0 48px; font-size:12px; color:#252525;}
+.member_con h1{font-size:30px; font-weight:bold; color:#382224; margin-bottom:30px;}
+.member_con h2{font-size:18px; font-weight:bold; color:#000000; margin-bottom:26px; margin-top:10px;}
+.member_con h3{font-size:14px; font-weight:normal; color:#707070; line-height:18px; }
+.col01{color:#f27500;}
+.col02{color:#4079b3;}
+
+table.join{width:100%; margin-bottom:20px; }
+table.join th{background:#ececec; font-size:12px; color:#464646; padding:10px 15px; text-align:left; border:1px solid #d7d7d7;}
+table.join td{color:#707070; padding:10px 15px; text-align:left; font-size:12px; border:1px solid #d7d7d7;}
+table.join ul{margin-top:10px;}
+table.join ul li{line-height:16px; background:src:url(/resources/admin/img/dot.gif) no-repeat 0 50%; padding-left:10px;}
+table.join ul li span{color:#2d94eb;}
+.txt2{height:20px; padding-top:6px; border:1px solid #d7d7d7; text-indent:5px; font-size:12px; color:#707070;}
+.s_select{height:27px; border:1px solid #d7d7d7; font-family:NanumGothic, "나눔고딕";}
+.txt_long{border:1px solid #d7d7d7; margin-top:7px; width:370px; height:80px; padding:5px; font-family:NanumGothic, "나눔고딕"; color:#707070; font-size:12px; }
+.bt_join{width:100%; margin-top:40px; text-align:center;}
+
+#search{margin:0 auto; width:880px; height:422px; background:src:url(/resources/admin/img/bg_search.gif) no-repeat; margin-top:30px; font-family:NanumGothic, "나눔고딕", ngttf, ngeot, Dotum,"돋움", sans-serif;}
+.sch_mail{float:left; width:348px; padding:46px 36px 46px 46px;}
+.sch_pw{float:right; width:348px; padding:46px 46px 46px 36px;}
+#search h1{font-size:24px; color:#382224; margin-bottom:80px;}
+#search h4{font-size:13px; color:#382224; margin-bottom:30px;}
+.txt3{height:25px; padding-top:7px; background:#f5f5f5; border:1px solid #d7d7d7; text-indent:5px; font-size:14px; font-family:NanumGothic, "나눔고딕";}
+#search a:link, visited { font-size:12px; color:#382224; text-decoration: none;} 
+#search a:hover{font-size:12px; color:#382224; text-decoration: underline; } 
+.i_sch{margin-top:120px; text-align:right;}
+.i_sch a {color:#382224; font-size:12px; text-decoration:none;}
+
+.sp01{margin:8px 0 16px 46px;}
+.sp02{margin-left:20px; margin-bottom:25px; margin-top:20px;}
+.sp03{width:880px; margin:0 auto; margin-top:30px; padding-left:20px;}
+.sp04{margin-left:20px; margin-bottom:10px; margin-top:15px;}
+.sp05{margin:8px 0 0 36px;}
+
+#bottom{ text-align:center; padding-top:10px; padding-bottom:50px; margin-top:130px;}

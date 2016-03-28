@@ -1,0 +1,446 @@
+@CHARSET "UTF-8";
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-size: 12px;
+    font-size: 0.75rem;
+    font-family: '나눔고딕', NanumGothic, ng, '돋움', dotum, tahoma, sans-serif;
+    line-height: 1.3;
+    text-rendering: optimizeLegibility;
+    background: white;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0
+}
+
+h1 {
+    font-size: 30px;
+    font-size: 1.7rem;
+    color: #606060;
+    text-transform: uppercase;
+    display: inline;
+    margin-left: auto;
+    margin-right: auto
+}
+
+h2 {
+    font-size: 24px;
+    font-size: 1.5rem;
+    color: #606060;
+    text-transform: uppercase;
+    display: inline;
+    margin-left: auto;
+    margin-right: auto
+}
+
+h3 {
+    font-size: 18px;
+    font-size: 1.2rem;
+    color: #606060;
+    text-transform: uppercase;
+    display: inline;
+    margin-left: auto;
+    margin-right: auto
+}
+
+h4 {
+    font-size: 14px;
+    font-size: 1.0rem;
+    color: #606060;
+    text-transform: uppercase;
+    display: inline;
+    margin-left: auto;
+    margin-right: auto
+}
+
+p {
+    font-size: 16px;
+    font-size: 1.0rem;
+    color: #606060;
+    text-transform: uppercase;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.header_pt {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 65px;
+	background-color:#0c0c0c;
+	background:url(/wingko/img/section0_head_bg.png) repeat-x;
+	z-index: 101;
+}
+
+.header_pt .logo {
+	position: absolute;
+	top: 20px;
+	left: 129px;
+	width: 117px;
+	height: 24px;
+	background-position:-233px -101px; 
+	z-index:101;
+}
+
+.container {
+    position: relative;
+    margin-top: 65px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.row {
+    max-width: 940px;
+    max-width: 58.75rem;
+    margin: 0 auto;
+    position: relative;
+    height: 100%;
+    margin-top: 100px;
+}
+
+.section1 .section1-content {
+    *zoom: 1
+}
+
+.section1 .section1-content:before, header:after, .workchat-banner:after, .section1 .section1-content:after {
+    content: "";
+    display: table
+}
+
+.section1 .section1-content:after {
+    clear: both
+}
+
+.section1 {
+    background: white;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 1080px;
+    background: url(/wingko/img/section1_bg.png) no-repeat center;
+    text-align: center;
+    
+}
+
+.section1 h1 {
+    font-size: 40px;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 1.5px;
+    letter-spacing: 0.09375rem
+}
+
+.section1 h3 {
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #606060;
+    letter-spacing: 1.5px;
+    letter-spacing: 0.09375rem
+}
+
+.section2 {
+    background: linear-gradient(45deg, #fffcf5 0%, #d9ceb4 100%);
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 800px;
+    text-align: center;
+}
+
+ul li .image {
+    position: absolute;
+    width: 100%;
+    display: block
+}
+
+ul li.member1 {
+	height: 309px;
+}
+
+ul li.member1 .image {
+    background: url(/wingko/img/section2_member1.png) no-repeat;
+    background-size: 400px 300px;
+    max-width: 400px;
+    height: 308px;
+    right: 0px;
+    right: 0rem;
+}
+
+ul li.member2 {
+	height: 309px;
+}
+
+ul li.member2 .image {
+    background: url(/wingko/img/section2_member2.png) no-repeat;
+    background-size: 400px 309px;
+    max-width: 400px;
+    top: -100px;
+    height: 308px;
+    left: 0px;
+    left: 0rem;
+}
+
+.section2 ul li.member1 .content {
+    position: absolute;
+    line-height: 21px;
+    line-height: 1.3125rem;
+    width: 380px;
+    width: 23.75rem;
+    top: 100px;
+    top: 12.25rem;
+    left: 0;
+    color: #696969;
+    text-align: left;
+}
+
+.section2 ul li.member2 .content {
+    position: absolute;
+    line-height: 21px;
+    line-height: 1.3125rem;
+    width: 380px;
+    width: 23.75rem;
+    top: 50px;
+    top: 2.25rem;
+    right: 0;
+    color: #696969;
+    text-align: left;
+}
+
+.section3 {
+    background: linear-gradient(45deg, #f6f6f6 0%, #bab9b8 100%);
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 460px;
+    text-align: center;
+}
+
+ul li.func-title {
+	
+}
+
+.functions {
+    max-width: 960px;
+    max-width: 60rem;
+    position: relative;
+    margin-top: 10px;
+    margin-top: 0.5rem;
+    padding-top: 10px;
+    padding-top: 0.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    height: 160px;
+}
+
+.functions li:first-child {
+    margin-left: 0
+}
+
+.functions li {    
+    position: relative;
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: top;
+    zoom: 1;
+    *display: inline;
+    text-align: center;
+    width: 16%;
+    height: 100%;
+    padding: 0px 5px;
+    padding: 0rem 0.5rem;
+    max-width: 320px;
+    max-width: 20rem
+}
+
+.functions li .img-button {
+    display: block;
+    height: 100%;
+}
+
+.functions li .content {
+	top: 10px;
+    display: block;
+    position: relative;
+    text-align: center;
+    color: #696969
+}
+
+.functions li.custom .image {
+    background: url(/wingko/img/section3_icon01.png) no-repeat;
+    background-size: 160px 160px;
+    max-width: 160px;
+    height: 160px;
+    left: 0px
+}
+
+.functions li.custom .content {
+    display: block;
+    position: relative;
+    text-align: center;
+    color: #696969
+}
+
+.functions li.autoreply .image {
+    background: url(/wingko/img/section3_icon02.png) no-repeat;
+    background-size: 160px 160px;
+    max-width: 160px;
+    height: 160px;
+    left: 0px
+}
+
+.functions li.autoreply .content {
+}
+
+.functions li.crm .image {
+    background: url(/wingko/img/section3_icon03.png) no-repeat;
+    background-size: 160px 160px;
+    max-width: 160px;
+    height: 160px;
+    left: 0px
+}
+
+.functions li.addition .image {
+    background: url(/wingko/img/section3_icon04.png) no-repeat;
+    background-size: 160px 160px;
+    max-width: 160px;
+    height: 160px;
+    left: 0px
+}
+
+.functions li.statistics .image {
+    background: url(/wingko/img/section3_icon05.png) no-repeat;
+    background-size: 160px 160px;
+    max-width: 160px;
+    height: 160px;
+    left: 0px
+}
+
+.section4 {
+    background: linear-gradient(45deg, #fffcf5 0%, #d9ceb4 100%);
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 650px;
+    text-align: center;
+}
+
+.func-detail {
+    max-width: 960px;
+    max-width: 60rem;
+    position: relative;
+    margin-top: 10px;
+    margin-top: 0.5rem;
+    padding-top: 10px;
+    padding-top: 0.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    height: 100%;
+}
+
+.func-detail li:first-child {
+    margin-left: 0
+}
+
+.func-detail li {    
+    position: relative;
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: top;
+    zoom: 1;
+    *display: inline;
+    text-align: center;
+    height: 100%;
+    padding: 0px 5px;
+    padding: 0rem 0.5rem;
+    max-width: 600px;
+    max-width: 40rem
+}
+
+ul li.phone .image {
+    background: url(/wingko/img/section4_phone_bg.png) no-repeat;
+    background-size: 250px 500px;
+    max-width: 300px;
+    height: 600px;
+    left: 0px;
+    left: 0rem;
+    display: block;
+}
+
+.func-detail li.phone {
+	width: 260px;	
+}
+
+.func-detail .content li {
+	top: 10px;
+    display: block;
+    position: relative;
+    text-align: left;
+    color: #696969
+}
+
+.section5 {
+    background: linear-gradient(45deg, #f6f6f6 0%, #bab9b8 100%);
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 600px;
+    text-align: center;
+}
+
+ul li.push .image {
+    background: url(/wingko/img/section5_push_bg.png) no-repeat;
+    background-size: 150px 150px;
+    max-width: 310px;
+    height: 310px;
+    left: 0px;
+    left: 0rem;
+    display: block;
+}
+
+.section5 ul li.push .content {
+    position: absolute;
+    line-height: 21px;
+    line-height: 1.3125rem;
+    width: 380px;
+    width: 23.75rem;
+    top: 100px;
+    top: 12.25rem;
+    left: 0;
+    color: #696969;
+    text-align: left;
+}
+
+ul li.tools .image {
+    background: url(/wingko/img/section5_tools_bg.png) no-repeat;
+    background-size: 310px 310px;
+    max-width: 310px;
+    height: 310px;
+    left: 0px;
+    left: 0rem;
+    display: block;
+}
+
+ul li.statistics .image {
+    background: url(/wingko/img/section5_statistics_bg.png) no-repeat;
+    background-size: 310px 310px;
+    max-width: 310px;
+    height: 310px;
+    left: 0px;
+    left: 0rem;
+    display: block;
+}
+.section6 {
+    background: linear-gradient(45deg, #fffcf5 0%, #d9ceb4 100%);
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 650px;
+    text-align: center;
+}

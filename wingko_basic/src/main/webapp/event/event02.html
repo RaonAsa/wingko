@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>WingkoStory</title>
+<style type="text/css">
+body{margin:0; padding:0;}
+.event{width:360px; margin:0 auto;}
+.bt{width:360px; height:67px; background:url(img/p_event02.png) no-repeat; text-align:center;}
+</style>
+<script>
+
+	function setCookie(name, value, expiredays) {
+		var today = new Date();
+	    today.setDate(today.getDate() + expiredays);
+
+	    document.cookie = name + '=' + escape(value) + '; path=/; expires=' + today.toGMTString() + ';'
+	}
+
+	function closeWin() {
+		setCookie("event", "1", 1);
+	}
+
+	function go() {
+		open.close();
+		window.open("/company/event.do?no=13", "_blank"); 
+	}
+</script>
+</head>
+
+<body>ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄻㅇㄴㄹ
+<div class="event">
+	<!--<img src="img/p_event01.png" alt="" title="" />-->새로이벤트팝업수정여부테스트<br/>
+	<div class="bt">
+		<a href="javascript:go();" ><img src="img/p_event_bt.png" alt="" title="" style="margin-left:1px; border: 0px;" /></a><br/>
+		<!-- <a href="javascript:closeWin();">오늘하루 그만보기</a> -->
+	</div>
+</div>
+</body>
+</html>

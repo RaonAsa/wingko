@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CommunityMapper">
+
+	<select id="noticeTopFour" resultType="Notice">
+		select
+			*
+		from tb_notice
+		where 
+				no > 0
+			and use_flag = 'Y'
+		order by no desc limit 4
+	</select>
+	
+	<select id="noticeList" parameterType="Notice" resultType="Notice">
+		select
+			A.*
+		from 
+			tb_notice A,
+			(
+				select
+					no
+				from tb_notice
+				where no > 0
+					and use_flag = 'Y'
+					<if test="top != null and top != ''">
+						and top = #{top}
+					</if>
+					<if test="search_type != null and search_type != ''">
+						and ${search_type} like '%${search_string}%'
+					</if>
+				order by no desc
+				limit #{start_no}, #{pageSize}
+			) B
+		where A.no = B.no
+		order by A.no desc
+	</select>
+	
+	<select id="noticeListCount" parameterType="Notice" resultType="Integer">
+		select
+			count(no)
+		from tb_notice
+		where no > 0
+			and use_flag = 'Y'
+			<if test="search_type != null and search_type != ''">
+				and ${search_type} like '%${search_string}%'
+			</if>
+	</select>
+
+	<select id="notice" parameterType="Integer" resultType="Notice">
+		select * from tb_notice where no = #{no} and use_flag = 'Y'
+	</select>
+	
+	<select id="noticeNext" parameterType="Notice" resultType="Notice">
+		<![CDATA[
+			select * from tb_notice 
+			where no < #{no} and use_flag = 'Y'
+		]]>
+			<if test="search_type != null and search_type != ''">
+				and ${search_type} like '%${search_string}%'
+			</if>
+			order by no desc limit 1
+		
+	</select>
+	
+	<select id="noticePrev" parameterType="Notice" resultType="Notice">
+		select * from tb_notice 
+		where no > #{no} and use_flag = 'Y'
+		<if test="search_type != null and search_type != ''">
+			and ${search_type} like '%${search_string}%'
+		</if>
+		order by no asc limit 1
+	</select>
+	
+	<update id="noticeHit" parameterType="Integer">
+		update tb_notice set hit = hit + 1 where no = #{no}
+	</update>
+	
+	<select id="communityList" parameterType="Community" resultType="Community">
+		select
+			A.*, B.ripple, B.location_name, C.user_name, C.user_nickname
+		from 
+			tb_community A,
+			(
+				select
+					no,
+					(select count(no) from tb_ripple where parent_code ='community' and parent_no = A.no) as ripple
+					, (select name from tb_location where location_no = A.location_no ) as location_name
+				from tb_community A
+				where no > 0
+					and use_flag = 'Y'
+					and category = #{category}
+					<if test="search_type != null and search_type != ''">
+						and ${search_type} like '%${search_string}%'
+					</if>
+				<if test="sort == 'no'">order by no desc</if>
+				<if test="sort == 'user_no'">order by user_no desc</if>
+				<if test="sort == 'hit'">order by hit desc</if>
+				<if test="sort == 'recommend'">order by recommend desc</if>
+				<if test="sort == 'ripple'">order by ripple desc</if>
+				limit #{start_no}, #{pageSize}
+			) B,
+			tb_member C
+		where A.no = B.no and A.user_no = C.user_no
+		<if test="sort == 'no'">order by no desc</if>
+		<if test="sort == 'user_no'">order by A.user_no desc</if>
+		<if test="sort == 'hit'">order by hit desc</if>
+		<if test="sort == 'recommend'">order by recommend desc</if>
+		<if test="sort == 'ripple'">order by B.ripple desc</if>
+	</select>
+	
+	<select id="communityListCount" parameterType="Community" resultType="Integer">
+		select
+			count(no)
+		from tb_community
+		where no > 0
+			and use_flag = 'Y'
+			and category = #{category}
+			<if test="search_type != null and search_type != ''">
+				and ${search_type} like '%${search_string}%'
+			</if>
+	</select>
+	
+	<select id="community" parameterType="Integer" resultType="Community">
+		select * from tb_community where no = #{no} and use_flag = 'Y'
+	</select>
+	
+	<select id="communityNext" parameterType="Community" resultType="Community">
+		<![CDATA[
+			select * from tb_community where no < #{no} and category = #{category} and use_flag = 'Y'
+		]]>
+			<if test="search_type != null and search_type != ''">
+				and ${search_type} like '%${search_string}%'
+			</if>
+			<if test="sort == 'no'">order by no desc</if>
+			<if test="sort == 'user_no'">order by user_no desc</if>
+			<if test="sort == 'hit'">order by hit desc</if>
+			<if test="sort == 'recommend'">order by recommend desc</if>
+			limit 1
+	</select>
+	
+	<select id="communityPrev" parameterType="Community" resultType="Community">
+		select * from tb_community where no > #{no} and category = #{category} and use_flag = 'Y'
+			<if test="search_type != null and search_type != ''">
+				and ${search_type} like '%${search_string}%'
+			</if>
+			<if test="sort == 'no'">order by no asc</if>
+			<if test="sort == 'user_no'">order by user_no asc</if>
+			<if test="sort == 'hit'">order by hit asc</if>
+			<if test="sort == 'recommend'">order by recommend asc</if>
+			limit 1
+	</select>
+	
+	<update id="communityHit" parameterType="Integer">
+		update tb_community set hit = hit + 1 where no = #{no}
+	</update>
+	
+	<select id="getCommunityRippleList" parameterType="Ripple" resultType="Ripple">
+		select length(ifnull(reply_order, ''))/2 level, A.*, B.user_id 
+		  from tb_ripple A, tb_member B
+		 where A.user_no = B.user_no and parent_no = #{parent_no} and parent_code = #{parent_code}
+		 order by reply_order asc, no asc
+	</select>
+
+	<select id="getCommunityRippleListCount" parameterType="Ripple" resultType="Integer">
+		select count(A.no) from tb_ripple A, tb_member B
+		where A.user_no = B.user_no and parent_no = #{parent_no} and parent_code = #{parent_code}
+	</select>
+
+	<select id="getNewReplyOrder" parameterType="Ripple" resultType="String">
+		select lpad(ifnull(max(reply_order), concat(#{reply_order}, '00')) + 1, length(#{reply_order})+2, '0')
+		  from tb_ripple
+		 where parent_no = #{parent_no} 
+		   and parent_code = #{parent_code}
+		   and reply_order like concat(#{reply_order}, '%')
+		   and length(reply_order) = length(#{reply_order})+2
+   	</select>
+
+	<insert id="setCommunityRippleInsert" parameterType="Ripple">
+		insert tb_ripple(parent_no, parent_code, user_no, content, reply_order, reg_date)
+		values(#{parent_no}, #{parent_code}, #{user_no}, #{content}, #{reply_order}, sysdate())
+	</insert>
+
+	<update id="setCommunityRippleUpdate" parameterType="Ripple">
+		update tb_ripple
+		set content = #{content}
+		where no = #{no}
+	</update>
+
+	<delete id="setCommunityRippleDelete" parameterType="Ripple">
+		delete from tb_ripple where no = #{no} and user_no = #{user_no}
+	</delete>
+	
+	<select id="marketList" parameterType="Market" resultType="Market">
+		select
+			A.*, C.user_name, C.user_nickname
+		from 
+			tb_market_bbs A,
+			(
+				select
+					no
+				from tb_market_bbs
+				where no > 0
+					and use_flag = 'Y'
+					<if test="search_type != null and search_type != ''">
+						and ${search_type} like '%${search_string}%'
+					</if>
+				order by no desc
+				limit #{start_no}, #{pageSize}
+			) B,
+			tb_member C
+		where A.no = B.no and A.user_no = C.user_no
+		order by A.no desc
+	</select>
+	
+	<select id="marketListCount" parameterType="Market" resultType="Integer">
+		select count(no) from tb_market_bbs
+		where no > 0 and use_flag = 'Y'
+			<if test="search_type != null and search_type != ''">
+				and ${search_type} like '%${search_string}%'
+			</if>
+	</select>
+	
+	<select id="marketSelect" parameterType="Integer" resultType="Market">
+		select
+			A.*, B.user_name, B.user_nickname, C.name as location_name
+		from
+			tb_market_bbs A,
+			tb_member B,
+			tb_location C
+		where A.user_no = B.user_no and no = #{no} and A.location_no = C.location_no 
+	</select>
+	<select id="marketSelectNext" parameterType="Market" resultType="Market">
+		<![CDATA[
+			select * from tb_market_bbs
+			where no < #{no} and use_flag = 'Y'
+		]]>
+			<if test="search_type != null and search_type != ''">
+				and ${search_type} like '%${search_string}%'
+			</if>
+			order by no desc limit 1
+	</select>
+	<select id="marketSelectPrev" parameterType="Market" resultType="Market">
+		<![CDATA[
+			select * from tb_market_bbs
+			where no > #{no} and use_flag = 'Y'
+		]]>
+			<if test="search_type != null and search_type != ''">
+				and ${search_type} like '%${search_string}%'
+			</if>
+			order by no asc limit 1
+
+	</select>
+	
+	<update id="marketHit" parameterType="Integer">
+		update tb_market_bbs set hit = hit + 1 where no = #{no}
+	</update>
+	
+	<insert id="marketInsert" parameterType="Market">
+		insert into tb_market_bbs (sell_flag, user_no, location_no, title, content, hit, use_flag, edit_date, reg_date)
+		values(#{sell_flag}, #{user_no}, #{location_no}, #{title}, #{content}, 0, 'Y', sysdate(), sysdate())
+	</insert>
+	
+	<update id="marketUpdate" parameterType="Market">
+		update tb_market_bbs
+		set sell_flag = #{sell_flag}, location_no = #{location_no}, title = #{title}, content = #{content}, edit_date = sysdate()
+		where no = #{no} and user_no = #{user_no}
+	</update>
+	
+	
+	<delete id="marketDelete" parameterType="Integer">
+		delete from tb_market_bbs where no = #{no}
+	</delete>
+	
+	<update id="marketSellUpdate" parameterType="Integer">
+		update tb_market_bbs
+		set sell_flag = 'Y'
+		where no = #{no}
+	</update>
+	
+	
+	
+
+	<select id="jobList" parameterType="Job" resultType="Job">
+		select
+			A.*
+		from 
+			tb_job A,
+			(
+				select
+					job_no
+				from tb_job
+				where job_no > 0
+				<if test="job_type != null and job_type != ''">
+					and job_type = #{job_type}
+				</if>
+				<if test="search_type != null and search_type != ''">
+					and ${search_type} like '%${search_string}%'
+				</if>
+				order by job_no desc
+				limit #{start_no}, #{pageSize}
+			) B
+		where A.job_no = B.job_no
+		order by A.job_no desc
+	</select>
+	
+	<select id="jobListCount" parameterType="Job" resultType="Integer">
+		select count(job_no) from tb_job 
+		where job_no > 0
+		<if test="job_type != null and job_type != ''">
+			and job_type = #{job_type}
+		</if>
+		<if test="search_type != null and search_type != ''">
+			and ${search_type} like '%${search_string}%'
+		</if>
+	</select>
+	
+	<select id="jobSelect" parameterType="Integer" resultType="Job">
+		select * from tb_job where job_no = #{job_no}
+	</select>
+	<select id="jobSelectNext" parameterType="Job" resultType="Job">
+		<![CDATA[
+			select * from tb_job
+			where job_no < #{job_no}
+		]]>
+			<if test="job_type != null and job_type != ''">
+				and job_type = #{job_type}
+			</if>
+			<if test="search_type != null and search_type != ''">
+				and ${search_type} like '%${search_string}%'
+			</if>
+			order by job_no desc limit 1
+	</select>
+	<select id="jobSelectPrev" parameterType="Job" resultType="Job">
+		<![CDATA[
+			select * from tb_job
+			where job_no > #{job_no}
+		]]>
+			<if test="job_type != null and job_type != ''">
+				and job_type = #{job_type}
+			</if>
+			<if test="search_type != null and search_type != ''">
+				and ${search_type} like '%${search_string}%'
+			</if>
+			order by job_no asc limit 1
+	</select>
+	
+	<update id="jobHit" parameterType="Integer">
+		update tb_job set hit = hit + 1 where job_no = #{job_no}
+	</update>
+	
+	<insert id="jobInsert" parameterType="HashMap">
+		insert into tb_job (job_no, job_type, title, company_title, company_type, company_desc, company_address, company_tel, company_contact, company_email, company_location, company_jobs, company_employ, company_recruite, company_pay, company_career, company_etc,
+							hunter_name, hunter_photo, hunter_pay, hunter_email, hunter_education1, hunter_education2, hunter_education3, hunter_education4, hunter_education5, 
+							hunter_career1, hunter_career2, hunter_career3, hunter_career4, hunter_career5, hunter_about, edit_date, reg_date, hit, writer, pwd)
+		values(#{job_no}, #{job_type}, #{title}, #{company_title}, #{company_type}, #{company_desc}, #{company_address}, #{company_tel}, #{company_contact}, #{company_email}, #{company_location}, #{company_jobs}, #{company_employ}, #{company_recruite}, #{company_pay}, #{company_career}, #{company_etc},
+				#{hunter_name}, #{hunter_photo}, #{hunter_pay}, #{hunter_email}, #{hunter_education1}, #{hunter_education2}, #{hunter_education3}, #{hunter_education4}, #{hunter_education5},
+				#{hunter_career1}, #{hunter_career2}, #{hunter_career3}, #{hunter_career4}, #{hunter_career5}, #{hunter_about}, sysdate(), sysdate(), 0, #{writer}, #{pwd})
+	</insert>
+	
+	<update id="jobUpdate" parameterType="HashMap">
+		update tb_job
+		set job_type = #{job_type}, title = #{title}, company_title = #{company_title}, company_type = #{company_type}, company_desc = #{company_desc}, company_address = #{company_address}, company_tel = #{company_tel}, company_contact = #{company_contact}, company_email = #{company_email}, company_location = #{company_location}, company_jobs = #{company_jobs}, company_employ = #{company_employ}, company_recruite = #{company_recruite}, company_pay = #{company_pay}, company_career = #{company_career}, company_etc = #{company_etc},
+			hunter_name = #{hunter_name}, hunter_pay = #{hunter_pay}, hunter_email = #{hunter_email}, hunter_education1 = #{hunter_education1}, hunter_education2 = #{hunter_education2}, hunter_education3 = #{hunter_education3}, hunter_education4 = #{hunter_education4}, hunter_education5 = #{hunter_education5}, 
+			hunter_career1 = #{hunter_career1}, hunter_career2 = #{hunter_career2}, hunter_career3 = #{hunter_career3}, hunter_career4 = #{hunter_career4}, hunter_career5 = #{hunter_career5}, hunter_about = #{hunter_about}, edit_date = sysdate(), writer = #{writer}
+		<if test="hunter_photo != null and hunter_photo != ''">
+			, hunter_photo = #{hunter_photo}
+		</if>
+		where job_no = #{job_no} and pwd = #{pwd}
+	</update>
+	
+	<delete id="jobDelete" parameterType="Integer">
+		delete from tb_job where job_no = #{job_no}
+	</delete>
+	
+	
+	
+	
+	
+	<select id="qnaList" parameterType="Qna" resultType="Qna">
+		select
+			A.*, C.user_name, C.user_nickname
+		from 
+			tb_qna A,
+			(
+				select
+					no
+				from tb_qna
+				where no > 0
+				<if test="search_type != null and search_type != ''">
+					and ${search_type} like '%${search_string}%'
+				</if>
+				order by ref desc, sort
+				limit #{start_no}, #{pageSize}
+			) B,
+			tb_member C
+		where A.no = B.no and A.user_no = C.user_no
+		order by ref desc, sort
+	</select>
+	
+	<select id="qnaListCount" parameterType="Qna" resultType="Integer">
+		select count(no) from tb_qna
+		where no > 0
+			<if test="search_type != null and search_type != ''">
+				and ${search_type} like '%${search_string}%'
+			</if>
+	</select>
+	
+	<select id="qnaSelect" parameterType="Integer" resultType="Qna">
+		select
+			A.*, B.user_name , B.user_nickname
+		from
+			tb_qna A,
+			tb_member B
+		where A.user_no = B.user_no and no = #{no}
+	</select>
+	<select id="qnaSelectNext" parameterType="Qna" resultType="Qna">
+		<![CDATA[
+			select * from tb_qna 
+			where ref <= #{ref}
+		]]>
+			<if test="search_type != null and search_type != ''">
+				and ${search_type} like '%${search_string}%'
+			</if>
+			order by ref desc, sort limit 1
+
+	</select>
+	<select id="qnaSelectPrev" parameterType="Qna" resultType="Qna">
+		<![CDATA[
+			select * from tb_qna
+			where ref >= #{ref}
+		]]>
+			<if test="search_type != null and search_type != ''">
+				and ${search_type} like '%${search_string}%'
+			</if>
+			order by ref asc, sort desc limit 1
+	</select>
+	
+	<update id="qnaHit" parameterType="Integer">
+		update tb_qna set hit = hit + 1 where no = #{no}
+	</update>
+	
+	<insert id="qnaInsert" parameterType="Qna">
+		<selectKey resultType="int" keyProperty="ref" order="BEFORE"> 
+			select IFNULL(max(ref), 0) + 1 from tb_qna;
+		</selectKey>
+		insert into tb_qna (ref, ref_level, sort, title, content, user_no, edit_date, reg_date, hit)
+		values(#{ref}, 0, 0, #{title}, #{content}, #{user_no}, sysdate(), sysdate(), 0)
+	</insert>
+	
+	<update id="qnaUpdate" parameterType="Qna">
+		update tb_qna
+		set title = #{title}, content = #{content}, edit_date = sysdate()
+		where no = #{no} and user_no = #{user_no}
+	</update>
+	
+	<delete id="qnaDelete" parameterType="Integer">
+		delete from tb_qna where no = #{no}
+	</delete>
+	
+
+</mapper>

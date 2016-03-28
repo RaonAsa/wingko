@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="uyan_auth" content="04a3f6938d" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="Wechat 마케팅, Wechat 대리운용, Wechat 개발 솔루션, Wechat Site, Wechat Template, Message Push, Wechat ShoppingMall" name="Keywords">
+	<meta content="Wechat 공식 계정 관리 Platform，제공서비스：Customizing Menu、Template、 MemberShip、 Event、 ShoppingMall, Service, 통계, 기업마케팅" name="Description">
+    <script src="/static/wxgjcn/src/html5.js" ></script>
+    <link rel="stylesheet" type="text/css" href="/static/wxgjcn/css/www/index1/wingko.css-2015-01-02-1.css"  media="all" />
+<script type="text/javascript" src="/static/wxgjcn/src/jQuery.js-2014-03-07-1.js" ></script>
+<script type="text/javascript" src="/static/wxgjcn/src/www/index1/weimob-index.js-2014-03-07-1.js" ></script>
+<title>WECHATKOREA</title>
+	<link rel="shortcut icon" href="httpimg/favicon.ico" />
+</head>
+<body>
+	<!--[if lte IE 8]>  <script language="javascript">$(function (){$.browser.msie&&$("#ie9-tips").show().find("#stopSuggestA").click(function(){$("#ie9-tips").hide()})})</script><![endif]-->
+<div class="nav clearfix">
+	<div class="nav-content">
+		<h1 class="left"><a href="/"   title="Wechat 공식 계정 관리 Platform">Wechat 공식 계정 관리 Platform</a></h1>
+		<!--<div class="left city">
+			<h2>上海</h2>
+							<a href="/static/wxgjcn/city1.htm" >
+					切换城市<i class="tri4"></i>
+				</a>
+					</div>-->
+		<div class="right line-li">
+			 <ul>
+		        <li><a href="/" >MAIN</a></li>
+		        <li><a href="/static/wxgjcn/case1.htm"  >성공사례</a></li>
+			    <!--<li class="nav_menu_li_1"><a style="width:70px; text-align:left;" class="_hover">기능<i></i></a>
+							 <div class="sub-nav">
+								 <a href="/static/wxgjcn/package.htm"  target="_black">服务套餐</a>
+								 <a href="/static/wxgjcn/guide1.htm" >功能介绍</a>
+								 
+
+							 </div>
+
+			    </li>-->
+		        <li><a href="/static/wxgjcn/guide1.htm"  class="hover">기능소개</a></li>
+		        <li><a href="/static/wxgjcn/proxy1.htm"  >사업제휴</a></li>
+		        <li><a href="/login.html" >로그인</a></li>
+		        <li><span>|</span></li>
+		        <li><a href="/static/wxgjcn/chinabiz.htm">중국마케팅</a></li>
+		        <li><a href="/static/wxgjcn/img/www/index1/wechat_brochure.pdf" target="_blank">위챗서비스소개</a></li>
+		    </ul>
+            <!--
+            <div class="account">
+		        <a href="/reg.html"  class="btn-reg btn0" target="_black">가입</a>
+                <a href="/login.html" class="btn-login btn0" target="_black">등록</a>
+			</div>
+		    -->
+		</div>
+	</div>
+</div>
+
+	
+<div id="ie9-tips" class="clearfix">
+	<div id="tipsPanel">
+		<div id="tipsDesc">系统检测到您所使用的浏览器版本较低，推荐使用<a   target="_blank">Firefox</a>或<a   target="_blank">Chrome</a>浏览器打开，否则将无法体验完整产品功能。</div>
+		<a id="stopSuggestA" href="javascript:;">×</a>
+	</div>
+</div>
+
+<script>
+var $do_submit = false;
+
+// 绑定回车键
+$('#loginBox').keydown(function(e){
+	if(13 == event.keyCode){
+		login();
+	}
+});
+
+	function login()
+	{
+		if (true == $do_submit)
+		{
+			return false;
+		}
+
+		var $pre_submit = '登录', $done_submit = '登录中...';
+		var $username = $('#username').val(), $password = $('#password').val(), $keepalive = $('#rememberPwdIcon').val();
+		$('#login_button').text($done_submit);
+		$do_submit = true;
+
+		// check
+		if ('' == $username || '' == $password)
+		{
+			$('#err_tips').text('您输入的微企—国内优秀的微信公众服务平台号或密码错误，请重新输入！');
+			$('#err_area').show();
+			$('#login_button').text($pre_submit);
+			$do_submit = false;
+			return false;
+		}
+
+		var $login_data = {
+			username:$username,
+			password:$password,
+			keepalive:$keepalive
+		};
+		$.post('/login', $login_data, function(rs){
+			if(rs.errno == 200)
+			{
+				location.href = rs.url_route;
+			}
+			else
+			{
+				$('#err_tips').text(rs.error);
+				$('#err_area').show();
+				$('#login_button').text($pre_submit);
+			}
+			$do_submit = false;
+		}, 'json');
+	}
+</script>
+
+<div class="Public-content clearfix">
+	<div class="Public">
+		<h1 class="Public-h1">기능소개</h1>
+		<div class="Public-box clearfix">
+			<ul id="nav_lis" class="case-nav left">
+				<li data-index="0"  data-hash="#site">위챗템플릿</li>
+				<li data-index="1" data-hash="#member"><span style=" left:3px; position:absolute; "><ins style=" text-decoration:none;color:#4343fd;font-size:11px;">N</ins><ins style="color:#6d7183;font-size:8px;text-decoration:none;">EW</ins></span>위챗멤버십카드</li>
+				<li data-index="2" data-hash="#activities">위챗이벤트</li>
+				<li data-index="3" data-hash="#push">위챗PUSH</li>
+				<li data-index="4" data-hash="#services">위챗서비스</li>
+				<li data-index="5" data-hash="#message">위챗 게시판</li>
+				<li data-index="6" data-hash="#photo">위챗앨범</li>
+				<li data-index="7" data-hash="#menu">자동메뉴생성</li>
+				<li data-index="8" data-hash="#research">위챗리서치</li>
+				<li data-index="9" data-hash="#estate">위챗부동산</li>
+				<li data-index="10" data-hash="#car">위챗자동차</li>
+				<li data-index="11" data-hash="#wedd">위챗초대장</li>
+				<li data-index="12" data-hash="#medical">위챗의료</li>
+				<li data-index="13" data-hash="#hotels">위챗숙박</li>
+				<li data-index="14" data-hash="#lbs">LBS안내</li>
+                <li data-index="15" data-hash="#cate">위챗요식업</li>
+				<li data-index="16" data-hash="#vshop">위챗쇼핑몰</li>
+                <li data-index="17" data-hash="#reser">위챗예약</li>
+                <li data-index="18" data-hash="#vlife">위챗생활</li>
+                <li data-index="19" data-hash="#vkefu"><span style=" left:3px; position:absolute; "><ins style=" text-decoration:none;color:#4343fd;font-size:11px;">N</ins><ins style="color:#6d7183;font-size:8px;text-decoration:none;">EW</ins></span>위챗상담</li>
+                <li data-index="20" data-hash="#addup"><span style=" left:3px; position:absolute; "><ins style=" text-decoration:none;color:#4343fd;font-size:11px;">N</ins><ins style="color:#6d7183;font-size:8px;text-decoration:none;">EW</ins></span>위챗통계</li>
+				<li data-index="21" data-hash="#vwall"><span style=" left:3px; position:absolute; "><ins style=" text-decoration:none;color:#4343fd;font-size:11px;">N</ins><ins style="color:#6d7183;font-size:8px;text-decoration:none;">EW</ins></span>위챗사교</li>
+                <li data-index="22" data-hash="#vwall"><span style=" left:3px; position:absolute; "><ins style=" text-decoration:none;color:#4343fd;font-size:11px;">N</ins><ins style="color:#6d7183;font-size:8px;text-decoration:none;">EW</ins></span>위챗스냅</li>
+                
+                <li data-index="23" data-hash="#vwall"><span style=" left:3px; position:absolute; "><ins style=" text-decoration:none;color:#4343fd;font-size:11px;">N</ins><ins style="color:#6d7183;font-size:8px;text-decoration:none;">EW</ins></span>위챗공동구매</li>
+				<li data-index="24" data-hash="#vwall"><span style=" left:3px; position:absolute; "><ins style=" text-decoration:none;color:#4343fd;font-size:11px;">N</ins><ins style="color:#6d7183;font-size:8px;text-decoration:none;">EW</ins></span>위챗커뮤니티</li>
+				</ul>
+			<div id="nav_uls">
+				<div data-index="0" data-on class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 템플릿: 브랜드 개성에 맞춘 멋진 모바일 사이트를 구축할 수 있습니다.</h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob1.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗매니저는 위챗 모바일 사이트 구축 기능을 만들었습니다. 위챗매니저 사용자는 간단한 설정을 통해 자기만의 위챗 모바일 사이트를 만들 수  있습니다. 위챗 템플릿에서 제공되는 모듈을 선택하거나 자기만의 스타일로 개성 넘치는 디자인을 할 수 있습니다.</p>
+					</div>
+				</div>
+				<div data-index="1" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 멤버십카드: 모바일 시대의 멤버십카드, 편리한 휴대성과 더불어 분실위험은‘0’<a href="/static/wxgjcn/topic/mcard.htm"  target="_blank" class="guideright-topic">查看专题</a></h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob2.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗 멤버십카드는 위챗 공식계정에 멤버십카드를 연동하여 4억8천만 중국 위챗 사용자들 기반으로 기업의 브랜드 관리뿐만 아니라 멤버십 관리, 세일 이벤트, 통계 리포팅이 결합된 위챗 멤버십관리플랫폼입니다. 고객의 구매 행동을 상세히 기록하고 데이터 분석을 통해, 고객의 특성에 따라 세분화하여 여러 가지 형태의 정교한 마케팅을 실행할 수 있습니다.</p>
+					</div>
+				</div>
+				<div data-index="2" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 이벤트: 쿠폰+스크래치복권+회전판+투표+퀴즈 이벤트를 이용한 고객 리마케팅(remarketing)</h2>
+						<p  class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob3.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p  class="guidep">위챗의 대화형(interactive) 인터페이스와 여러 형태의 디자인을 통해 각종 이벤트 디자인을 생성하여 사용자와 대화형(interective) 커뮤니케이션을 구현할 수 있습니다. 위챗 통합 시스템의 상호작용은 ‘놀이’라는 위챗 서비스의 컨셉과 부합됩니다. 위챗매니저는 오프라인 상점의 편리한 이용을 위해, 쿠폰, 스크래치복권, 회전판, 투표, 퀴즈이벤트 등 "오프라인 상점 마케팅 서비스" 를 도입, 오프라인 상점은 이벤트를 통해 고객 대상으로 리마케팅(remarketing)을 진행할 수 있습니다. 항상 새로운 테마를 업데이트하여 고객들은 주기적으로 참여, 주변인과의 공유를 통해 구전 마케팅(word of mouth marketing)효과를 극대화할 수 있습니다.</p>
+					</div>
+				</div>
+				<div data-index="3" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 PUSH: 위챗 공식계정 팔로워 대상 정밀 마케팅</h2>
+						<p  class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob4.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p  class="guidep">위챗 공식계정 팔로워 대상으로 PUSH를 추가 비용 없이 발송할 수 있습니다. PUSH를 발송하면, 팔로워 채팅메뉴에 알림(notification) 표시가 되어 팔로워는 새로운 메시지를 빨리 확인할 수 있습니다. 이를 활용하여 각종 신제품 정보, 이벤트 및 프로모션 정보를 팔로워에게 신속하게 알릴 수 있습니다. 
+						</p>
+					</div>
+				</div>
+				<div data-index="4" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 서비스: 위챗 기업 응용과 전자상거래(Electronic Commerce)</h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob5.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">xiaohuangji(쑈황지)채팅 프로그램 510개 데이터가 있고 광고와 일부 민감성 단어들을 여과하였고 날씨 검색, 핸드폰 검색, 우편번호 검색, 택백 검색(160개 택배회사 검색가능), 신분증 검색, 인품 테스트, 번역, 사전, 백과(전망 데이터), 음악80.1만 개, 유머 5만개, xiaohuangji(쑈황지) 채팅 510만 개 데이터, 시와 사 23만 수, 성어 5만 개, 수수께끼 5만개, 해몽 3만 개, 개그 55만 개, 버스선로 4만 개, 기차선로 4500 개, 로봇 학습기능 등</p>
+					</div>
+				</div>
+				<div data-index="5" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 게시판: 위챗 사용자와의 커뮤니케이션에 필요한 기능</h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob6.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗 게시판은 위챗 사용자들이 상점의 방대한 소셜 정보를 공유할 수 기능입니다. 위챗 게시판에 글을 올리면 글을 올린 사용자의 모멘트에 공유되고 텐센트 블로그, 친구에게도 공유됩니다. 이런 방식을 이용하면 무제한으로 팔로워에게 공유할 수 있습니다. 고객은 상점의 상품이나 서비스에 대해 실시간으로 객관적 평가를 매겨 게시판 메시지의 객관성과 유효성을 보증할 수 있습니다. 위챗 게시판을 이용하는 상점은 상품과 서비스의 품질 관리만 잘 하면 입소문의 퍼짐에 따라 고객도 증가할 것입니다. </p>
+					</div>
+				</div>
+				<div data-index="6" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 앨범: 사진보기, 상품들이 한눈에 들어옵니다.</h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob7.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗 앨범은 위챗매니저의 주요기능으로 위챗매니저 사용자들에게 이미지의 저장과 게시 기능을 제공합니다. 위챗 앨범을 이용하면 손쉽게 새로운 앨범을 만들어 보여주려는 이미지들을 쉽게 업로드 할 수 있습니다. 뿐만 아니라 상점에서 이벤트를 진행하기 위한 수단으로 활용할 수 있습니다.</p>
+					</div>
+				</div>
+				<div data-index="7" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">자동메뉴생성: 각종 모듈을 직접 선택해 사용 가능하고, 니즈에 따라 설정하고, 니즈에 따라 각종 기능을 연결할 수 있습니다.</h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob8.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗매니저는 위챗 공식계정 자동메뉴생성기능을 제공합니다. 위챗 사용자는 키워드를 입력 하지 않고 직접 메뉴를 클릭해 내용을 확인할 수 있습니다. 위챗매니저를 이용하면 기업의 기존 웹페이지와의 연결, 기업 App의 기존 기능 복제 및 다른 기능 추가, 특히 HTML5 기술을 이용하여 무한한 확장을 할 수 있어, 기업은 더욱 편리하고 마케팅이 용이한 위챗 내장APP을 만들 수 있습니다. 이 기능을 위챗 모바일 사이트와 결합시키면, 공식계정 이용자에게 더욱 편리하고 독특한 느낌을 줄 수 있습니다.</p>
+					</div>
+				</div>
+				<div data-index="8" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 리서치: 실시간 통계, 시장조사를 위한 데이터 제공</h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob9.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗 리서치는 새로운 온라인 설문조사방식입니다. 위챗 리서치는 이미 몇 십 개에 달하는 리서치 항목을 완성하였습니다. 여기에는 게임, 소비재, 자동차, 부동산, 음식, 디지털제품, 가전제품 등 여러 카테고리가 포함 되어 있어, 위챗 사용자의 생활 행태에 대한 연구를 할 수 있습니다.</p>
+					</div>
+				</div>
+				
+				<div data-index="9" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 부동산: 360도 파노라마 뷰</h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob11.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗부동산은 위챗매니저를 이용하여 구축하는 부동산용 공식 사이트이다. 위챗 부동산의 기능은 강력합니다. 매물소개, 분류별 매물관리, 매물 레이아웃 설명 및 레이아웃 도면, 매물 갤러리, 매물에 대한 의견 및 전문가 코멘트 등 기능들이 있다. 그리고 360도로 이미지를 볼 수 있는 기능이 있습니다. 몇 분이라는 짧은 시간에 위챗 부동산 공식사이트를 만들 수 있습니다.</p>
+					</div>
+				</div>
+				<div data-index="10" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 자동차: 시승예약, 정비예약, 360도 뷰, 고객 케어 지원</h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob12.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗 자동차는 위챗매니저를 이용하여 진행하는 자동차 영업관리, 정비예약, 시승예약, 보험계산, 대출계산, 차종비교, 법규위반이력조회, 360도 뷰, 고객 케어 등의 기능을 지원합니다. 모든 기능들은 아주 손쉽게 이용할 수 있어 많은 편의를 도모함과 동시에, 위챗매니저와 인터렉션이 가능한 스마트폰 사용자에게 신속하고 쾌적한 영업관리와 예약관리 기능을 제공하며, 고객은 매장에 방문할 필요 없이 정비예약이나 시승예약을 할 수 있습니다.</p>
+					</div>
+				</div>
+				<div data-index="11" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 초대장: 전통적인 방식을 전환하여, 친환경적이고 시대적 감각이 묻어나는 초대장을 만들 수 있습니다.</h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob13.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗 초대장은 결혼식에 위해 출시한 기능으로서, 결혼을 계획하고 있는 사용자가 위챗 초대장을 이용하면 지인들에게 결혼식 초대장을 발송할 수 있습니다. 초대장에 메세지, 일정, 장소, 오시는 길, 연락처 등을 작성해 발송하면, 받는 사람은 위챗 초대장 플랫폼에서 참석여부와 함께 축복의 메시지를 보내고, 초대장을 다른 사람들에게 돌릴 수도 있다.</p>
+					</div>
+				</div>
+				<div data-index="12" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 의료: 인터넷시대의 의료도우미</h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob14.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗 매니저를 통하여 온라인접수, 내용설정, 예약조회, 예약통계 등 의료 서비스 시스템을 구현할 수 있으며, 이 외 환자가 불편한 사항을 효율적으로 해결할 수 있습니다.</p>
+					</div>
+				</div>
+				<div data-index="13" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2  class="guideh2">위챗 숙박: 클릭 한 번으로 손쉽게 예약</h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob15.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">1. 뉴스 관리: 자동뉴스응답과 뉴스편집기능으로 사용자 대상 뉴스 서비스를 최적화로 개선된 사용자 경험을 제공합니다.<br>
+						2. 숙박 관리: 숙박 상세 페이지 내용 관리. 사용자는 터치 한 번으로 내비게이션과 전화 연결이 가능합니다.<br>
+						3. 사용자 관리: 사용자정보관리모듈. 각 사용자별로 표시를 하여, 정교한 마케팅을 가능하게 합니다.<br>
+						4. 데이터 통계: 각양각색의 데이터로 숙박 운영에 중요한 도움을 드립니다.<br>
+						5. 제공 서비스: 사용자는 공식계정에서 직접 객실 예약, 음식점 예약 등을 할 수 있습니다.</p>
+					</div>
+				</div>
+                <div data-index="14" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">LBS 회신: LBS 기능을 이용하여 상점의 정확한 위치를 알려줍니다.</h2>
+							<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob16.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">LBS 이미지 회신은 상점이 점포위치를 설정한 후, 위챗 사용자가가 현재 위치정보를 알려주면 인접한 상점 점포를 사용자의 위챗 화면에 나타내주며 터치 한 번으로 내비게이션과 전화 연결을 할 수 있습니다. 그리고 특정 점포에서 진행중인 이벤트(예: 쿠폰, 스크래치복권)가 있을 경우, 이벤트 진행표시도 가능합니다.</p>
+					</div>
+				</div>
+				<div data-index="15" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 요식업: 실시간 데이터 통계가 가능하며, 운영효과를 확인할 수 있습니다</h2>
+					
+                        <p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob17.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗매니저를 이용하면 위챗 공식계정의 팔로우 상황 및 음성 청구 수를 실시간 집계가 가능합니다. 이런 통계 수치에 근거하여, 마케팅 효과 및 어떤 요소가 마케팅 결과에 영향을 끼치는지 판단할 수 있으며, 이에 따라 마케팅 플랜 수정에 도움을 줄 수 있으며, 시장 관리와 신속한 응대를 실현할 수 있습니다.</p>
+					</div>
+				</div>
+				<div data-index="16" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 쇼핑몰: 위챗 모바일전자상거래 구축 <a href="/static/wxgjcn/topic/vmall.htm"  target="_blank" class="guideright-topic">查看专题</a> </h2>
+						
+                        <p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob18.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">“위챗쇼핑몰”(별칭:Vshop)은 모바일인터넷을 이용한 쇼핑몰 서비스입니다. 현재 널리 사용되고 있는 위챗을 기반으로, 위챗 5.0 버전의 지불기능을 결합해, 위챗 사용자에게 최신상품정보를 제공하여, 위챗 온라인 쇼핑 기능을 실현 하였습니다. 상품관리, 회원관리, 쇼핑카트, 상품분류관리, 주문관리, 점포설정, 지불방식관리, 배송방식관리 기능이 있습니다.</p>
+					</div>
+				</div>
+				
+                <div data-index="17" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 예약: 온라인 예약은 위챗매니저에서 간편하게</h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob19.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗 예약은 상점이 위챗 매니저로 실현한 온라인 예약서비스입니다. 자동차, 부동산, 숙박, 의료, 요식업 등 업계에 응용 할 수 있어, 외출, 쇼핑, 소비에 최대한의 편리를 주고 있습니다. 더불어 조작 방법이 간편하고, 응답속도가 빠릅니다.</p>
+					</div>
+				</div>
+                <div data-index="18" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 생활: 편리, 신속, 효과적인 생활서비스 </h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob20.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗 등 새로운 매체의 발전과 더불어, 생활방식에도 미묘한 변화가 생기고 있습니다. 위챗 생활은 위챗매니저를 이용해 만들어진, 위챗 사용자의 생활에 전면적인 서비스를 제공하는 모바일 사이트입니다. 위챗 생활서비스를 이용하는 사용자는 언제 어디서나 온라인 쇼핑, 음식 주문, 항공권 예약, 숙박 예약 등 다양한 서비스를 이용 할 수 있어, 전통적인 생활방식에 변화를 불러일으키고 있습니다.<br />
+                        1. 상점관리: 상점의 인프라, 상점의 메시지 설정, 회원 설정, 혜택 설정 및 상품전시기능이 포함 되어 있어, 사용자는 위챗매니저를 통하여 상가의 전모를 볼 수 있다.<br />
+                       2. 회원관리: 사용자는 스마트폰에서 회원카드를 발급 받으며, 상점은 위챗매니저 어드민 페이지에서 사용자의 회원기록을 조회할 수 있습니다. 조회내용에는 회원카드번호, 사용자 이름, 휴대전화번호, 카드수령시간, 소속 사용자 및 회원카드의 상태설정이 포함되어 있어, 사용자의 정보를 손쉽게 알아 볼 수 있습니다.
+</p>
+					</div>
+				</div>
+                
+                <div data-index="19" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 상담: 6억 사용자와의 소통을 통하여 무한한 비즈니스 기회를 만들 수 있습니다.<a href="/static/wxgjcn/topic/kefu.htm"  target="_blank" class="guideright-topic">查看专题</a></h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob21.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">인터넷의 발전과 인터넷 마케팅의 중요성이 부각됨에 따라 온라인 상담시스템은 인터넷 마케팅의 중요한 도구이며 또한 기업의 이미지 관리 및 고객과의 소통을 위해 없어서는 안 될 도구입니다. 지금, 위챗은 빠른 성장속도를 보여주고 있으며, 상점들은 자신의 점포를 공식계정으로 이전하고 있습니다. 위챗 상담시스템은 바로 위챗 상점들을 위해 만들어진 실시간 커뮤니케이션 소프트웨어이며, 상점들은 위챗 6억 사용자를 공유하여 무한한 비즈니스 기회를 누릴 수 있습니다.
+
+</p>
+					</div>
+				</div>
+                
+                <div data-index="20" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">구매자를 쉽게 이해할 수 있어 어떤 고객도 놓치지 않습니다.<a href="/static/wxgjcn/topic/datacube.htm"  target="_blank" class="guideright-topic">查看专题</a></h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob22.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗 통계를 통해 상점은 쉽게 구매자를 이해할 수 있고, 위챗 네트워크 정보를 진단할 수 있어, 잠재적인 고객을 놓치지 않습니다. 위챗 통계에는 사용자 분석, 콘텐츠 (이미지, 텍스트) 분석, 경로 분석, 키워드 분석 등의 기능들이 있습니다.</p>
+					</div>
+				</div>
+
+				<div data-index="21" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 사교: 현장 분위기 업!<a href="/static/wxgjcn/topic/wallcame.htm"  target="_blank" class="guideright-topic">查看专题</a></h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob23.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗 사용자가 이벤트 주최자인 위챗 공식계정을 팔로우 하여, 텍스트, 이모티콘, 이미지 메시지들을 발송 하면, 위챗 바탕화면(월페이퍼)에 게시되면서 현장분위기가 활발해지며 사용자간의 인터렉션이 증가합니다.</p>
+					</div>
+				</div>
+                
+                	<div data-index="22" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 스냅: 사용자는 체험을 통하여 기업의 매력을 느낄 수 있습니다.<a href="/static/wxgjcn/topic/weipai.htm"  target="_blank" class="guideright-topic">查看专题</a></h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob24.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">“위챗 스냅”을 이용해 예쁜 사진을 출력 할 수 있습니다. 위챗 팔로워 증가, 기업 브랜드 마케팅용으로 확인할 수 있으며 고객은 실제 체험을 통해 기업의 매력을 느낍니다. 더불어 위챗매니저 서비스에 가입하면 공식 페이지 등을 포함한 여러 가지 기능들을 누릴 수 있어, 기업의 온/오프라인 마케팅을 환상적으로 결합할 수 있습니다.</p>
+					</div>
+				</div>
+                
+                <div data-index="23" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 공동구매: 고객의 주머니에 혜택을 담다<a href="/static/wxgjcn/topic/cust.htm"  target="_blank" class="guideright-topic">查看专题</a></h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob25.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗 공동구매에서 상점 관리는, 어드민 페이지 관리 및 점포 관리 2개로 나뉘어집니다. 어드민 페이지 관리는 공동구매 관리, 주문 관리, 공동구매 쿠폰 관리 및 회원 관리, 환불 관리로 구성됩니다. 공동구매 관리 메뉴에서는 공동구매 새로 만들기, 공동구매 복제, 출시 관리, 알림 첨가 등의 기능들이 포함됩니다. 주문 관리 및 공동구매 쿠폰 관리의 주요 기능은 조회와 추출입니다. 회원 관리 메뉴에서 회원이 구매 이력 데이터 전체를 볼 수 있다. 환불 관리메뉴에서 사용자의 환불 정보를 볼 수 있습니다. 점포 관리 메뉴는 공동구매 쿠폰 인증 및 공동구매 쿠폰 관리로 구성되어 있습니다. 공동구매 쿠폰 인증메뉴에서 적용 점포에서 이미 해당 점포를 선택한 공동구매 쿠폰을 인증 할 수 있다. 공동구매 쿠폰 관리는 기존에 권한을 부여 받은 공동구매만을 지원합니다.</p>
+					</div>
+				</div>
+
+				<div data-index="24" class="weimob_guide right">
+					<div class="wm_case_list">
+						<h2 class="guideh2">위챗 커뮤니티: 위챗 소셜 플랫폼 구축<a href="/static/wxgjcn/topic/community.htm"  target="_blank" class="guideright-topic">查看专题</a></h2>
+						<p class="guideimg"><img src="/static/wxgjcn/img/www/index1/weimob26.jpg-v=2014-03-07-1.jpg"  /></p>
+						<p class="guidep">위챗 커뮤니티는 상점의 위챗 공식계정에서 생성된 소셜 플랫폼이다. 커뮤니티는 작을 수 있지만, 상점의 팔로워들은 서로 모르는 사이에서 출발해서 커뮤니티에서 커뮤니케이션을 통해 서로 알게 되고, 상호 커뮤니케이션으로 만들어진 콘텐츠를 전파 할 수 있으며, 커뮤니케이션 방식 또한 이미지, 동영상, 텍스트, 이모티콘 등으로 다양하고 자유롭게 표출할 수 있습니다.</p>
+					</div>
+				</div>
+
+                
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 
+<div class="erwei" title="微信扫一扫">
+	<span class="hudongzhushou">官方微信</span>
+	<div class="erwei_big" style="display:none;">
+		<p>扫一扫，关注微企—国内优秀的微信公众服务平台官方微信，体验微企—国内优秀的微信公众服务平台智能服务</p>
+	</div>
+</div>  -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		var erwei_time = null;
+		$(".erwei").hover(function(){
+			$(".erwei_big").show();
+		}).mouseleave(function(){
+				erwei_time = setTimeout(function(){
+					$(".erwei_big").hide();
+				},1000);
+			});
+		$(".erwei_big").mouseenter(function(){
+			if(erwei_time){
+				clearTimeout(erwei_time);
+			}
+		}).mouseleave(function(){
+				erwei_time = setTimeout(function(){
+					$(".erwei_big").hide();
+				},1000);
+			});
+	});
+</script>
+<!-- 意见反馈 -->
+<div class="feedback" id="feedback">
+	<p class="feedsize"><b>亲爱的用户</b><a class="close" href="javascript:;" onclick= "$('#feedback, #feedback_cover').toggleClass('on');">×</a></p>
+	<p class="bbottom">欢迎您访问微企—国内优秀的微信公众服务平台官方网站！您对微企—国内优秀的微信公众服务平台有任何意见和建议，或在使用过程中遇到问题，请在本页面反馈。我们会实时关注您的反馈不断优化，您的建议将帮助我们改进，为您提供更好的服务！</p>
+	<p class="feedsize"><b>请留下您的宝贵意见和建议！（请填写）</b></p>
+	<form>
+		<textarea  id="feedback-text" name="" id="feedback-text" placeholder="输入文本..."></textarea>
+		<p class="feedsize"><b>您常用的电子邮箱是？（请填写）</b></p>
+		<p style="color:#666; text-indent:1em;"><b class="blue">★</b>请尽量填写，以便我们尽快回复您！</p>
+		<input type="text" placeholder="如：@163.com" id="feedback-input" />
+       <p class="feedsize"><b>验证码</b></p>
+        <input type="text" name="captcha" id="feedback-Captcha" maxlength="4" onClick="">
+        <span name="feedback_captcha" id="feedback_captcha">
+				<img title="看不清？点击更换" style="cursor: pointer;" src="captcha-f=feedback&v=7536108.png"  id="yanzhen" width="60" height="20" border="1">
+	    </span>
+	    <br />
+		<input type="button"  class="feed-btn" value="" onClick="feedbackSubmit(); return false;" />
+	</form>
+</div>
+<div id="feedback_cover" class="feedback_cover"></div>
+<!--QQ咨询-->
+<script charset="utf-8" type="text/javascript" src="/static/wxgjcn//static.b.qq.com/account/bizqq/js/wpa.js-wty=1&type=13&kfuin=2943747028&ws=http---www.weimob.com-&title=企业QQ售前&cot1=国内最大的微企—国内优秀的微信公众服务平台&btn1=企业QQ咨询&fsty=0&fposX=2&fposY=1&tx=2&aty=1&a=1001.js" ></script>
+
+<div class="footer">
+	<div class="footer-content clearfix">
+			<div class="foot-menu">
+			<p>
+				<a href="/static/wxgjcn/index1.htm"  target="_blank">윙코커뮤니케이션(주) │ 사업자등록번호 109-86-41054 통신판매업신고번호 2013-서울강서-0811호</a>&nbsp;&nbsp;
+				
+			</p>
+			<p>대표 이주연 │ 개인정보관리책임자 이주연</p>
+			<p>고객센터 02-6365-1030 │ Fax 02-6365-1040 │ 이메일 wechat@wingkostory.com </p>
+			<p>157-925 서울특별시 강서구 화곡동 1081-39번지 3층 (강서로31길 52)</p>
+			<p>중국지사 : 201105 上海市 闵行区 吴中路 2708号 4楼 </p>
+		</div>
+		<div class="copyright">
+			Copyright  2011-2014  All Rights Reserved
+		</div>
+	</div>
+</div>
+
+<!--  
+<a class="feedbackbot" href="javascript:;" onclick= "$('#feedback, #feedback_cover').toggleClass('on');"></a>
+<div style="display:none;"><script type="text/javascript" src="/static/wxgjcn/src/www/index1/huishuo.js-v=2014-03-07-1.js" ></script></div>
+-->
+<script>
+	$(document).ready(function(){
+		$("#yanzhen").click(function(){
+			var img_src= 'captcha-f=feedback&v=.png'/*tpa=http://www.weimob.com/site/captcha?f=feedback&v=*/;
+			$(this).attr({"src":img_src + Math.random()*100000});
+		});
+	});
+	function feedbackSubmit(){
+		var $data = {
+			feedback: $('#feedback-text').val(),
+			email: $('#feedback-input').val(),
+			captcha: $('#feedback-Captcha').val(),
+			url: self.location.hrefy
+		};
+		$.post('/site/feedback', $data, function(rs){
+			alert(rs.error);
+			if (200 == rs.code)
+			{
+				$('#feedback, #feedback_cover').toggleClass('on');
+			}
+		}, 'json');
+	}
+</script>
+
+
+<script type="text/javascript">
+		$(document).ready(function(){
+		var hash=window.location.hash || "#site";
+		if(hash){
+			var lis=$("#nav_lis>li"),
+				divs=$("#nav_uls>div");
+			lis.each(function(index, v) {
+				if(hash == v.getAttribute("data-hash")){
+					v.className="hover";
+					//.var divs = $("#nav_uls>div");
+					for(var i=0,ci; ci = divs[i]; i++){
+						if(index == ci.getAttribute("data-index")){
+							$(ci).addClass("show");
+						}else{
+							$(ci).removeClass("show");
+						}
+					}
+			
+				}
+			});
+		}
+
+
+	$("#nav_lis").on("mouseover", function(e){
+			$(this).find("li").removeClass("hover");
+			e.target.className = "hover";
+			var index = e.target.getAttribute("data-index");
+			//
+			var divs = $("#nav_uls>div");
+			for(var i=0,ci; ci = divs[i]; i++){
+				if(index == ci.getAttribute("data-index")){
+					$(ci).addClass("show");
+				}else{
+					$(ci).removeClass("show");
+				}
+			}
+
+		});
+
+
+	});
+</script></body>
+</html>
+

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminStoreMapper">
+
+	<select id="list" parameterType="Store" resultType="Store">
+		(
+		select
+			A.*,
+			B.name as location_name,
+			B.name_ko as location_name_ko,
+			C.name as category_name,
+			C.name_ko as category_name_ko
+		from tb_store A
+			inner join tb_location B on A.location_no = B.location_no
+			inner join tb_category C on A.category_no = C.category_no
+		where A.store_no > 0
+			<if test="category_no != null and category_no != ''">
+				and A.category_no = #{category_no}
+			</if>
+			<if test="location_no != null and location_no != ''">
+				and A.location_no = #{location_no}
+			</if>
+			<if test="search_type != null and search_type != ''">
+				and A.${search_type} like '%${search_string}%'
+			</if>
+		order by A.store_no desc
+		) limit #{start_no}, #{pageSize}
+	</select>
+	
+	<select id="listCount" parameterType="Store" resultType="Integer">
+		select
+			count(A.store_no)
+		from tb_store A
+			inner join tb_location B on A.location_no = B.location_no
+			inner join tb_category C on A.category_no = C.category_no
+		where A.store_no > 0
+			<if test="category_no != null and category_no != ''">
+				and A.category_no = #{category_no}
+			</if>
+			<if test="location_no != null and location_no != ''">
+				and A.location_no = #{location_no}
+			</if>
+			<if test="search_type != null and search_type != ''">
+				and A.${search_type} like '%${search_string}%'
+			</if>
+	</select>
+	
+	<select id="select" parameterType="String" resultType="Store">
+		select * from tb_store where store_no = #{store_no}
+	</select>
+
+	<insert id="insert" parameterType="HashMap">
+		<![CDATA[
+			insert tb_store (
+					location_no, category_no, title, content, address, tel, email, office_hour, holiday, language_service, payment, traffic, traffic_bus, traffic_subway,
+					etc, image, image_thumb, image1, image2, image3, image_map, x, y, review_count, use_flag, edit_date, reg_date, description)
+			values(
+					#{location_no}, #{category_no}, #{title}, #{content}, #{address}, #{tel}, #{email}, #{office_hour}, 
+					#{holiday}, (#{language_service}), (#{payment}), #{traffic}, #{traffic_bus}, #{traffic_subway}, #{etc}, #{image}, #{image_thumb}, 
+					#{image1}, #{image2}, #{image3}, #{image_map}, #{x}, #{y}, 0, 'N', sysdate(), sysdate(), #{description})
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="HashMap">
+		<![CDATA[
+		update tb_store
+		set location_no = #{location_no}, category_no = #{category_no}, title = #{title}, content = #{content}, address = #{address}, 
+			tel = #{tel}, tel2 = #{tel2}, email = #{email}, office_hour = #{office_hour}, holiday = #{holiday}, 
+			language_service = #{language_service}, payment = #{payment}, traffic = #{traffic}, 
+			traffic_bus = #{traffic_bus}, traffic_subway = #{traffic_subway}, etc = #{etc}, 
+			x = #{x}, y = #{y}, review_count = #{review_count}, use_flag = #{use_flag}, edit_date = sysdate(), description = #{description}
+		]]>
+			<if test="image_thumb != null and image_thumb != ''">
+				, image_thumb = #{image_thumb}
+			</if>
+			<if test="image != null and image != ''">
+				, image = #{image}
+			</if>
+			<if test="image1 != null and image1 != ''">
+				, image1 = #{image1}
+			</if>
+			<if test="image2 != null and image2 != ''">
+				, image2 = #{image2}
+			</if>
+			<if test="image3 != null and image3 != ''">
+				, image3 = #{image3}
+			</if>
+			<if test="image_map != null and image_map != ''">
+				, image_map = #{image_map}
+			</if>
+		where store_no = #{store_no}
+	</update>
+	
+	<!-- <delete id="delete" parameterType="String">
+		delete from tb_store
+		where store_no = #{store_no}
+	</delete> -->
+	<update id="delete" parameterType="String">
+		update tb_store set use_flag = 'N' where store_no = #{store_no}
+	</update>
+	
+	<select id="getLocationForSelect" resultType="SelectData">
+		select
+		  (case depth
+		    when 1 then concat('1뎁스: ',name, '(', name_ko, ')')
+		    when 2 then concat('2뎁스: ', (select concat(name, '(', name_ko, ')') from tb_location where location_no = A.parent_location_no ), ' > ', name, '(', name_ko, ')' )
+		    else concat('3뎁스: ', (select concat(name, '(', name_ko, ')') from tb_location where location_no = A.parent_location_no ), ' > ', name, '(', name_ko, ')' )
+		  end) as title
+		  , location_no as value
+		from tb_location A
+		where depth = '2'
+		order by parent_location_no asc, location_no asc
+	</select>
+
+	<select id="getCategoryForSelect" resultType="SelectData">
+		select
+		  (case depth
+		    when 1 then concat('1뎁스: ',name, '(', name_ko, ')')
+		    when 2 then concat('2뎁스: ', (select concat(name, '(', name_ko, ')') from tb_category where category_no = A.parent_category_no ), ' > ', name, '(', name_ko, ')' )
+		    else concat('3뎁스: ', (select concat(name, '(', name_ko, ')') from tb_category where category_no = A.parent_category_no ), ' > ', name, '(', name_ko, ')' )
+		  end) as title
+		  , category_no as value
+		from tb_category A
+		where depth = '2'
+		order by parent_category_no asc, category_no asc
+	</select>
+	
+	
+	<select id="storeMenuList" parameterType="StoreMenu" resultType="StoreMenu">
+		select
+			A.*, B.title as store_name
+		from
+			tb_store_menu A
+			inner join tb_store B
+				on A.store_no = B.store_no 
+		where A.store_no = #{store_no}
+	</select>
+	
+	<select id="storeMenu" parameterType="StoreMenu" resultType="StoreMenu">
+		select * from tb_store_menu where menu_no = #{menu_no}
+	</select>
+	
+	<insert id="storeMenuInsert" parameterType="HashMap">
+		insert tb_store_menu (store_no, menu_name, menu_price, menu_price_cny, menu_coupon, start_date, end_date, image_thumb, image, use_flag, edit_date, reg_date)
+		values(#{store_no}, #{menu_name}, #{menu_price}, #{menu_price_cny}, #{menu_coupon}, #{start_date}, #{end_date}, #{image_thumb}, #{image}, 'N', sysdate(), sysdate() )
+	</insert>
+
+	<update id="storeMenuUpdate" parameterType="HashMap">
+		update tb_store_menu
+		set menu_name = #{menu_name}, menu_price = #{menu_price}, menu_price_cny = #{menu_price_cny}, menu_coupon = #{menu_coupon}, start_date = #{start_date}, 
+			end_date = #{end_date}, use_flag = #{use_flag}, edit_date = sysdate()
+			<if test="image != null">
+				, image = #{image}
+			</if>
+			<if test="image_thumb != null">
+				, image_thumb = #{image_thumb}
+			</if>
+		where menu_no = #{menu_no} and store_no = #{store_no} 
+	</update>
+	
+	<!-- <delete id="storeMenuDelete" parameterType="StoreMenu">
+		delete from tb_store_menu where menu_no = #{menu_no} and store_no = #{store_no}
+	</delete> -->
+	<update id="storeMenuDelete" parameterType="StoreMenu">
+		update tb_store_menu set use_flag = 'N' where menu_no = #{menu_no} and store_no = #{store_no}
+	</update>
+	
+	
+
+
+
+	<select id="storeCouponList" parameterType="StoreCoupon" resultType="StoreCoupon">
+		select
+			A.*, B.title as store_name
+		from
+			tb_store_coupon A
+			inner join tb_store B
+				on A.store_no = B.store_no 
+		where A.store_no = #{store_no}
+	</select>
+	
+	<select id="storeCoupon" parameterType="StoreCoupon" resultType="StoreCoupon">
+		select * from tb_store_coupon where coupon_no = #{coupon_no}
+	</select>
+	
+	<insert id="storeCouponInsert" parameterType="HashMap">
+		insert tb_store_coupon (store_no, coupon_name, coupon_desc, start_date, end_date, image, use_flag, edit_date, reg_date)
+		values(#{store_no}, #{coupon_name}, #{coupon_desc}, #{start_date}, #{end_date}, #{image}, 'N', sysdate(), sysdate() )
+	</insert>
+
+	<update id="storeCouponUpdate" parameterType="HashMap">
+		update tb_store_coupon
+		set coupon_name = #{coupon_name}, coupon_desc = #{coupon_desc}, start_date = #{start_date}, 
+			end_date = #{end_date}, use_flag = #{use_flag}, edit_date = sysdate()
+			<if test="image != null">
+				, image = #{image}
+			</if>
+		where coupon_no = #{coupon_no} and store_no = #{store_no} 
+	</update>
+	
+	<!-- <delete id="storeCouponDelete" parameterType="StoreCoupon">
+		delete from tb_store_coupon where coupon_no = #{coupon_no} and store_no = #{store_no}
+	</delete> -->
+	<update id="storeCouponDelete" parameterType="StoreCoupon">
+		update tb_store_coupon set use_flag = 'N' where coupon_no = #{coupon_no} and store_no = #{store_no}
+	</update>
+
+</mapper>

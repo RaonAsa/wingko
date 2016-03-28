@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CompanyMapper">
+
+	<insert id="insertCompanyQuestion" parameterType="HashMap">
+		INSERT INTO tb_question_bbs (question_category, company, name, url, email, phone, title, content, file, reg_date)
+		VALUES ( #{question_category}, #{company}, #{name}, #{url}, #{email}, #{phone}, #{title}, #{content}, #{file}, sysdate() )
+	</insert>
+
+	
+	
+	<select id="companyNewsList" parameterType="CompanyNews" resultType="CompanyNews">
+		select
+			A.*, C.user_nickname
+		from 
+			tb_company_news A,
+			(
+				select
+					no
+				from tb_company_news
+				where no > 0
+					and use_flag = 'Y'
+				order by no desc
+				limit #{start_no}, #{pageSize}
+			) B,
+			tb_member C
+		where A.no = B.no and A.user_no = C.user_no
+		order by A.no desc
+	</select>
+	
+	<select id="companyNewsListCount" parameterType="CompanyNews" resultType="Integer">
+		select
+			count(no)
+		from tb_company_news
+		where no > 0
+			and use_flag = 'Y'
+	</select>
+
+	<select id="companyNews" parameterType="Integer" resultType="CompanyNews">
+		select A.*, B.user_nickname from tb_company_news A, tb_member B
+		where no = #{no} and use_flag = 'Y' and A.user_no = B.user_no
+	</select>
+	
+	<select id="companyNewsNext" parameterType="CompanyNews" resultType="CompanyNews">
+		<![CDATA[
+			select * from tb_company_news 
+			where no < #{no} and use_flag = 'Y'
+		]]>
+		order by no desc limit 1
+		
+	</select>
+	
+	<select id="companyNewsPrev" parameterType="CompanyNews" resultType="CompanyNews">
+		select * from tb_company_news 
+		where no > #{no} and use_flag = 'Y'
+		order by no asc limit 1
+	</select>
+	
+	<update id="companyNewsHit" parameterType="Integer">
+		update tb_company_news set hit = hit + 1 where no = #{no}
+	</update>
+
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RecommendMapper">
+
+	<insert id="insert" parameterType="Recommend">
+		insert into tb_recommend(parent_no, parent_code, user_no, reg_date)
+		values (#{parent_no}, #{parent_code}, #{user_no}, sysdate())
+	</insert>
+	
+	<select id="check" parameterType="Recommend" resultType="Integer">
+		select IFNULL(count(no), 0) from tb_recommend where user_no = #{user_no} and parent_no = #{parent_no} and parent_code = #{parent_code}
+	</select>
+	
+	<update id="travelRecommendUpdate" parameterType="Recommend">
+		update tb_travel set recommend = recommend + 1 where travel_no = #{parent_no}
+	</update>
+	
+	<update id="communityRecommendUpdate" parameterType="Recommend">
+		update tb_community set recommend = recommend + 1 where no = #{parent_no}
+	</update>
+
+</mapper>

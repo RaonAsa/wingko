@@ -1,0 +1,1107 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="uyan_auth" content="04a3f6938d" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="微信营销、微信代运营、微信定制开发、微信托管、微网站、微商城、微营销" name="Keywords">
+	<meta content="微企—国内优秀的微信公众服务平台，国内最大的微信公众智能服务平台，微企—国内优秀的微信公众服务平台八大微体系：微菜单、微官网、微会员、微活动、微商城、微推送、微服务、微统计，企业微营销必备。" name="Description">
+    <script src="http://kr.wechatkorea.cn/static/wxgjcn/src/html5.js" ></script>
+    <link rel="stylesheet" type="text/css" href="/static/wxgjcn/css/www/index1/index.css-2014-03-07-1.css"  media="all" />
+<script type="text/javascript" src="http://kr.wechatkorea.cn/static/wxgjcn/src/jQuery.js-2014-03-07-1.js" ></script>
+<script type="text/javascript" src="http://kr.wechatkorea.cn/static/wxgjcn/src/www/index1/project.js-2014-03-07-1.js" ></script>
+<script type="text/javascript" src="http://kr.wechatkorea.cn/static/wxgjcn/src/www/index1/carouFredSel.js-2014-03-07-1.js" ></script>
+<script type="text/javascript" src="http://kr.wechatkorea.cn/static/wxgjcn/src/www/index1/weimob-index.js-2014-03-07-1.js" ></script>
+<title>WECHATMANAGER(local)</title>
+	<link rel="shortcut icon" href="../../소스backup/www/static/wxgjcn/httpimg/favicon.ico" />
+</head>
+<body>
+	<!--[if lte IE 8]>  <script language="javascript">$(function (){$.browser.msie&&$("#ie9-tips").show().find("#stopSuggestA").click(function(){$("#ie9-tips").hide()})})</script><![endif]-->
+<div class="nav clearfix">
+	<div class="nav-content">
+		<h1 class="left"><a href="/"   title="微企—国内优秀的微信公众服务平台官网">微企—国内优秀的微信公众服务平台·微信营销，如此简单！</a></h1>
+		<div class="left city">
+			<!--<h2>全国</h2>
+							<a href="/static/wxgjcn/city1.htm" >
+					切换城市<i class="tri4"></i>
+				</a> -->
+					</div>
+		<div class="right line-li">
+        
+			 <ul>
+        <li><a href="/" ><font face="方正粗圆简体" >MAIN</font></a></li>
+        <li><a href="/static/wxgjcn/case1.htm"  > <font face="方正粗圆简体" >성공사례</font></a></li>
+	    <!--<li class="nav_menu_li_1"><a style="width:70px; text-align:left;" class="_hover"><font face="方正粗圆简体" >기능</font><i></i></a>
+					 <div class="sub-nav">
+						 <a href="/static/wxgjcn/package.htm"  target="_black"><font face="方正粗圆简体" >服务套餐</font></a>
+						 <a href="/static/wxgjcn/guide1.htm" ><font face="方正粗圆简体" >기능소개</font></a>
+						 
+
+					 </div>
+
+	    </li>-->
+        <li><a href="/static/wxgjcn/guide1.htm"  >기능소개</a></li>
+        <li><a href="/static/wxgjcn/proxy1.htm"  ><font face="方正粗圆简体" >사업제휴</font></a></li>
+        <li><a href="/static/wxgjcn/help.htm"   target="_black"><font face="方正粗圆简体" >HELP</font></a></li>
+    </ul>
+            <div class="account">
+        <a href="/reg.html"  class="btn-reg btn0" target="_black">가입</a>
+                  <a href="/login.html" class="btn-login btn0" target="_black">등록</a>
+		</div>
+		</div>
+	</div>
+</div>
+
+	
+<div id="ie9-tips" class="clearfix">
+	<div id="tipsPanel">
+		<div id="tipsDesc">系统检测到您所使用的浏览器版本较低，推荐使用<a   target="_blank">Firefox</a>或<a   target="_blank">Chrome</a>浏览器打开，否则将无法体验完整产品功能。</div>
+		<a id="stopSuggestA" href="javascript:;">×</a>
+	</div>
+</div>
+
+<script>
+var $do_submit = false;
+
+// 绑定回车键
+$('#loginBox').keydown(function(e){
+	if(13 == event.keyCode){
+		login();
+	}
+});
+
+	function login()
+	{
+		if (true == $do_submit)
+		{
+			return false;
+		}
+
+		var $pre_submit = '登录', $done_submit = '登录中...';
+		var $username = $('#username').val(), $password = $('#password').val(), $keepalive = $('#rememberPwdIcon').val();
+		$('#login_button').text($done_submit);
+		$do_submit = true;
+
+		// check
+		if ('' == $username || '' == $password)
+		{
+			$('#err_tips').text('您输入的微企—国内优秀的微信公众服务平台号或密码错误，请重新输入！');
+			$('#err_area').show();
+			$('#login_button').text($pre_submit);
+			$do_submit = false;
+			return false;
+		}
+
+		var $login_data = {
+			username:$username,
+			password:$password,
+			keepalive:$keepalive
+		};
+		$.post('/login', $login_data, function(rs){
+			if(rs.errno == 200)
+			{
+				location.href = rs.url_route;
+			}
+			else
+			{
+				$('#err_tips').text(rs.error);
+				$('#err_area').show();
+				$('#login_button').text($pre_submit);
+			}
+			$do_submit = false;
+		}, 'json');
+	}
+</script>
+<!-- banner -->
+<script>
+	if(top!=self)
+		if(self!=top) top.location='/index.htm'/*tpa=http://www.weimob.com/*/;
+</script>
+<div class="header clearfix">
+	<div class="hd-c">
+		<div class="banner">
+			<ul>
+									<li class="pic-intro" >
+						 <div class="text">
+							<!--<h4>
+								已有<font>246,898</font>商家入驻微企—国内优秀的微信公众服务平台，微信营销 如此简单
+							</h4>-->
+							<a id="start_btn" class="start" href="/reg.html"  title="入驻微企—国内优秀的微信公众服务平台"></a>
+						</div>  
+													<div class="pic" onClick="location.href='/topic/community.htm'" style="cursor:pointer;">
+													<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/banner-ab.png-v=2014-03-07-1.png"  class="png-24" alt="banner" />
+						</div>
+					</li>
+									<li class="pic-intro" style="display: none;">
+						<div class="text">
+							<!--<h4>
+								已有<font>246,898</font>商家入驻微企—国内优秀的微信公众服务平台，微信营销 如此简单
+							</h4>  -->
+							<a id="start_btn" class="start" href="/reg.html"  title="入驻微企—国内优秀的微信公众服务平台"></a>
+						</div>
+													<div class="pic" onClick="location.href='/topic/mcard.htm'" style="cursor:pointer;">
+													<img src="http://kr.wechatkorea.cn//static/wxgjcn/img/www/index1/banner-o.png-v=2014-03-07-1.png"  class="png-24" alt="banner" />
+						</div>
+					</li>
+									<li class="pic-intro" style="display: none;">
+						<div class="text">
+							<!--<h4>
+								已有<font>246,898</font>商家入驻微企—国内优秀的微信公众服务平台，微信营销 如此简单
+							</h4> -->
+							<a id="start_btn" class="start" href="/reg.html"  title="入驻微企—国内优秀的微信公众服务平台"></a>
+						</div>
+													<div class="pic" onClick="location.href='/topic/cust.htm'" style="cursor:pointer;">
+													<img src="http://kr.wechatkorea.cn//static/wxgjcn/img/www/index1/banner-p.png-v=2014-03-07-1.png"  class="png-24" alt="banner" />
+						</div>
+					</li>
+									<li class="pic-intro" style="display: none;">
+						<div class="text">
+							<!--<h4>
+								已有<font>246,898</font>商家入驻微企—国内优秀的微信公众服务平台，微信营销 如此简单
+							</h4>-->
+							<a id="start_btn" class="start" href="/reg.html"  title="入驻微企—国内优秀的微信公众服务平台"></a>
+						</div>
+													<div class="pic" onClick="location.href='/topic/weipai.htm'" style="cursor:pointer;">
+													<img src="http://kr.wechatkorea.cn//static/wxgjcn/img/www/index1/banner-l.png-v=2014-03-07-1.png"  class="png-24" alt="banner" />
+						</div>
+					</li>
+									<li class="pic-intro" style="display: none;">
+						<div class="text">
+							<!--<h4>
+								已有<font>246,898</font>商家入驻微企—国内优秀的微信公众服务平台，微信营销 如此简单
+							</h4>-->
+							<a id="start_btn" class="start" href="/reg.html"  title="入驻微企—国内优秀的微信公众服务平台"></a>
+						</div>
+													<div class="pic" onClick="location.href='/topic/datacube.htm'" style="cursor:pointer;">
+													<img src="http://kr.wechatkorea.cn//static/wxgjcn/img/www/index1/banner-h.png-v=2014-03-07-1.png"  class="png-24" alt="banner" />
+						</div>
+					</li>
+									<li class="pic-intro" style="display: none;">
+						<div class="text">
+							<!--<h4>
+								已有<font>246,898</font>商家入驻微企—国内优秀的微信公众服务平台，微信营销 如此简单
+							</h4>-->
+							<a id="start_btn" class="start" href="/reg.html"  title="入驻微企—国内优秀的微信公众服务平台"></a>
+						</div>
+													<div class="pic" onClick="location.href='/topic/kefu.htm'" style="cursor:pointer;">
+													<img src="http://kr.wechatkorea.cn//static/wxgjcn/img/www/index1/banner-g.png-v=2014-03-07-1.png"  class="png-24" alt="banner" />
+						</div>
+					</li>
+									<li class="pic-intro" style="display: none;">
+						<div class="text">
+							<!--<h4>
+								已有<font>246,898</font>商家入驻微企—国内优秀的微信公众服务平台，微信营销 如此简单
+							</h4>-->
+							<a id="start_btn" class="start" href="/reg.html"  title="入驻微企—国内优秀的微信公众服务平台"></a>
+						</div>
+													<div class="pic" onClick="location.href='/topic/vmall.htm'" style="cursor:pointer;">
+													<img src="http://kr.wechatkorea.cn//static/wxgjcn/img/www/index1/banner-i.png-v=2014-03-07-1.png"  class="png-24" alt="banner" />
+						</div>
+					</li>
+									<li class="pic-intro" style="display: none;">
+						<div class="text">
+							<!--<h4>
+								已有<font>246,898</font>商家入驻微企—国内优秀的微信公众服务平台，微信营销 如此简单
+							</h4>-->
+							<a id="start_btn" class="start" href="/reg.html"  title="入驻微企—国内优秀的微信公众服务平台"></a>
+						</div>
+													<div class="pic">
+													<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/banner-a.png-v=2014-03-07-1.png"  class="png-24" alt="banner" />
+						</div>
+					</li>
+									<li class="pic-intro" style="display: none;">
+						<div class="text">
+							<!--<h4>
+								已有<font>246,898</font>商家入驻微企—国内优秀的微信公众服务平台，微信营销 如此简单
+							</h4>-->
+							<a id="start_btn" class="start" href="/reg.html"  title="入驻微企—国内优秀的微信公众服务平台"></a>
+						</div>
+													<div class="pic">
+													<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/banner-b.png-v=2014-03-07-1.png"  class="png-24" alt="banner" />
+						</div>
+					</li>
+									<li class="pic-intro" style="display: none;">
+						<div class="text">
+							<!--<h4>
+								已有<font>246,898</font>商家入驻微企—国内优秀的微信公众服务平台，微信营销 如此简单
+							</h4>-->
+							<a id="start_btn" class="start" href="/reg.html"  title="入驻微企—国内优秀的微信公众服务平台"></a>
+						</div>
+													<div class="pic">
+													<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/banner-c.png-v=2014-03-07-1.png"  class="png-24" alt="banner" />
+						</div>
+					</li>
+									<li class="pic-intro" style="display: none;">
+						<div class="text">
+							<!--<h4>
+								已有<font>246,898</font>商家入驻微企—国内优秀的微信公众服务平台，微信营销 如此简单
+							</h4>-->
+							<a id="start_btn" class="start" href="/reg.html"  title="入驻微企—国内优秀的微信公众服务平台"></a>
+						</div>
+													<div class="pic">
+													<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/banner-d.png-v=2014-03-07-1.png"  class="png-24" alt="banner" />
+						</div>
+					</li>
+									<li class="pic-intro" style="display: none;">
+						<div class="text">
+							<!--<h4>
+								已有<font>246,898</font>商家入驻微企—国内优秀的微信公众服务平台，微信营销 如此简单
+							</h4>-->
+							<a id="start_btn" class="start" href="/reg.html"  title="入驻微企—国内优秀的微信公众服务平台"></a>
+						</div>
+													<div class="pic">
+													<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/banner-e.png-v=2014-03-07-1.png"  class="png-24" alt="banner" />
+						</div>
+					</li>
+							</ul>
+			<div class="frame">
+				<span class="changing-over">
+																	<a href="#" class="now"></a>
+																	<a href="#" ></a>
+																	<a href="#" ></a>
+																	<a href="#" ></a>
+																	<a href="#" ></a>
+																	<a href="#" ></a>
+																	<a href="#" ></a>
+																	<a href="#" ></a>
+																	<a href="#" ></a>
+																	<a href="#" ></a>
+																	<a href="#" ></a>
+																	<a href="#" class="last"></a>
+									</span>
+			</div>
+		</div>
+	</div>
+</div>
+<div>
+	<div class="list_carousel">
+		<ul id="foo2">
+										<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case1.jpg-v=2014-03-07-1.jpg"  alt="case1.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case2.jpg-v=2014-03-07-1.jpg"  alt="case2.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case3.jpg-v=2014-03-07-1.jpg"  alt="case3.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case4.jpg-v=2014-03-07-1.jpg"  alt="case4.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case5.jpg-v=2014-03-07-1.jpg"  alt="case5.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case6.jpg-v=2014-03-07-1.jpg"  alt="case6.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case7.jpg-v=2014-03-07-1.jpg"  alt="case7.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case8.jpg-v=2014-03-07-1.jpg"  alt="case8.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case9.jpg-v=2014-03-07-1.jpg"  alt="case9.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case10.jpg-v=2014-03-07-1.jpg"  alt="case10.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case11.jpg-v=2014-03-07-1.jpg"  alt="case11.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case12.jpg-v=2014-03-07-1.jpg"  alt="case12.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case13.jpg-v=2014-03-07-1.jpg"  alt="case13.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case14.jpg-v=2014-03-07-1.jpg"  alt="case14.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case15.jpg-v=2014-03-07-1.jpg"  alt="case15.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case16.jpg-v=2014-03-07-1.jpg"  alt="case16.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case17.jpg-v=2014-03-07-1.jpg"  alt="case17.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case18.jpg-v=2014-03-07-1.jpg"  alt="case18.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case19.jpg-v=2014-03-07-1.jpg"  alt="case19.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case20.jpg-v=2014-03-07-1.jpg"  alt="case20.jpg" />
+					</a>
+				</li>
+							<li>
+					<a href="javascript:void(0);">
+						<img src="http://kr.wechatkorea.cn/static/wxgjcn/img/www/index1/case21.jpg-v=2014-03-07-1.jpg"  alt="case21.jpg" />
+					</a>
+				</li>
+					</ul>
+		<div class="clearfix"></div>
+		<a id="prev2" class="prev" href="#"></a>
+		<a id="next2" class="next" href="#"></a>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#foo2').carouFredSel({
+					//auto: true,
+					prev: '#prev2',
+					next: '#next2',
+					pagination: "#pager2",
+					mousewheel: true,
+					swipe: {
+						onMouse: true,
+						onTouch: true
+					}
+				});
+			});
+		</script>
+	</div>
+</div>
+
+
+<!--
+<div class="notice_customers">
+			<div id="notice-panel">
+			<div style="width:600px; margin:0 auto; position:relative; z-index:20;">
+				<h1><div class="notice_icon"></div>公告：</h1>
+				<div class="notice">
+					<label>
+						<a href="javascript:;" onClick="javascript:$('#notice_mask').show(), $('#notice_message').show(); window.scrollTo(0,0);" title="">微官网模板更新啦!</a>
+						<span class="date">2014-03-27</span>
+					</label>
+				</div>
+			</div>
+		</div>
+		<section class="customers">
+		<h2>他们都在使用微企—国内优秀的微信公众服务平台Weimob</h2>
+		<nav>
+			<ul>
+				<li><a href="#previous" class="arrow _previous"><b>上一个</b></a></li>
+				<li><a href="#next" class="arrow _next"><b>下一个</b></a></li>
+			</ul>
+		</nav>
+		<div class='clients-display'>
+			<ul>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_15 first"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_12 first"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_5 first"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_3 first"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_9 first"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_6"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_7"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_8"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_1"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_10"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_11"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_4"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_13"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_14"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_2"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_16"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_17"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_18"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_19"></a></li>
+				<li><a href="/static/wxgjcn/case1.htm"  class="clients_20"></a></li>
+
+			</ul>
+		</div>
+	</section>
+	<script type="text/javascript">
+		$(function(){
+
+			/*rolling the logos*/
+
+			function repeat(str, num) {
+				return new Array( num + 1 ).join( str );
+			}
+
+			!function () {
+				var $wrapper = $('.clients-display').css('overflow', 'hidden'),
+
+					$slider = $wrapper.find('> ul'),
+					$items = $slider.find('> li'),
+					$single = $items.filter(':first'),
+
+					singleWidth = $single.outerWidth(),
+					visible = Math.ceil($wrapper.innerWidth() / singleWidth),
+					currentPage = 1,
+					pages = Math.ceil($items.length / visible);
+
+				if (($items.length % visible) != 0) {
+					$slider.append(repeat('<li class="empty" />', visible - ($items.length % visible)));
+					$items = $slider.find('> li');
+				}
+
+				$items.filter(':first').before($items.slice(- visible).clone().addClass('cloned'));
+				$items.filter(':last').after($items.slice(0, visible).clone().addClass('cloned'));
+				$items = $slider.find('> li'); // reselect
+
+				$wrapper.scrollLeft(singleWidth * visible);
+
+				function gotoPage(page) {
+					var dir = page < currentPage ? -1 : 1,
+						n = Math.abs(currentPage - page),
+						left = singleWidth * dir * visible * n;
+
+					$wrapper.filter(':not(:animated)').animate({
+						scrollLeft : '+=' + left
+					}, 700, function () {
+						if (page == 0) {
+							$wrapper.scrollLeft(singleWidth * visible * pages);
+							page = pages;
+						} else if (page > pages) {
+							$wrapper.scrollLeft(singleWidth * visible);
+							// reset back to start position
+							page = 1;
+						}
+
+						currentPage = page;
+					});
+
+					return false;
+				}
+
+				$('.arrow._previous').click(function () {
+					return gotoPage(currentPage - 1);
+				});
+
+				$('.arrow._next').click(function () {
+					return gotoPage(currentPage + 1);
+				});
+
+				$(this).bind('goto', function (event, page) {
+					gotoPage(page);
+				});
+			}()});
+		
+	</script>
+</div>
+-->
+
+<div id="cover_video" class="cover_video"></div>
+<!-- trade -->
+<div class="content clearfix">
+
+	<div class="feature-content">
+		<script>
+			$(document).ready(function(){
+				$(".feature-content dd").hover(
+					function(){
+						$(this).addClass("active")
+					},
+					function(){
+						$(this).removeClass("active");
+					}
+				);
+			});
+		</script>
+
+		<dl class="clearfix">
+			<dd class="vborder">
+				<a href="/static/wxgjcn/guide1.htm#site" >
+					<!--<div class="fimg icon website"></div>
+					<h3>微官网</h3> -->
+					<div style="margin-left: 43px; margin-top: 25px;" id="1_a" onMouseOver="dis(1)" onMouseOut="dis1(1)">
+				<img src="/images/icon01-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:29px;color:#fff">템플릿</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="1_b" onMouseOut="dis1(1)" onMouseOver="dis(1)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">템플릿</h3>
+				<p style="padding:0 1px;font-size:10px;">5분만에 간단히<br>디자인 완료</p> 
+				</div>
+				</a>
+			</dd>
+			<dd class="vborder">
+				<a href="/static/wxgjcn/topic/mcard.htm" >
+					<!--<div class="fimg icon member"></div>
+					<h3>微信会员卡v2.0</h3>-->
+					<div style="margin-left: 43px; margin-top: 25px;" id="2_a" onMouseOver="dis(2)" onMouseOut="dis1(2)">
+				<img src="/images/icon02-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:20px;color:#fff">회원카드</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="2_b" onMouseOut="dis1(2)" onMouseOver="dis(2)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">위챗회원카드2.0</h3>
+				<p style="padding:0 1px;font-size:10px;">모바일휴대&nbsp;No분실<br>포인트적립&nbsp;一卡配备</p>
+				</div>
+				</a>
+				</dd>
+
+			<dd class="vborder">
+				<a href="/static/wxgjcn/topic/vmall.htm" >
+					<!--<div class="fimg icon vshop"></div>
+					<h3>微商城</h3>-->
+					<div style="margin-left: 43px; margin-top: 25px;" id="3_a" onMouseOver="dis(3)" onMouseOut="dis1(3)">
+				<img src="/images/icon03-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:29px;color:#fff">쇼핑몰</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="3_b" onMouseOut="dis1(3)" onMouseOver="dis(3)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">쇼핑몰</h3>
+				<p style="padding:0 1px;font-size:10px;">위챗 기업계정속<br>모바일쇼핑몰</p>
+				</div>
+				</a>
+				</dd>
+			<dd  class="vborder">
+				<a href="/static/wxgjcn/guide1.htm#cate" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="4_a" onMouseOver="dis(4)" onMouseOut="dis1(4)">
+				<img src="/images/icon04-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:29px;color:#fff">요식업</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="4_b" onMouseOut="dis1(4)" onMouseOver="dis(4)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">요식업</h3>
+				<p style="padding:0 1px;font-size:10px;">扫一扫<br>신메뉴 홍보<br>주문예약</p>
+				</div>
+					
+				</a>
+				</dd>
+
+			<dd>
+				<a href="/static/wxgjcn/topic/community.htm" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="5_a" onMouseOver="dis(5)" onMouseOut="dis1(5)">
+				<img src="/images/icon05-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:20px;color:#fff">커뮤니티</div>
+					</div>
+					<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="5_b" onMouseOut="dis1(5)" onMouseOver="dis(5)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">커뮤니티</h3>
+				<p style="padding:0 1px;font-size:10px;">위챗커뮤니티<br> 모바일활동</p>
+				</div>
+				</a>
+				</dd>
+			
+			
+		</dl>
+		<div class="line"></div>
+		<dl class="clearfix">
+			<dd class="vborder">
+				<a href="/static/wxgjcn/topic/cust.htm" >
+			    <div style="margin-left: 43px; margin-top: 25px;" id="6_a" onMouseOver="dis(6)" onMouseOut="dis1(6)">
+				<img src="/images/icon06-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:20px;color:#fff">공동구매</div>
+					</div>
+					<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="6_b" onMouseOut="dis1(6)" onMouseOver="dis(6)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">공동구매</h3>
+				<p style="padding:0 1px;font-size:10px;">기획상품<br>특가판매행사</p>
+				</div>
+				</a>
+				</dd>
+
+			<dd class="vborder">
+				<a href="/static/wxgjcn/topic/weipai.htm" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="7_a" onMouseOver="dis(7)" onMouseOut="dis1(7)">
+				<img src="/images/icon07-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:36px;color:#fff">앨범</div>
+					</div>
+					<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="7_b" onMouseOut="dis1(7)" onMouseOver="dis(7)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">앨범</h3>
+				<p style="padding:0 1px;font-size:10px;">위챗속의<br>미니앨범</p>
+				</div>
+				</a>
+				</dd>
+			<dd class="vborder">
+				<a href="/static/wxgjcn/topic/wallcame.htm" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="8_a" onMouseOver="dis(8)" onMouseOut="dis1(8)">
+				<img src="/images/icon08-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:10px;color:#fff">브로드캐스트</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="8_b" onMouseOut="dis1(8)" onMouseOver="dis(8)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">브로드캐스트</h3>
+				<p style="padding:0 1px;font-size:10px;">파티,행사<br>분위기 생생히 전달</p>
+				</div>
+				</a>
+				</dd>
+
+			<dd class="vborder">
+				<a href="/static/wxgjcn/topic/datacube.htm" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="9_a" onMouseOver="dis(9)" onMouseOut="dis1(9)">
+				<img src="/images/icon09-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:36px;color:#fff">통계</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="9_b" onMouseOut="dis1(9)" onMouseOver="dis(9)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">통계</h3>
+				<p style="padding:0 1px;font-size:10px;">일일방문<br>메뉴별 조회수 통계</p>
+				</div>
+				</a>
+				</dd>
+
+			<dd>
+				<a href="/static/wxgjcn/topic/kefu.htm" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="10_a" onMouseOver="dis(10)" onMouseOut="dis1(10)">
+				<img src="/images/icon10-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:29px;color:#fff">서비스</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="10_b" onMouseOut="dis1(10)" onMouseOver="dis(10)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">서비스</h3>
+				<p style="padding:0 1px;font-size:10px;">위챗속의<br>다양한 서비스</p>
+				</div>
+				</a>
+				</dd>
+
+		
+
+		</dl>
+        <div class="line"></div>
+         <dl class="clearfix">
+
+			<dd  class="vborder">
+				<a href="/static/wxgjcn/guide1.htm#car" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="11_a" onMouseOver="dis(11)" onMouseOut="dis1(11)">
+				<img src="/images/icon11-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:29px;color:#fff">자동차</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="11_b" onMouseOut="dis1(11)" onMouseOver="dis(11)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">자동차</h3>
+				<p style="padding:0 1px;font-size:10px;">자동차업종<br>특화 템플릿</p>
+				</div>
+				</a>
+				</dd>
+			<dd class="vborder">
+				<a href="/static/wxgjcn/guide1.htm#wedd" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="12_a" onMouseOver="dis(12)" onMouseOut="dis1(12)">
+				<img src="/images/icon12-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:29px;color:#fff">축하카드</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="12_b" onMouseOut="dis1(12)" onMouseOver="dis(12)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">축하카드</h3>
+				<p style="padding:0 1px;font-size:10px;">청첩장,연하장<br>모바일초청장</p>
+				</div>
+				</a>
+				</dd>
+            
+            <dd class="vborder">
+				<a href="/static/wxgjcn/guide1.htm#hotels" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="13_a" onMouseOver="dis(13)" onMouseOut="dis1(13)">
+				<img src="/images/icon13-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:36px;color:#fff">호텔</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="13_b" onMouseOut="dis1(13)" onMouseOver="dis(13)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">호텔</h3>
+				<p style="padding:0 1px;font-size:10px;">호텔이미지<br>룸정보,예약서비스</p>
+				</div>
+				</a>
+				</dd>
+            <dd class="vborder">
+				<a href="/static/wxgjcn/guide1.htm#activities" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="14_a" onMouseOver="dis(14)" onMouseOut="dis1(14)">
+				<img src="/images/icon14-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:29px;color:#fff">이벤트</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="14_b" onMouseOut="dis1(14)" onMouseOver="dis(14)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">이벤트</h3>
+				<p style="padding:0 1px;font-size:10px;">고객유입강화<br>판매증진이벤트시행</p>
+				</div>
+				</a>
+				</dd>
+
+			 <dd>
+				 <a href="/static/wxgjcn/guide1.htm#estate" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="15_a" onMouseOver="dis(15)" onMouseOut="dis1(15)">
+				<img src="/images/icon15-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:29px;color:#fff">부동산</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="15_b" onMouseOut="dis1(15)" onMouseOver="dis(15)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">부동산</h3>
+				<p style="padding:0 1px;font-size:10px;">부동산신규매물<br>방문예약서비스</p>
+				</div>
+				 </a>
+				  </dd>
+		
+			
+		</dl>
+
+        <div class="line"></div>
+		<dl class="clearfix">
+              <dd  class="vborder">
+				<a href="/static/wxgjcn/guide1.htm#reser" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="16_a" onMouseOver="dis(16)" onMouseOut="dis1(16)">
+				<img src="/images/icon16-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:36px;color:#fff">예약</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="16_b" onMouseOut="dis1(16)" onMouseOver="dis(16)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">예약</h3>
+				<p style="padding:0 1px;font-size:10px;">각종예약을<br>고객정보와함께 전송</p>
+				</div>
+				</a>
+				</dd>
+            
+            <dd class="vborder">
+				<a href="/static/wxgjcn/guide1.htm#photo" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="17_a" onMouseOver="dis(17)" onMouseOut="dis1(17)">
+				<img src="/images/icon17-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:36px;color:#fff">앨범</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="17_b" onMouseOut="dis1(17)" onMouseOver="dis(17)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">앨범</h3>
+				<p style="padding:0 1px;font-size:10px;">각종 이미지<br>위챗속 미니 앨범</p>
+				</div>
+				</a>
+				</dd>
+            
+              <dd  class="vborder">
+				<a href="/static/wxgjcn/guide1.htm#message" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="18_a" onMouseOver="dis(18)" onMouseOut="dis1(18)">
+				<img src="/images/icon18-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:29px;color:#fff">메시지</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="18_b" onMouseOut="dis1(18)" onMouseOver="dis(18)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">메시지</h3>
+				<p style="padding:0 1px;font-size:10px;">건의사항,불만<br>등 고객의 의견 전달</p>
+				</div>
+				</a>
+				</dd>
+		
+            	<dd class="vborder">
+				<a href="/static/wxgjcn/guide1.htm#research" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="19_a" onMouseOver="dis(19)" onMouseOut="dis1(19)">
+				<img src="/images/icon19-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:29px;color:#fff">리서치</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="19_b" onMouseOut="dis1(19)" onMouseOver="dis(19)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">리서치</h3>
+				<p style="padding:0 1px;font-size:10px;">상품,서비스<br>고객반응조사 </p>
+				</div>
+				</a>
+				</dd>
+            <dd>
+				<a href="/static/wxgjcn/guide1.htm#push" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="20_a" onMouseOver="dis(20)" onMouseOut="dis1(20)"> 
+				<img src="/images/icon20-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:16px;color:#fff">홍보PUSH</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="20_b" onMouseOut="dis1(20)" onMouseOver="dis(20)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">홍보PUSH</h3>
+				<p style="padding:0 1px;font-size:10px;">고객에게 신상품<br>안내,홍보전송</p>
+				</div>
+				</a>
+				</dd>
+            
+          
+		</dl>
+		<div class="line"></div>
+		<dl class="clearfix">
+			
+				<dd class="vborder">
+				<a href="/static/wxgjcn/guide1.htm#medical" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="21_a" onMouseOver="dis(21)" onMouseOut="dis1(21)">
+				<img src="/images/icon21-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:36px;color:#fff">의료</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="21_b" onMouseOut="dis1(21)" onMouseOver="dis(21)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">의료</h3>
+				<p style="padding:0 1px;font-size:10px;">위챗속 진료상담<br>진료 예약서비스</p>
+				</div>
+				</a>
+				</dd>
+            <dd class="vborder">
+				<a>
+					<div style="margin-left: 43px; margin-top: 25px;" id="22_a" onMouseOver="dis(22)" onMouseOut="dis1(22)">
+				<img src="/images/icon22-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:36px;color:#fff">생활</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="22_b" onMouseOut="dis1(22)" onMouseOver="dis(22)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">생활</h3>
+				<p style="padding:0 1px;font-size:10px;">위챗life<br>종합 서비스</p>
+				</div>
+				</a>
+				</dd>
+
+			<dd class="vborder">
+				<a>
+					<div style="margin-left: 43px; margin-top: 25px;" id="23_a" onMouseOver="dis(23)" onMouseOut="dis1(23)">
+				<img src="/images/icon23-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:29px;color:#fff">CRM</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="23_b" onMouseOut="dis1(23)" onMouseOver="dis(23)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">CRM</h3>
+				<p style="padding:0 1px;font-size:10px;">자동응답<br>실시간 상담등 CRM</p>
+				</div>
+				</a>
+				</dd>
+			<!--dd class="vborder">
+				<a href="/site/guide1#services">
+					<div class="fimg icon service"></div>
+					<h3>微服务</h3>
+				</a>
+				<!--<p>提供生活服务<br>增加用户粘性</p>
+			</dd-->
+
+			<dd>
+				<a>
+					<div style="margin-left: 43px; margin-top: 25px;" id="24_a" onMouseOver="dis(24)" onMouseOut="dis1(24)">
+				<img src="/images/icon24-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:36px;color:#fff">채널</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="24_b" onMouseOut="dis1(24)" onMouseOver="dis(24)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">채널</h3>
+				<p style="padding:0 1px;font-size:10px;">고객 방문<br>유입최적채널</p>
+				</div>
+				</a>
+				</dd>
+			<dd >
+				<a href="/static/wxgjcn/guide1.htm#menu" >
+					<div style="margin-left: 43px; margin-top: 25px;" id="25_a" onMouseOver="dis(25)" onMouseOut="dis1(25)">
+				<img src="/images/icon25-b.jpg" height="97px" width="100px"/>
+				<div style="position:absoluter;margin-top:-20px;margin-left:20px;color:#fff">자동메뉴</div>
+					</div>
+				<div style="margin-left: 43px; margin-top: 25px;height:97px;width:100px;background: url('/images/index_09.png') no-repeat scroll 0 0 transparent;};display:none" id="25_b" onMouseOut="dis1(25)" onMouseOver="dis(25)">
+				<h3 style="padding-top:15px;color:#7D7D7D;font-weight:bold;font-size:15px">자동메뉴</h3>
+				<p style="padding:0 1px;font-size:10px;">자동메뉴세팅<br>메뉴별링크서비스</p>
+				</div>
+				</a>
+				</dd>
+		 
+		</dl>
+		
+	</div>
+</div>
+<!-- case -->
+
+
+
+
+<!-- 视频播放 begin -->
+<div class="content videopeak" style="left: 239.5px; top: 140px;">
+	<ul>
+		<li><div class="videopopup videopopup1" onClick="playVideo(0);"><div class="play-button"></div></div></li>
+		<li><div class="videopopup videopopup2" onClick="playVideo(1);"><div class="play-button"></div></div></li>
+		<li><div class="videopopup videopopup3" onClick="playVideo(2);"><div class="play-button"></div></div></li>
+	</ul>
+</div>
+<div id="pop_video" class="videopeak-dialog" style="display:none;">
+	<span class="videopeak-dialog-title-close" onClick="$('#pop_video').css('display','none'); $('#cover_video').css('display','none'); $('#flash_player_id').remove();"></span>
+	<div class="videopeak-dialog-content" id="flash_player_box"></div>
+</div>
+<div id="cover_video" class="cover_video"></div>
+<script>
+	var video_map = [
+		'uu=5201f0b16c&vu=17c9ae34a6&auto_play=1&gpcflag=1&width=860&height=480',
+		'uu=5201f0b16c&vu=ee6c71103e&auto_play=1&gpcflag=1&width=860&height=480',
+		'uu=5201f0b16c&vu=6cc5199595&auto_play=1&gpcflag=1&width=860&height=480'
+	];
+
+	/**
+	 * 打开视频
+	 */
+	function playVideo($key)
+	{
+		$key = parseInt($key);
+		$key = Math.max(0, Math.min($key, Math.max(0, (video_map.length - 1))));
+
+		var $video_key = video_map[$key];
+
+		var $html = '<embed id="flash_player_id" src="http://kr.wechatkorea.cn/static/wxgjcn//yuntv.letv.com/bcloud.swf"/*tpa=http://yuntv.letv.com/bcloud.swf*/ allowFullScreen="true" quality="high"  width="860" height="480" align="middle" allowScriptAccess="always" flashvars="'+$video_key+'" type="application/x-shockwave-flash"></embed>';
+		$('#flash_player_box').html($html);
+		$('#cover_video').css('display','block');
+		$('#pop_video').css('display','block');
+	}
+</script>
+<!-- 视频播放 end -->
+
+
+<!--
+<div class="erwei" title="微信扫一扫">
+	<span class="hudongzhushou">官方微信</span>
+	<div class="erwei_big" style="display:none;">
+		<p>扫一扫，关注微企—国内优秀的微信公众服务平台官方微信，体验微企—国内优秀的微信公众服务平台智能服务</p>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var erwei_time = null;
+		$(".erwei").hover(function(){
+			$(".erwei_big").show();
+		}).mouseleave(function(){
+				erwei_time = setTimeout(function(){
+					$(".erwei_big").hide();
+				},1000);
+			});
+		$(".erwei_big").mouseenter(function(){
+			if(erwei_time){
+				clearTimeout(erwei_time);
+			}
+		}).mouseleave(function(){
+				erwei_time = setTimeout(function(){
+					$(".erwei_big").hide();
+				},1000);
+			});
+	});
+</script>
+-->
+
+<!-- 意见反馈 -->
+<div class="feedback" id="feedback">
+	<p class="feedsize"><b>亲爱的用户</b><a class="close" href="javascript:;" onclick= "$('#feedback, #feedback_cover').toggleClass('on');">×</a></p>
+	<p class="bbottom">欢迎您访问微企—国内优秀的微信公众服务平台官方网站！您对微企—国内优秀的微信公众服务平台有任何意见和建议，或在使用过程中遇到问题，请在本页面反馈。我们会实时关注您的反馈不断优化，您的建议将帮助我们改进，为您提供更好的服务！</p>
+	<p class="feedsize"><b>请留下您的宝贵意见和建议！（请填写）</b></p>
+	<form>
+		<textarea  id="feedback-text" name="" id="feedback-text" placeholder="输入文本..."></textarea>
+		<p class="feedsize"><b>您常用的电子邮箱是？（请填写）</b></p>
+		<p style="color:#666; text-indent:1em;"><b class="blue">★</b>请尽量填写，以便我们尽快回复您！</p>
+		<input type="text" placeholder="如：@163.com" id="feedback-input" />
+       <p class="feedsize"><b>验证码</b></p>
+        <input type="text" name="captcha" id="feedback-Captcha" maxlength="4" onClick="">
+        <span name="feedback_captcha" id="feedback_captcha">
+				<img title="看不清？点击更换" style="cursor: pointer;" src="../../소스backup/www/static/wxgjcn/captcha-f=feedback&v=8328561.png"  id="yanzhen" width="60" height="20" border="1">
+	    </span>
+	    <br />
+		<input type="button"  class="feed-btn" value="" onClick="feedbackSubmit(); return false;" />
+	</form>
+</div>
+<div id="feedback_cover" class="feedback_cover"></div>
+<!--QQ咨询-->
+
+
+<script charset="utf-8" type="text/javascript" src="http://kr.wechatkorea.cn/static/wxgjcn//static.b.qq.com/account/bizqq/js/wpa.js-wty=1&type=13&kfuin=2943747028&ws=http---www.weimob.com-&title=企业QQ售前&cot1=国内最大的微企—国内优秀的微信公众服务平台&btn1=企业QQ咨询&fsty=0&fposX=2&fposY=1&tx=2&aty=1&a=1001.js" ></script>
+
+
+
+<div class="footer">
+	<div class="footer-content clearfix">
+		<div class="foot-menu">
+			<p>
+				<a href="/static/wxgjcn/index1.htm"  target="_blank">辟客私（上海）商贸有限公司首页</a>&nbsp;|&nbsp;
+				<a href="/reg.html"  target="_blank">申请入驻</a>&nbsp;|&nbsp;
+				<a href="/static/wxgjcn/proxy1.htm"  target="_blank">渠道代理</a>&nbsp;|&nbsp;
+				<a href="/static/wxgjcn/about1.htm"  target="_blank">关于微企</a>&nbsp;|&nbsp;
+				<a href="/static/wxgjcn/agents.htm"  target="_blank">授权认证</a>&nbsp;|&nbsp;
+				<a href="/static/wxgjcn/jobs.htm"  target="_blank">加入微企</a>
+			</p>
+			<p>电话咨询：+86-21-24283306&nbsp;&nbsp;&nbsp;QQ：1509825155&nbsp;&nbsp;&nbsp;邮箱：chinapapa@naver.com</p>
+			<p>地址：
+								上海闵行区吴中路2708号万英广场410室</p>
+		</div>
+		<div class="copyright">
+			Copyright  2011-2014  All Rights Reserved
+		</div>
+	</div>
+</div>
+<a class="feedbackbot" href="javascript:;" onclick= "$('#feedback, #feedback_cover').toggleClass('on');"></a>
+<div style="display:none;"><script type="text/javascript" src="http://kr.wechatkorea.cn/static/wxgjcn/src/www/index1/huishuo.js-v=2014-03-07-1.js" ></script></div>
+
+<script>
+	$(document).ready(function(){
+		$("#yanzhen").click(function(){
+			var img_src= 'captcha-f=feedback&v=.png'/*tpa=http://www.weimob.com/site/captcha?f=feedback&v=*/;
+			$(this).attr({"src":img_src + Math.random()*100000});
+		});
+	});
+	function feedbackSubmit(){
+		var $data = {
+			feedback: $('#feedback-text').val(),
+			email: $('#feedback-input').val(),
+			captcha: $('#feedback-Captcha').val(),
+			url: self.location.hrefy
+		};
+		$.post('/site/feedback', $data, function(rs){
+			alert(rs.error);
+			if (200 == rs.code)
+			{
+				$('#feedback, #feedback_cover').toggleClass('on');
+			}
+		}, 'json');
+	}
+</script>
+
+
+<!--公告信息-->
+	<div id="notice_mask"></div>
+	<div id="notice_message" style="position: absolute;">
+		<div class="title">公 告<a onClick="javascript:jQuery('#notice_mask').hide(),jQuery('#notice_message').hide();">×</a></div>
+		<div class="content">
+			<pre style="white-space:pre-wrap;">尊敬的微企—国内优秀的微信公众服务平台用户：
+    您好！
+    近期微企—国内优秀的微信公众服务平台团队一直致力于强大的功能研发,日以继夜,对于微官网的模板短期内没有更新,大家是不是都捉急了?稳住,新模板来了!赶紧去平台一睹眼福吧!
+
+     本次更新用高大上来形容都不够哦!微企—国内优秀的微信公众服务平台团队后期会定期上新模板,持续给大家耳目一新的感觉,您们如果有好的模板推荐,可直接发送至我们哦。
+
+微企—国内优秀的微信公众服务平台团队
+2014-03-27</pre>
+		</div>
+	</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#notice_mask').click(function(){
+			$('#notice_mask').hide();
+			$('#notice_qrcode').hide();
+			$('#notice_message').hide();
+		});
+
+		$(window).resize(function(){
+			$('#notice_qrcode').css({
+				position:'absolute',
+				left: ($(window).width() - $('#notice_qrcode').outerWidth())/2,
+				top: ($(window).height() - $('#notice_qrcode').outerHeight())/2
+			});
+			/*$('#notice_message').css({
+				position:'absolute',
+				left: ($(window).width() - $('#notice_message').outerWidth())/2,
+				top: ($(window).height() - $('#notice_message').outerHeight())/2
+			});*/
+		});
+	});
+</script>
+<div id="daiyanbao_com_content" style="position: fixed;_position: 
+
+absolute;text-align: left;overflow: visible;bottom 
+
+:0;right:0;display:block; z-index:999;">
+
+</div>
+</body>
+</html>
+<script>
+function dis(id)
+{
+document.getElementById(id+'_a').style.display="none";
+document.getElementById(id+'_b').style.display="";
+}
+function dis1(id)
+{
+document.getElementById(id+'_b').style.display="none";
+document.getElementById(id+'_a').style.display="";
+}
+</script>

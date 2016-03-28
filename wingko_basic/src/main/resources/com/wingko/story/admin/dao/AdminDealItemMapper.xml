@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminDealItemMapper">
+
+	<insert id="insert" parameterType="DealItem">
+		insert tb_deal_item (deal_id, item_name, price_ko, price_cn)
+		values(#{deal_id}, #{item_name}, #{price_ko}, #{price_cn} )
+	</insert>
+	
+	<update id="update" parameterType="DealItem">
+		update tb_deal_item
+		set deal_id = #{deal_id}, item_name = #{item_name}, price_ko = #{price_ko}, price_cn = #{price_cn} 
+		where item_id = #{item_id}
+	</update>
+	
+	<select id="delete" parameterType="Integer">
+		delete from tb_deal_item where item_id = #{item_id}
+	</select>
+	
+	<select id="select" parameterType="DealItem" resultType="DealItem">
+		select * from tb_deal_item where item_id = #{item_id}
+	</select>
+	
+	<select id="list_deal" parameterType="Integer" resultType="DealItem">
+		select * from tb_deal_item where deal_id = #{deal_id}  
+		order by item_id asc
+	</select>
+	
+	
+</mapper>

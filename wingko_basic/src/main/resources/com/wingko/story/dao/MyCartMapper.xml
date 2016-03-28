@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  
+<mapper namespace="MyCartMapper">
+  
+	<insert id="insert" parameterType="MyCart">
+		insert tb_mycart (pid, user_no, menu_no, menu_cnt, coupon_apply, used_date, sum_price_ko, sum_price_cn, reg_date)
+		values(#{pid}, #{user_no}, #{menu_no}, #{menu_cnt}, #{coupon_apply}, #{used_date}, #{sum_price_ko}, #{sum_price_cn}, sysdate())
+	</insert>
+  
+	<update id="update" parameterType="MyCart">
+		update tb_mycart
+		set pid = #{pid}, user_no = #{user_no}, menu_no = #{menu_no}, menu_cnt = #{menu_cnt}, coupon_apply = #{coupon_apply}, used_date = #{used_date}, sum_price_ko = #{sum_price_ko}, sum_price_cn = #{sum_price_cn}
+		where cart_id = #{cart_id}
+	</update>
+	
+	<delete id="delete" parameterType="MyCart">
+		delete from tb_mycart where cart_id = #{cart_id}
+	</delete>
+	
+	<select id="select" parameterType="MyCart" resultType="MyCart">
+		select * from tb_mycart where cart_id = #{cart_id}
+	</select>
+
+	<select id="list_user" parameterType="MyCart" resultType="MyCart">
+		select * from tb_mycart where user_no = #{user_no}
+		order by cart_id desc
+	</select>
+		
+</mapper>

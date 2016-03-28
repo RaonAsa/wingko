@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminDealEmsMapper">
+	
+	<insert id="insert" parameterType="DealEms">
+		insert tb_deal_ems (item_cnt, gram, price_ko, price_cn )
+		values(#{item_cnt}, #{gram}, #{price_ko}, #{price_cn} )
+	</insert>
+	
+	<update id="update" parameterType="DealEms">
+		update tb_deal_ems
+		set item_cnt = #{item_cnt}, item_cnt = #{item_cnt}, gram = #{gram}, price_ko = #{price_ko}, price_cn = #{price_cn}
+		where ems_id = #{ems_id}
+	</update>
+	
+	<select id="select" parameterType="DealEms" resultType="DealEms">
+		select * from tb_deal_ems where ems_id = #{ems_id}
+	</select>
+	
+	<select id="list_all" resultType="DealEms">
+		select * from tb_deal_ems 
+		order by item_cnt asc
+	</select>
+	
+	<select id="get_item_cnt" parameterType="DealEms" resultType="DealEms">
+		select * from tb_deal_ems where item_cnt = #{item_cnt}
+	</select>
+	
+	
+</mapper>

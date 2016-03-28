@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminCommunityMapper">
+
+	<select id="noticeList" parameterType="Notice" resultType="Notice">
+		select
+			A.*
+		from 
+			tb_notice A,
+			(
+				select
+					no
+				from tb_notice
+				where no > 0
+				<if test="use_flag != null and use_flag != ''">
+					and use_flag = #{use_flag}
+				</if>
+				<if test="search_type != null and search_type != ''">
+					and ${search_type} like '%${search_string}%'
+				</if>
+				order by no desc
+				limit #{start_no}, #{pageSize}
+			) B
+		where A.no = B.no
+		order by A.no desc
+	</select>
+	
+	<select id="noticeListCount" parameterType="Notice" resultType="Integer">
+		select
+			count(no)
+		from tb_notice
+		where no > 0
+		<if test="use_flag != null and use_flag != ''">
+			and use_flag = #{use_flag}
+		</if>
+		<if test="search_type != null and search_type != ''">
+			and ${search_type} like '%${search_string}%'
+		</if>
+	</select>
+	
+	<select id="notice" parameterType="Integer" resultType="Notice">
+		select * from tb_notice where no = #{no}
+	</select>
+	
+	<insert id="noticeInsert" parameterType="Notice">
+		insert into tb_notice (title, content, user_no, user_name, top, hit, edit_date, reg_date, use_flag)
+		values(#{title}, #{content}, #{user_no}, #{user_name}, 'N', 0, sysdate(), sysdate(), 'Y')
+	</insert>
+	
+	<update id="noticeUpdate" parameterType="Notice">
+		update tb_notice
+		set title = #{title}, content = #{content}, top = #{top}, edit_date = sysdate(), use_flag = #{use_flag}
+		where no = #{no}
+	</update>
+	
+	<delete id="noticeDelete" parameterType="Integer">
+		delete from tb_notice where no = #{no}
+	</delete>
+	
+	
+	
+	<select id="communityList" parameterType="Community" resultType="Community">
+		select
+			A.*, C.user_name, C.user_nickname
+		from 
+			tb_community A,
+			(
+				select
+					no
+				from tb_community
+				where no > 0
+				<if test="search_type != null and search_type != ''">
+					and ${search_type} like '%${search_string}%'
+				</if>
+				<if test="use_flag != null and use_flag != ''">
+					and use_flag = #{use_flag}
+				</if>
+				<if test="category != null and category != ''">
+					and category = #{category}
+				</if>
+				order by no desc
+				limit #{start_no}, #{pageSize}
+			) B,
+			tb_member C
+		where A.no = B.no and A.user_no = C.user_no
+		order by A.no desc
+	</select>
+	
+	<select id="communityListCount" parameterType="Community" resultType="Integer">
+		select
+			count(no)
+		from tb_community
+		where no > 0
+		<if test="search_type != null and search_type != ''">
+			and ${search_type} like '%${search_string}%'
+		</if>
+		<if test="use_flag != null and use_flag != ''">
+			and use_flag = #{use_flag}
+		</if>
+		<if test="category != null and category != ''">
+			and category = #{category}
+		</if>
+	</select>
+	
+	<select id="community" parameterType="Integer" resultType="Community">
+		select * from tb_community where no = #{no}
+	</select>
+	
+	<insert id="communityInsert" parameterType="HashMap">
+		insert into tb_community (location_no, category, notice_flag, title, content, user_no, hit, recommend, use_flag, edit_date, reg_date, image_thumb)
+		values(#{location_no}, #{category}, #{notice_flag}, #{title}, #{content}, #{user_no}, 0, 0, #{use_flag}, sysdate(), sysdate(), #{image_thumb})
+	</insert>
+	
+	<update id="communityUpdate" parameterType="HashMap">
+		update tb_community
+		set location_no = #{location_no}, category = #{category}, notice_flag = #{notice_flag}, title = #{title}, content = #{content},
+		user_no = #{user_no}, use_flag = #{use_flag}, edit_date = sysdate()
+		<if test="image_thumb != null and image_thumb != ''">
+			, image_thumb = #{image_thumb} 
+		</if>
+		where no = #{no}
+	</update>
+	
+	<delete id="communityDelete" parameterType="Integer">
+		delete from tb_community where no = #{no}
+	</delete>
+	
+
+
+	<select id="qnaList" parameterType="Qna" resultType="Qna">
+		select
+			A.*, C.user_name, C.user_nickname
+		from 
+			tb_qna A,
+			(
+				select
+					no
+				from tb_qna
+				where no > 0
+				<if test="search_type != null and search_type != ''">
+					and ${search_type} like '%${search_string}%'
+				</if>
+				order by ref desc, sort
+				limit #{start_no}, #{pageSize}
+			) B,
+			tb_member C
+		where A.no = B.no and A.user_no = C.user_no
+		order by ref desc, sort
+	</select>
+	
+	<select id="qnaListCount" parameterType="Qna" resultType="Integer">
+		select count(no) from tb_qna
+		where no > 0
+			<if test="search_type != null and search_type != ''">
+				and ${search_type} like '%${search_string}%'
+			</if>
+	</select>
+	
+	
+	<select id="qna" parameterType="Integer" resultType="Qna">
+		select
+			A.*, B.user_name , B.user_nickname
+		from
+			tb_qna A,
+			tb_member B
+		where A.user_no = B.user_no and no = #{no}
+	</select>
+	
+	
+	<insert id="qnaInsert" parameterType="Qna">
+		insert into tb_qna (ref, ref_level, sort, title, content, user_no, edit_date, reg_date, hit)
+		values(#{ref}, #{ref_level}, #{sort}, #{title}, #{content}, #{user_no}, sysdate(), sysdate(), 0)
+	</insert>
+	
+	<update id="qnaUpdate" parameterType="Qna">
+		update tb_qna
+		set title = #{title}, content = #{content}, edit_date = sysdate()
+		where no = #{no}
+	</update>
+	
+	<delete id="qnaDelete" parameterType="Integer">
+		delete from tb_qna where no = #{no}
+	</delete>
+	
+	<delete id="qnaDeleteRef" parameterType="Integer">
+		delete from tb_qna where ref = #{ref} and no > 0
+	</delete>
+	
+	<select id="userreplyList" parameterType="Ripple" resultType="Ripple">
+		select
+			A.*, C.user_name, C.user_nickname
+		from 
+			tb_ripple A,
+			(
+				select
+					no
+				from tb_ripple
+				where no > 0
+				<if test="parent_code != null and parent_code != ''">
+					and parent_code = #{parent_code}
+				</if>
+				<if test="search_type != null and search_type != ''">
+					and ${search_type} like '%${search_string}%'
+				</if>
+				order by no desc
+				limit #{start_no}, #{pageSize}
+			) B,
+			tb_member C
+		where A.no = B.no and A.user_no = C.user_no
+		order by no desc
+	</select>
+	
+	<select id="userreplyListCount" parameterType="Ripple" resultType="Integer">
+		select count(no) from tb_ripple
+		where no > 0
+			<if test="parent_code != null and parent_code != ''">
+				and parent_code = #{parent_code}
+			</if>
+			<if test="search_type != null and search_type != ''">
+				and ${search_type} like '%${search_string}%'
+			</if>
+	</select>
+
+	<update id="userreplycheck" parameterType="Integer">
+		update tb_ripple
+			set reply_check = 'Y', reply_check_date = sysdate()
+		where no = #{no}
+	</update>
+
+</mapper>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DealShopMapper">
+  
+	<select id="deal_shop" resultType="DealMain">
+		select * from tb_deal_main
+		where used_sort > 0 
+		<![CDATA[ and start_date <= sysdate() and sysdate() <= end_date ]]>
+		order by used_sort desc limit 1
+	</select>
+	
+	<select id="get_dealmain" resultType="DealMain">
+		select * from tb_deal_main
+		where deal_id = #{deal_id} 
+	</select>
+	
+	<select id="list_dealitem" parameterType="Integer" resultType="DealItem">
+		select * from tb_deal_item where deal_id = #{deal_id}  
+		order by item_id asc
+	</select>
+	
+	<select id="getRippleList" parameterType="Ripple" resultType="Ripple">
+		select a.*, b.user_id from tb_ripple as a 
+		Inner Join tb_member As b On a.user_no = b.user_no
+		where a.parent_no = #{parent_no} and parent_code = #{parent_code}
+		order by a.no desc
+	</select>
+	
+	<select id="getRippleListCount" parameterType="Ripple" resultType="Integer">
+		select count(a.no) from tb_ripple as a 
+		Inner Join tb_member As b On a.user_no = b.user_no
+		where a.parent_no = #{parent_no} and parent_code = #{parent_code}
+	</select>
+	
+	<insert id="addRipple" parameterType="Ripple">
+		insert tb_ripple(parent_no, parent_code, user_no, content, reg_date)
+		values(#{parent_no}, #{parent_code}, #{user_no}, #{content}, sysdate())
+	</insert> 
+	
+	<delete id="delRipple" parameterType="Ripple">
+		delete from tb_ripple where no = #{no}
+	</delete>
+	
+	<select id="get_userinfo" parameterType="User" resultType="User">
+		select * from tb_member where user_no = #{user_no}
+	</select>
+	
+	<select id="get_userinfo_addr" parameterType="User" resultType="Map">
+		select a.*, b.province, c.city, d.area from tb_member As a, hat_province As b, hat_city As c, hat_area As d
+		where a.provinceID = b.provinceID and a.cityID = c.cityID and a.areaID = d.areaID and a.user_no = #{user_no} 
+	</select>
+	
+	
+	<update id="dealitem_salecount" parameterType="DealMain">
+	<![CDATA[
+		update tb_deal_main set sale_count = (
+			select ifnull(sum(menu_cnt), 0) as cnt from pay_main As a
+			Inner Join pay_item As b On a.pid = b.pid
+			where a.pay_used = 'Y' and a.pay_state in ('19', '30', '38') and b.menu_no in (
+  				select item_id from tb_deal_item where deal_id = #{deal_id}
+			)
+		)
+		where deal_id = #{deal_id}
+	]]>
+	</update>
+	
+	<select id="get_dealitem_salecount" parameterType="DealMain" resultType="Integer">
+	<![CDATA[
+		select ifnull(sum(menu_cnt), 0) as cnt from pay_main As a
+		Inner Join pay_item As b On a.pid = b.pid
+		where a.pay_used = 'Y' and a.pay_state in ('19', '30', '38') and b.menu_no in (
+			select item_id from tb_deal_item where deal_id = #{deal_id}
+		)
+	]]>
+	</select>
+	
+	<select id="get_order_dealid" parameterType="PayMain" resultType="Integer">
+	<![CDATA[
+		select deal_id from tb_deal_item
+		where item_id = (
+			select menu_no from pay_item
+			where item_type = '03' and pid = #{pid}
+			limit 1
+		)
+	]]>
+	</select>
+	
+	
+</mapper>

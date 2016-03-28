@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SearchMapper">
+
+	<select id="getSearchListAll" parameterType="Search" resultType="Search">
+			select
+				*
+			from
+				(
+					select travel_no as no, title, content, image, 'travel' as content_type, reg_date from tb_travel 
+					where use_flag = 'Y' and ${searchType} like '%${searchString}%' order by reg_date desc
+				) A
+			union
+			select
+				*
+			from
+				(
+					select store_no as no, title, description as content, image_thumb as image, 'store' as content_type, reg_date from tb_store
+					where use_flag = 'Y'
+					<if test="searchType == 'title'">
+						and ${searchType} like '%${searchString}%'
+					</if>
+					<if test="searchType == 'content'">
+						and description like '%${searchString}%'
+					</if>  
+					order by reg_date desc
+				) B
+			order by reg_date desc
+			limit #{start_no}, #{pageSize}
+	</select>
+	
+	<select id="getSearchTravelList" parameterType="Search" resultType="Search">
+		select travel_no as no, title, content, image, 'travel' as content_type from tb_travel 
+		where use_flag = 'Y' and ${searchType} like '%${searchString}%' order by travel_no desc
+		limit #{start_no}, #{pageSize}
+	</select>
+	
+	<select id="getSearchStoreList" parameterType="Search" resultType="Search">
+		select store_no as no, title, description as content, image_thumb as image, 'store' as content_type from tb_store
+		where use_flag = 'Y'
+			<if test="searchType == 'title'">
+				and ${searchType} like '%${searchString}%'
+			</if>
+			<if test="searchType == 'content'">
+				and description like '%${searchString}%'
+			</if>
+			<if test="menu == 3">
+				and category_no in (select category_no from tb_category where parent_category_no = 8)
+			</if>
+			<if test="menu == 4">
+				and category_no in (select category_no from tb_category where parent_category_no = 9)
+			</if>
+			<if test="menu == 5">
+				and category_no in (select category_no from tb_category where parent_category_no = 10)
+			</if>
+			<if test="menu == 6">
+				and category_no in (select category_no from tb_category where parent_category_no = 11)
+			</if>
+			<if test="menu == 7">
+				and category_no in (select category_no from tb_category where parent_category_no = 12)
+			</if>
+			<if test="menu == 8">
+				and category_no in (select category_no from tb_category where parent_category_no = 13)
+			</if>
+		order by store_no desc
+		limit #{start_no}, #{pageSize}
+	</select>
+	
+	
+
+	<select id="getSearchTravelListCount" parameterType="Search" resultType="Integer">
+			select count(travel_no) from tb_travel where use_flag = 'Y' and ${searchType} like '%${searchString}%'
+	</select>
+	
+	<select id="getSearchStoreListCount" parameterType="Search" resultType="Integer">
+		select count(store_no) from tb_store
+		where use_flag = 'Y'
+			<if test="searchType == 'title'">
+				and ${searchType} like '%${searchString}%'
+			</if>
+			<if test="searchType == 'content'">
+				and description like '%${searchString}%'
+			</if>
+			<if test="menu == 3">
+				and category_no in (select category_no from tb_category where parent_category_no = 8)
+			</if>
+			<if test="menu == 4">
+				and category_no in (select category_no from tb_category where parent_category_no = 9)
+			</if>
+			<if test="menu == 5">
+				and category_no in (select category_no from tb_category where parent_category_no = 10)
+			</if>
+			<if test="menu == 6">
+				and category_no in (select category_no from tb_category where parent_category_no = 11)
+			</if>
+			<if test="menu == 7">
+				and category_no in (select category_no from tb_category where parent_category_no = 12)
+			</if>
+			<if test="menu == 8">
+				and category_no in (select category_no from tb_category where parent_category_no = 13)
+			</if>
+	</select>
+
+
+	<select id="getSearchListForQuick" parameterType="HashMap" resultType="Search">
+		<if test="type == 'store'">
+			select store_no as no, title, description as content, image_thumb as image, 'store' as content_type from tb_store
+			where use_flag = 'Y' and store_no = #{no}
+		</if>
+		<if test="type == 'news'">
+			select news_no as no, title, content, thumb_image as image, 'news' as content_type from tb_news
+			where use_flag = 'Y' and news_no = #{no}
+		</if>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="getStoreSearchList" parameterType="Store" resultType="Store">
+		select
+			A.*
+		from
+			tb_store A,
+			(
+				select
+					store_no
+				from	tb_store A,
+						tb_location B
+				where 
+						A.location_no = B.location_no
+					and B.location_no = #{location_no}
+					and category_no = #{category_no}
+					and use_flag = 'Y'
+				order by store_no desc
+				limit #{start_no}, #{pageSize}
+			) B
+		where A.store_no = B.store_no
+		order by A.store_no desc
+	</select>
+
+
+	<select id="getStoreSearchListCount" parameterType="Store" resultType="Integer">
+		select
+			count(store_no)
+		from	tb_store A,
+				tb_location B
+		where 
+				A.location_no = B.location_no
+			and B.location_no = #{location_no}
+			and category_no = #{category_no}
+			and use_flag = 'Y'
+	</select>
+</mapper>

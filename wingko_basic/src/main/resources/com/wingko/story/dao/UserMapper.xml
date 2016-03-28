@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserMapper">
+
+	<select id="list" parameterType="User" resultType="User">
+		select * from tb_member
+	</select>
+	
+	<select id="select" parameterType="String" resultType="User">
+		select *, provinceID as province_id, cityID as city_id, areaID as area_id from tb_member where user_id = #{user_id}
+	</select>
+	
+	<select id="emailcheck" parameterType="String" resultType="Integer">
+		select count(*) from tb_member where email = #{email}
+	</select>
+	
+	<select id="idcheck" parameterType="String" resultType="Integer">
+		select count(*) from tb_member where user_id = #{id}
+	</select>
+	
+	<select id="nicknamecheck" parameterType="String" resultType="Integer">
+		select count(*) from tb_member where user_nickname = #{nickname}
+	</select>
+	
+	<select id="idSearch" parameterType="User" resultType="User">
+		select * from tb_member where user_name = #{user_name} and email = #{email}
+	</select>
+	
+	<select id="passwordSearch" parameterType="User" resultType="User">
+		select * from tb_member where user_id = #{user_id} and user_name = #{user_name} and email = #{email}
+	</select>
+	
+	<select id="login" parameterType="Login" resultType="User">
+		select * from tb_member where user_id = #{user_id} and user_password = #{user_password}
+	</select>
+
+	<insert id="insert" parameterType="Join">
+		insert tb_member (user_id, user_password, user_name, user_nickname, email, sex, phone, level, login_count, edit_date, reg_date, address, join_no, `leave`, provinceID, cityID, areaID)
+		values(#{id}, #{password},  #{name}, #{nickname},  #{email}, #{sex}, #{phone}, 9, 0, sysdate(), sysdate(), #{address}, #{join_no}, 'N', #{province_id}, #{city_id}, #{area_id})
+	</insert>
+	
+	<update id="updatePassword" parameterType="HashMap">
+		update tb_member set user_password = #{password} where user_no = #{user_no} and user_id = #{user_id}
+	</update>
+	
+	<update id="update" parameterType="HashMap">
+		update tb_member
+		set phone = #{phone}, edit_date = sysdate()
+		<if test="password != null and password != ''">
+			, user_password = #{password}
+		</if>
+		<if test="nickname != null">
+			, user_nickname = #{nickname}
+		</if>
+		<if test="email != null">
+			, email = #{email}
+		</if>
+		<if test="province_id != null">
+			, provinceID = #{province_id}
+		</if>
+		<if test="city_id != null">
+			, cityID = #{city_id}
+		</if>
+		<if test="area_id != null">
+			, areaID = #{area_id}
+		</if>
+		<if test="address != null">
+			, address = #{address}
+		</if>
+		where user_no = #{user_no}
+	</update>
+
+	<delete id="delete" parameterType="Integer">
+		delete from tb_member where user_no = #{user_no}
+	</delete>
+	
+	<update id="loginUpdate" parameterType="Integer">
+		update tb_member
+		set login_count = login_count + 1, last_login = sysdate()
+		where user_no = #{user_no}
+	</update>
+	
+	
+	
+	<select id="provinceId" resultType="SelectData">
+		select provinceID as value, province as title from hat_province order by id asc
+	</select>
+	<select id="cityId" parameterType="String" resultType="SelectData">
+		select cityID as value, city as title from hat_city where father = #{parent_code} order by id asc
+	</select>
+	<select id="areaId" parameterType="String" resultType="SelectData">
+		select areaID as value, area as title from hat_area where father = #{parent_code} order by id asc
+	</select>
+	
+	
+	
+	
+	<select id="getScrapList" parameterType="Search" resultType="Search">
+			select
+				*
+			from
+				(
+					select 
+						B.no as scrap_no, travel_no as no, title, 'travel' as content_type, A.reg_date, D.name as location_name, E.travel_category_name as category_name
+					from tb_travel A,
+						 tb_scrap B,
+						 tb_member C,
+						 tb_location D,
+						 tb_travel_category E
+					where use_flag = 'Y' and A.travel_no = B.parent_no and B.user_no = C.user_no
+						and A.location_no = D.location_no and A.travel_category_no = E.travel_category_no
+						and C.user_no = #{user_no}
+					order by B.no desc
+				) A
+			union
+			select
+				*
+			from
+				(
+					select B.no as scrap_no, store_no as no, title, 'store' as content_type, A.reg_date, D.name as location_name, E.name as category_name
+					from tb_store A,
+						 tb_scrap B,
+						 tb_member C,
+						 tb_location D,
+						 tb_category E
+					where use_flag = 'Y' and A.store_no = B.parent_no and B.user_no = C.user_no
+						and A.location_no = D.location_no and A.category_no = E.category_no
+						and C.user_no = #{user_no}
+					order by B.no desc
+				) B
+			order by no desc
+			limit #{start_no}, #{pageSize}
+	</select>
+	
+	<select id="getScrapListCount" parameterType="Search" resultType="Integer">
+			select
+				sum(cnt) as no
+			from
+				(
+						select 
+							count(travel_no) as cnt 
+						from tb_travel A,
+							 tb_scrap B,
+							 tb_member C,
+							 tb_location D,
+						 	 tb_travel_category E
+						where use_flag = 'Y' and A.travel_no = B.parent_no and B.user_no = C.user_no
+							and A.location_no = D.location_no and A.travel_category_no = E.travel_category_no
+							and C.user_no = #{user_no}
+					union
+						select count(store_no) as cnt 
+						from tb_store A,
+							 tb_scrap B,
+							 tb_member C,
+							 tb_location D,
+							 tb_category E
+						where use_flag = 'Y' and A.store_no = B.parent_no and B.user_no = C.user_no
+							and A.location_no = D.location_no and A.category_no = E.category_no
+							and C.user_no = #{user_no}
+				) A
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	<select id="getWriteList" parameterType="Market" resultType="Market">
+		select 
+			*
+		from tb_market_bbs
+		where use_flag = 'Y' and user_no = #{user_no}
+		order by no desc
+		limit #{start_no}, #{pageSize}
+	</select>
+	
+	<select id="getWriteListCount" parameterType="Market" resultType="Integer">
+		select 
+			count(no) as cnt 
+		from tb_market_bbs
+		where use_flag = 'Y' and user_no = #{user_no}
+	</select>
+	
+	
+	<select id="getWriteQnaList" parameterType="Qna" resultType="Qna">
+		select 
+			*
+		from tb_qna
+		where user_no = #{user_no}
+		order by no desc
+	</select>
+	
+	<select id="getWriteQnaListCount" parameterType="Qna" resultType="Integer">
+		select 
+			count(no) as cnt 
+		from tb_qna
+		where user_no = #{user_no}
+	</select>
+	
+	
+	<select id="getWriteRippleList" parameterType="Ripple" resultType="Ripple">
+		select
+			*
+		from
+			(
+				select 
+					no, parent_no, parent_code, content, reg_date
+				from tb_ripple
+				where user_no = #{user_no}
+				order by no desc
+				limit #{start_no}, #{pageSize}
+			) A
+		order by no desc
+	</select>
+	
+	<select id="getWriteRippleListCount" parameterType="Ripple" resultType="Integer">
+		select 
+			count(no)
+		from tb_ripple
+		where user_no = #{user_no}
+	</select>
+
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="com.wingko.story" />
+
+	<annotation-driven />
+
+	<!-- Login Interceptor -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/my/**"/>
+			<mapping path="/community/market_write.do"/>
+			<mapping path="/community/market_delete.do"/>
+			<mapping path="/community/market_sell_update.do"/>
+			<mapping path="/community/qna_write.do"/>
+			<mapping path="/community/qna_delete.do"/>
+			<beans:bean class="com.wingko.story.controller.LoginCheckInterceptor"></beans:bean>
+		</interceptor>
+		
+ 		<interceptor>
+ 			<!-- <mapping path="/admin/**"/> -->
+ 			
+  			<mapping path="/admin/ad/**"/>
+			<mapping path="/admin/categroy/**"/>
+			<mapping path="/admin/community/**"/>
+			<mapping path="/admin/couponinfo/**"/>
+			<mapping path="/admin/deal/**"/>
+			<mapping path="/admin/location/**"/>
+			<mapping path="/admin/member/**"/>
+			<mapping path="/admin/news/**"/>
+			<!-- <mapping path="/admin/paymgr/**"/>-->
+			<mapping path="/admin/store/**"/>
+			<mapping path="/admin/travel/**"/>
+			<beans:bean class="com.wingko.story.admin.controller.AdminLoginCheckInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
+	
+	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/event/**" location="/event/" />
+	<resources mapping="/upload/**" location="/upload/" />
+	<resources mapping="/design/**" location="/design/" />
+	<resources mapping="/inipay/**" location="/inipay/" />
+	<resources mapping="/file/**" location="/file/" />
+
+
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	<util:properties id="message" location="/WEB-INF/messages.properties" />
+	<util:properties id="config" location="classpath:config/config.xml"/>
+	 
+	<!-- <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="webmail.wingkostory.com" />
+		<beans:property name="port" value="25" />
+		<beans:property name="username" value="test2@wingkostory.com" />
+		<beans:property name="password" value="test2test2" />
+		<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+	
+	<beans:bean id="mailUtil" class="com.wingko.story.util.MailUtil">
+		<beans:property name="mailSender" ref="mailSender" />
+	</beans:bean> -->
+
+</beans:beans>

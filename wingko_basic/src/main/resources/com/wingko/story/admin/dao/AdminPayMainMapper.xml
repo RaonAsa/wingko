@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminPayMainMapper">
+
+	<insert id="insert" parameterType="PayMain">
+		insert pay_main (pid, user_no, user_id, user_name, user_email, user_phone, pay_method, pay_state, pay_type, pay_title, pay_price_ko, pay_price_cn, cancel_price_ko, cancel_price_cn, sale_price_ko, sale_price_cn, cancel_msg, cancel_date, refund_date, pay_date, reg_date, pay_used)
+		values(#{pid}, #{user_no}, #{user_id}, #{user_name}, #{user_email}, #{user_phone}, #{pay_method}, #{pay_state}, #{pay_type}, #{pay_title}, #{pay_price_ko}, #{pay_price_cn}, #{cancel_price_ko}, #{cancel_price_cn}, #{sale_price_ko}, #{sale_price_cn}, #{cancel_msg}, #{cancel_date}, #{refund_date}, #{pay_date}, sysdate(), #{pay_used})
+	</insert>
+	
+	<update id="update" parameterType="PayMain">
+		update pay_main
+		set user_no = #{user_no}, user_id = #{user_id}, user_name = #{user_name}, user_email = #{user_email}, user_phone = #{user_phone}, pay_method = #{pay_method}, pay_state = #{pay_state}, pay_type = #{pay_type}, pay_title = #{pay_title}, pay_price_ko = #{pay_price_ko}, pay_price_cn = #{pay_price_cn}, cancel_price_ko = #{cancel_price_ko}, cancel_price_cn = #{cancel_price_cn}, sale_price_ko = #{sale_price_ko}, sale_price_cn = #{sale_price_cn}, cancel_msg = #{cancel_msg}, cancel_date = #{cancel_date}, refund_date = #{refund_date}, pay_date = #{pay_date}, pay_used = #{pay_used} 
+		where pid = #{pid}
+	</update>
+	
+	<select id="select" parameterType="String" resultType="PayMain">
+		select * from pay_main where pid = #{pid}
+	</select>
+	
+	<select id="select_user" parameterType="PayMain" resultType="PayMain">
+		select * from pay_main where pid = #{pid} and user_no = #{user_no}
+	</select>
+
+	<select id="search_all" parameterType="PayMainSearch" resultType="PayMain">
+		select * from pay_main
+		<where>
+			pay_used = 'Y'
+			<if test="pay_method != null and pay_method != '' ">and pay_method = '${pay_method}'</if>
+			<if test="pay_state != null and pay_state != '' ">and pay_state = ${pay_state}</if>
+			<if test="pay_type != null and pay_type != '' ">and pay_type = ${pay_type}</if>
+			<if test="pid != null and pid != '' ">and pid = ${pid}</if>
+			<if test="user_no > 0">and user_no = ${user_no}</if>
+			<if test="user_id != null and user_id != '' ">and user_id = '${user_id}'</if>
+			<if test="user_name != null and user_name != '' ">and user_name like '%${user_name}%'</if>
+			<if test="start_date != null and start_date != '' "><![CDATA[
+				and str_to_date(${start_date}, '%Y-%m-%d') <= date_format(reg_date, '%Y-%m-%d') 
+			]]></if>
+			<if test="end_date != null and end_date != '' "><![CDATA[
+				and date_format(reg_date, '%Y-%m-%d') <= str_to_date(${end_date}, '%Y-%m-%d') 
+			]]></if>
+		</where>
+		order by pid desc
+	</select>
+	
+	
+	<select id="check_list"  resultType="PayMain">
+		select * from pay_main
+		where pay_used = 'Y' and pid in
+		<foreach collection="array" item="pid" index="index" open="(" separator="," close=")">#{pid}</foreach>
+		order by pid desc
+	</select>
+	
+	
+	<select id="search_list" parameterType="PayMainSearch" resultType="PayMain">
+		select * from pay_main
+		<where>
+			pay_used = 'Y'
+			<if test="pay_method != null and pay_method != '' ">and pay_method = '${pay_method}'</if>
+			<if test="pay_state != null and pay_state != '' ">and pay_state = ${pay_state}</if>
+			<if test="pay_type != null and pay_type != '' ">and pay_type = ${pay_type}</if>
+			<if test="pid != null and pid != '' ">and pid = ${pid}</if>
+			<if test="user_no > 0">and user_no = ${user_no}</if>
+			<if test="user_id != null and user_id != '' ">and user_id = '${user_id}'</if>
+			<if test="user_name != null and user_name != '' ">and user_name like '%${user_name}%'</if>
+			<if test="start_date != null and start_date != '' "><![CDATA[
+				and str_to_date(${start_date}, '%Y-%m-%d') <= date_format(reg_date, '%Y-%m-%d') 
+			]]></if>
+			<if test="end_date != null and end_date != '' "><![CDATA[
+				and date_format(reg_date, '%Y-%m-%d') <= str_to_date(${end_date}, '%Y-%m-%d') 
+			]]></if>
+		</where>
+		order by pid desc
+		limit #{start_no}, #{pageSize}
+	</select>
+	
+	
+	<select id="search_count" parameterType="PayMainSearch" resultType="Integer">
+		select count(*) from pay_main
+		<where>
+			pay_used = 'Y'
+			<if test="pay_method != null and pay_method != '' ">and pay_method = '${pay_method}'</if>
+			<if test="pay_state != null and pay_state != '' ">and pay_state = ${pay_state}</if>
+			<if test="pay_type != null and pay_type != '' ">and pay_type = ${pay_type}</if>
+			<if test="pid != null and pid != '' ">and pid = ${pid}</if>
+			<if test="user_no > 0">and user_no = ${user_no}</if>
+			<if test="user_id != null and user_id != '' ">and user_id = '${user_id}'</if>
+			<if test="user_name != null and user_name != '' ">and user_name like '%${user_name}%'</if>
+			<if test="start_date != null and start_date != '' "><![CDATA[
+				and str_to_date(${start_date}, '%Y-%m-%d') <= date_format(reg_date, '%Y-%m-%d') 
+			]]></if>
+			<if test="end_date != null and end_date != '' "><![CDATA[
+				and date_format(reg_date, '%Y-%m-%d') <= str_to_date(${end_date}, '%Y-%m-%d') 
+			]]></if>
+		</where>
+
+	</select>
+	
+	<select id="search_list_status" parameterType="PayMainSearch" resultType="PayMain">
+		select * from pay_main
+		<where>
+			pay_used = 'Y'
+			<if test="pay_method != null and pay_method != '' ">and pay_method = '${pay_method}'</if>
+			<choose>
+				<when test='pay_state != null and pay_state == "1" '><![CDATA[and (pay_state >= '10' and pay_state <= '19')]]></when>
+				<when test='pay_state != null and pay_state == "3" '><![CDATA[and (pay_state >= '30' and pay_state <= '39')]]></when>
+				<when test="pay_state != null and pay_state != '' ">and pay_state = '${pay_state}' </when>
+			</choose>
+			
+			<if test="pay_type != null and pay_type != '' ">and pay_type = '${pay_type}'</if>
+			<if test="pid != null and pid != '' ">and pid = '${pid}'</if>
+			<if test="user_no > 0">and user_no = ${user_no}</if>
+			<if test="user_id != null and user_id != '' ">and user_id = '${user_id}'</if>
+			<if test="user_name != null and user_name != '' ">and user_name like '%${user_name}%'</if>
+			<if test="start_date != null and start_date != '' "><![CDATA[
+				and str_to_date('${start_date}', '%Y-%m-%d') <= date_format(reg_date, '%Y-%m-%d') 
+			]]></if>
+			<if test="end_date != null and end_date != '' "><![CDATA[
+				and date_format(reg_date, '%Y-%m-%d') <= str_to_date('${end_date}', '%Y-%m-%d') 
+			]]></if>
+		</where>
+		order by pid desc
+		<if test="is_paging == true">limit #{start_no}, #{pageSize}</if>
+		
+	</select>
+	
+	<select id="search_list_status_count" parameterType="PayMainSearch" resultType="Integer">
+		select count(*) from pay_main
+		<where>
+			pay_used = 'Y'
+			<if test="pay_method != null and pay_method != '' ">and pay_method = '${pay_method}'</if>
+			<choose>
+				<when test='pay_state != null and pay_state == "1" '><![CDATA[and (pay_state >= '10' and pay_state <= '19')]]></when>
+				<when test='pay_state != null and pay_state == "3" '><![CDATA[and (pay_state >= '30' and pay_state <= '39')]]></when>
+				<when test="pay_state != null and pay_state != '' ">and pay_state = '${pay_state}' </when>
+			</choose>
+			
+			<if test="pay_type != null and pay_type != '' ">and pay_type = ${pay_type}</if>
+			<if test="pid != null and pid != '' ">and pid = ${pid}</if>
+			<if test="user_no > 0">and user_no = ${user_no}</if>
+			<if test="user_id != null and user_id != '' ">and user_id = '${user_id}'</if>
+			<if test="user_name != null and user_name != '' ">and user_name like '%${user_name}%'</if>
+			<if test="start_date != null and start_date != '' "><![CDATA[
+				and str_to_date('${start_date}', '%Y-%m-%d') <= date_format(reg_date, '%Y-%m-%d') 
+			]]></if>
+			<if test="end_date != null and end_date != '' "><![CDATA[
+				and date_format(reg_date, '%Y-%m-%d') <= str_to_date('${end_date}', '%Y-%m-%d') 
+			]]></if>
+		</where>
+
+	</select>
+	
+	
+	<select id="acount_count" parameterType="PayMainSearch" resultType="Integer">
+		select count(*) from (
+		  select date_format(reg_date, '%Y-%m-%d') as reg_date
+		  from pay_main
+		<where>
+			pay_used = 'Y'
+			<if test="pay_method != null and pay_method != '' ">and pay_method = '${pay_method}'</if>
+			<if test="pay_state != null and pay_state != '' ">and pay_state = ${pay_state}</if>
+			<if test="pay_type != null and pay_type != '' ">and pay_type = ${pay_type}</if>
+			<if test="start_date != null and start_date != '' "><![CDATA[
+				and str_to_date(${start_date}, '%Y-%m-%d') <= date_format(reg_date, '%Y-%m-%d') 
+			]]></if>
+			<if test="end_date != null and end_date != '' "><![CDATA[
+				and date_format(reg_date, '%Y-%m-%d') <= str_to_date(${end_date}, '%Y-%m-%d') 
+			]]></if>
+		</where>  
+		  group by date_format(reg_date, '%Y-%m-%d') 
+		) As a
+		
+	</select>
+	
+	
+	<select id="acount_list" parameterType="PayMainSearch" resultType="PayAcount">
+		select * from (
+		  select date_format(reg_date, '%Y-%m-%d') as reg_date 
+		  	, count(*) as pay_cnt
+		  	, sum( case pay_state when '39' then 1 else 0 end ) as refund_cnt
+		  	, sum( case pay_method when 'BANK' then pay_price_cn else 0 end ) as pay_price_cn
+		  	, sum( case pay_method when 'CARD' then pay_price_ko else 0 end ) as pay_price_ko
+		    , sum( case pay_state when '10' then pay_price_cn else 0 end ) as wait_price_cn
+		    , sum( case pay_state when '10' then pay_price_ko else 0 end ) as wait_price_ko
+		    , sum( case pay_state when '39' then cancel_price_cn else 0 end ) as refund_price_cn
+		    , sum( case pay_state when '39' then cancel_price_ko else 0 end ) as refund_price_ko
+		    , sum( case when pay_method = 'BANK' then sale_price_cn else 0 end) as sale_price_cn
+ 			, sum( case when pay_method = 'CARD' then sale_price_ko else 0 end) as sale_price_ko
+		  from pay_main
+		<where>
+			pay_used = 'Y'
+			<if test="pay_method != null and pay_method != '' ">and pay_method = '${pay_method}'</if>
+			<if test="pay_state != null and pay_state != '' ">and pay_state = ${pay_state}</if>
+			<if test="pay_type != null and pay_type != '' ">and pay_type = ${pay_type}</if>
+			<if test="start_date != null and start_date != '' "><![CDATA[
+				and str_to_date(${start_date}, '%Y-%m-%d') <= date_format(reg_date, '%Y-%m-%d') 
+			]]></if>
+			<if test="end_date != null and end_date != '' "><![CDATA[
+				and date_format(reg_date, '%Y-%m-%d') <= str_to_date(${end_date}, '%Y-%m-%d') 
+			]]></if>
+		</where>  
+		  group by date_format(reg_date, '%Y-%m-%d') 
+		) As a
+		order by reg_date desc
+		limit #{start_no}, #{pageSize} 
+		
+	</select>
+	
+	
+	<select id="acount_chk_list" resultType="PayAcount">
+		select * from (
+		  select date_format(reg_date, '%Y-%m-%d') as reg_date 
+		  	, count(*) as pay_cnt
+		  	, sum( case pay_state when '39' then 1 else 0 end ) as cancel_cnt
+		  	, sum( case pay_method when 'BANK' then pay_price_cn else 0 end ) as pay_price_cn
+		  	, sum( case pay_method when 'CARD' then pay_price_ko else 0 end ) as pay_price_ko
+		    , sum( case pay_state when '10' then pay_price_cn else 0 end ) as wait_price_cn
+		    , sum( case pay_state when '10' then pay_price_ko else 0 end ) as wait_price_ko
+		    , sum( case pay_state when '39' then cancel_price_cn else 0 end ) as cancel_price_cn
+		    , sum( case pay_state when '39' then cancel_price_ko else 0 end ) as cancel_price_ko
+		    , sum( case when pay_method = 'BANK' then sale_price_cn else 0 end) as sale_price_cn
+ 			, sum( case when pay_method = 'CARD' then sale_price_ko else 0 end) as sale_price_ko
+		  from pay_main
+		  where pay_used = 'Y'
+		  group by date_format(reg_date, '%Y-%m-%d') 
+		) As a
+		where reg_date in
+		<foreach collection="array" item="regdate" index="index" open="(" separator="," close=")">#{regdate}</foreach>
+		
+	</select>
+	
+	
+	<select id="get_dealitem_pay_count" parameterType="Integer" resultType="Integer">
+	<![CDATA[
+		select ifnull(sum(menu_cnt), 0) as cnt from pay_main As a
+		Inner Join pay_item As b On a.pid = b.pid
+		where a.pay_used = 'Y' and a.pay_state in ('19', '30', '38')
+		and b.menu_no in (
+		  select item_id from tb_deal_item where deal_id = #{deal_id}
+		)
+	]]>
+	</select>
+	
+	
+</mapper>

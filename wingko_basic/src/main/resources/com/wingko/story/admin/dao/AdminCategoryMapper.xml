@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminCategoryMapper">
+
+	<select id="list" parameterType="Category" resultType="Category">
+		select
+		    *
+		  , ( case parent_category_no
+		      when '0' then ''
+		      else (select name from tb_category where category_no = A.parent_category_no)
+		      end
+		    ) as parent_category_name
+		  , ( case parent_category_no
+		      when '0' then ''
+		      else (select name_ko from tb_category where category_no = A.parent_category_no)
+		      end
+		    ) as parent_category_name_ko
+		from tb_category A
+		<if test="category_no != null and category_no != ''">
+			where parent_category_no = #{category_no}
+		</if>
+		order by category_no asc
+	</select>
+	
+	<select id="select" parameterType="String" resultType="Category">
+		select * from tb_category where category_no = #{category_no}
+	</select>
+
+	<insert id="insert" parameterType="Category">
+		insert tb_category (name, name_ko, content, memo, depth, parent_category_no, x, y, reg_date)
+		values(#{name}, #{name_ko},  #{content}, #{memo},  #{depth}, #{parent_category_no}, #{x}, #{y}, sysdate())
+	</insert>
+	
+	<update id="update" parameterType="Category">
+		update tb_category
+		set name = #{name}, name_ko = #{name_ko}, content = #{content}, memo = #{memo}, depth = #{depth}, parent_category_no = #{parent_category_no}, x = #{x}, y = #{y}
+		where category_no = #{category_no}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from tb_category
+		where category_no = #{category_no}
+	</delete>
+	
+	
+	<select id="getDepthForInsert" parameterType="String" resultType="String">
+		select depth+1 from tb_category where category_no = #{category_no}
+	</select>
+	
+	<select id="getCategoryForSelect" resultType="SelectData">
+		select
+		  	concat(name, '(', name_ko, ')') as title
+		  , category_no as value
+		from tb_category A
+		where depth = 1
+		order by parent_category_no asc, category_no asc
+	</select>
+	  <!-- (case depth
+	    when 1 then concat(name, '(', name_ko, ')')
+	    else concat( (select concat(name, '(', name_ko, ')') from tb_category where category_no = A.parent_category_no ), ' > ', name, '(', name_ko, ')' )
+	  end) as title -->
+
+
+
+
+
+
+	<select id="categoryLocationList" parameterType="CategoryLocation" resultType="CategoryLocation">
+		select
+			A.*, B.name_ko as category_name, C.name_ko as location_name
+		from
+			tb_category_location_info A,
+			tb_category B,
+			tb_location C
+		where A.category_no = B.category_no
+			and A.location_no = C.location_no
+			<if test="category_no != null and category_no != ''">
+				and A.category_no = #{category_no}
+			</if>
+		order by no asc
+	</select>
+	
+	<select id="categoryLocationSelect" parameterType="Integer" resultType="CategoryLocation">
+		select
+			A.*, B.name_ko as category_name, C.name_ko as location_name
+		from
+			tb_category_location_info A,
+			tb_category B,
+			tb_location C
+		where A.category_no = B.category_no
+			and A.location_no = C.location_no
+			and no = #{no}
+	</select>
+
+	<insert id="categoryLocationInsert" parameterType="CategoryLocation">
+		insert into tb_category_location_info(category_no, location_no, info, map_info, edit_date, reg_date)
+		values(#{category_no}, #{location_no}, #{info}, #{map_info}, sysdate(), sysdate());
+	</insert>
+	
+	<update id="categoryLocationUpdate" parameterType="CategoryLocation">
+		update tb_category_location_info
+		set info = #{info}, map_info = #{map_info}, edit_date = sysdate()
+		where no = #{no}
+	</update>
+</mapper>

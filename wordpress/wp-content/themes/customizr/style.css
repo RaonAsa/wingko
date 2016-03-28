@@ -1,0 +1,131 @@
+/**
+* Theme Name: Customizr
+* Theme URI: http://presscustomizr.com/customizr
+* Description: Navigate to Appearance, Customize. Design in live preview, save and enjoy a beautiful, fast and responsive website compatible with all browsers. For developers, Customizr offers a well documented and modular code, easy to extend with hooks.
+* Version: 3.3.26
+* Author: nikeo
+* Author URI: http://presscustomizr.com/
+* Tags: gray, white, light, blue, red, yellow, green, purple, orange, black, one-column, two-columns, three-columns, left-sidebar, right-sidebar, fluid-layout, responsive-layout, custom-menu, custom-colors, featured-images, full-width-template, theme-options, threaded-comments, translation-ready, sticky-post, post-formats, rtl-language-support, editor-style
+* Text Domain: customizr
+* Copyright: (c) 2015 Nicolas GUILLAUME (nikeo), Nice, France
+* License: GNU General Public License v2.0 or later
+* License URI: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+
+/**
+* The styleheets of Customizr are located in inc/assets/css. Each skin has its own stylesheet : blue.css, green.css, ...
+* The current stylesheet is loaded after the main skin stylesheet.
+*
+* IMPORTANT : If you write your CSS code below, it will be deleted when you'll update the theme.
+* If you want to make quick style test / changes, consider using the Custom CSS section in appearance > customize > advanced options > Custom CSS, it will persist on update since it is saved in your database.
+* To make important CSS customizations, you'll want to use a child theme and add your css code in the style.css file of it.
+*/
+
+/*Slider size*/
+.carousel .item {
+	line-height: 700px;
+	overflow: hidden;
+	margin-left:auto;
+	margin-right:auto;
+	min-height: 700px;
+}
+
+/* START OF Change the Navbar Colors/Font/Size */
+/* Adjust Menu (red) text color, (Garamond) font-family, (1.5em) font-size  */
+.navbar .nav > li > a, .navbar .nav > li > a:first-letter,
+.navbar .nav > li.current-menu-item > a, 
+.navbar .nav > li.current-menu-ancestor > a {
+	display:        inline;
+	color:          red;                        
+	font-family:    Garamond;
+	font-size:      1.5em;
+	padding:        5px 20px;
+}
+ 
+/* Adjust Menu colors - Normal */
+.navbar .nav > li > a, .navbar .nav > li > a:first-letter {
+	color:          lightgray;
+	text-shadow:    none;
+}
+/* Adjust Menu colors - Hover */
+.navbar .nav > li > a:hover, .navbar .nav > li > a:hover:first-letter { 
+	color:          white;                      
+	text-shadow:    none;
+}
+/* Adjust Menu colors - Active */
+.navbar .nav > li > a:active, .navbar .nav > li > a:active:first-letter,
+.navbar .nav > li.current-menu-item > a, 
+.navbar .nav > li.current-menu-ancestor > a,
+.navbar .nav > li.current-menu-item > a:first-letter, 
+.navbar .nav > li.current-menu-ancestor > a:first-letter {
+	color:          blue;
+	text-shadow:    none;
+}
+ 
+/* Adjust dropdown Menu items (blue) text color, (yellow) shading and (green) border */
+.dropdown-menu > li > a {
+	color:          blue;
+	background:     yellow;
+	border-bottom:  2px solid green;
+}
+ 
+/* Remove the Hover/Focus Colors  */
+.navbar .nav > li.current-menu-item > a, .navbar .nav > li.current-menu-ancestor > a, 
+.navbar .nav > li > a:hover, .navbar .nav > li > a:focus {
+	color:          #5A5A5A;
+}
+/* END OF Change the Navbar Colors/Font/Size */
+
+/* START OF Change Featured Pages Text/Button color */
+.fp-text-one, .fp-text-two, .fp-text-three {
+	color: red;
+	font-family: malgun-gothic;
+}
+
+.btn.btn-primary.fp-button {
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #ee7c2a;
+  background-image: -moz-linear-gradient(top, #f78c40, #e16309);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f78c40), to(#e16309));
+  background-image: -webkit-linear-gradient(top, #f78c40, #e16309);
+  background-image: -o-linear-gradient(top, #f78c40, #e16309);
+  background-image: linear-gradient(to bottom, #f78c40, #e16309);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff78c40' , endColorstr='#ffe16309' , GradientType=0);
+  border-color: #e16309 #e16309 #984306;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #e16309;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.btn.btn-primary.fp-button:hover,
+.btn.btn-primary.fp-button:focus,
+.btn.btn-primary.fp-button:active,
+.btn.btn-primary.fp-button.active,
+.btn.btn-primary.fp-button.disabled,
+.btn.btn-primary.fp-button[disabled] {
+  color: white;
+  background-color: #e16309;
+  *background-color: #c95808;
+}
+.btn.btn-primary.fp-button:active,
+.btn.btn-primary.fp-button.active {
+  background-color: #b04d07 \9;
+}
+.btn.btn-primary.fp-button:hover,
+.btn.btn-primary.fp-button:focus,
+.btn.btn-primary.fp-button:active,
+.btn.btn-primary.fp-button.active,
+.btn.btn-primary.fp-button.disabled,
+.btn.btn-primary.fp-button[disabled] {
+  color: white;
+  background-color: #e16309;
+  *background-color: #c95808;
+}
+.btn.btn-primary.fp-button:active,
+.btn.btn-primary.fp-button.active {
+  background-color: #b04d07 \9;
+}
+/* END OF Change Featured Pages Button color */
+

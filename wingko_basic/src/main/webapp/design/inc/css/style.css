@@ -1,0 +1,68 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*Common*/
+form, p, blockquote, dl, dd, dt { margin:0; padding:0; }
+ul {list-style:none; margin:0; padding:0;}
+li {list-style:none; margin:0; padding:0;}
+ol {list-style:none; margin:0; padding:0;}
+fieldset { margin: 0; padding: 0; border: 0; }
+table{padding:0; margin:0; border-collapse:collapse;}
+caption{display:none;}
+img{border:0;}
+
+/*LINK*/
+ a:link { color:#7d7d7d; text-decoration: none; white-space: nowrap;} 
+ a:visited{ color:#7d7d7d; text-decoration: none; } 
+ a:active{ color:#0082d4;text-decoration: none; } 
+ a:hover{ color:#0082d4; text-decoration: none; }
+
+/*input*/
+.s_txt{height:26px; width:260px; .vertical-align:bottom; .width:160px; border:0; color:#333; font-size:16px; font-weight:bold;}/*메인검색*/
+@media screen and (-webkit-min-device-pixel-ratio:0){
+.s_txt{height:26px; width:260px; border:0; color:#333; font-size:16px; font-weight:bold; margin-bottom:4px;}/*메인검색 - 크롬*/
+}
+.ex_txt{width:113px; height:19px; padding-top:3px; color:#333; text-indent:5px; font-size:12px; border-top:1px solid #dedede; border-right:1px solid #dedede; border-bottom:1px solid #dedede; border-left:none;}/*나라별 환율*/
+.login_txt{height:24px; font-size:12px; border:1px solid #dedede; color:#333; text-indent:5px;}
+.review_txtarea{width:97%; border:1px solid #dedede; padding:5px; color:#555; font-size:13px; height:63px;}
+.date_txt{height:22px; width:80px; color:#333; font-size:12px; border:1px solid #dedede; text-indent:3px;}
+.txt{height:22px; color:#555; font-size:12px; border:1px solid #dedede; text-indent:3px; width:90%;}
+.txtarea{padding:10px; border:0; font-size:12px; color:#555; width:90%; height:400px; overflow:hidden;}
+.txtarea2{padding:10px; border:1px solid #dedede; font-size:12px; color:#555; width:93%; height:100px; overflow:hidden;}
+
+/*selectbox*/
+.select_store{border:1px solid #dedede; height:24px; color:#707070; font-size:12px; width:100%; margin-bottom:10px; vertical-align:middle;}
+.select_sch{border:1px solid #dedede; height:24px; vertical-align:middle; font-size:12px; color:#555;}
+
+/*Font*/
+h1{}
+h2{}
+h3{font-size:14px; color:#016db8; background:url(../../img/member/dot_b.png) no-repeat 0 50%; padding-left:10px;}
+h4{font-size:12px; color:333;}
+h5{font-size:13px; color:333; font-weight:normal; margin-top:10px;}
+h6{font-size:12px; color:#a1a1a1; font-weight:normal; margin-top:15px;}
+p{font-size:13px; color:#333; line-height:18px;}
+
+/*Image + text*/
+.menu_number{width:41px; height:33px; padding-top:8px; display:inline-block; *display:inline; *zoom:1; _display:inline; outline:none; 
+			font-weight:bold; font-size:18px; color:#fff; text-align:center; background:url(../../img/bg_num.png) no-repeat;}
+.wing_month{width:50px; height:42px; padding-top:8px; display:inline-block; *display:inline; *zoom:1; _display:inline; outline:none;
+			font-size:28px; font-weight:bold; color:#ff6a1a; text-align:center; background:url(../../img/bg_month.png) no-repeat;}
+
+/*button*/
+.orange{display:inline-block; *display:inline; *zoom:1; _display:inline; outline:none; text-decoration:none;
+		padding:3px 7px; color:#fff; font-size:12px; background:#f6aa00; border-radius:2px;}
+
+
+/*-------기타 스타일-------*/
+.line_s1{border:1px solid #c9c9c9;}
+
+
+/*------버튼 여백-------*/
+.bt_right{width:100%; text-align:right;}
+.bt_space1{margin-top:20px;}
+.bt_center{width:100%; text-align:center; margin-bottom:20px;}
+.btn_left{width:49%; float:left; margin-top:10px;}
+.btn_right{width:49%; float:right; text-align:right; margin-top:10px;}
+.space3{margin-top:6px;}
+.space4{margin-top:60px;}

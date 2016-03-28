@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="WingShowMapper">
+<!-- 
+	<insert id="insert" parameterType="WingShow">
+		insert tb_wing_calender (wing_date, wing_type, wing_name, used)
+		values(#{wing_date}, #{wing_type}, #{wing_name}, #{used})
+	</insert>
+	
+	<update id="update" parameterType="WingCalender">
+		update tb_wing_calender
+		set wing_date = #{wing_date}, wing_type = #{wing_type}, wing_name = #{wing_name}, used = #{used}
+		where calender_id = #{calender_id}
+	</update>
+	
+	<delete id="delete" parameterType="WingCalender">
+		delete from tb_wing_calender where calender_id = #{calender_id}
+	</delete>
+	-->
+	
+	<delete id="delete_cart" parameterType="Map">
+		delete from tb_mycart 
+		where user_no = #{user_no} and cart_id in
+		<foreach collection="arr_id" item="item_id" index="index" open="(" separator="," close=")">#{item_id}</foreach>
+	</delete>
+	
+	<delete id="delete_cart_last" parameterType="Map">
+	<![CDATA[
+		delete from tb_mycart
+		where cart_id in (
+		  select * from (
+		    select cart_id from tb_mycart As a
+		    inner join tb_store_menu As b
+		    On a.menu_no = b.menu_no
+		    Where date_format(b.end_date, '%Y-%m-%d') < sysdate() and a.user_no = #{user_no}
+		  ) As tmp
+		)
+	]]>
+	</delete>
+	
+	<select id="list_pid" parameterType="WingShow" resultType="WingShow">
+		select a.*
+			, b.menu_name, b.menu_price, b.menu_price_cny, b.menu_coupon, b.start_date, b.end_date, b.image_thumb
+			, c.title as store_title
+			, d.name as location_name
+		from tb_mycart As a
+		inner join tb_store_menu As b On a.menu_no = b.menu_no and b.use_flag = 'Y'
+		inner join tb_store As c On b.store_no = c.store_no 
+		inner join tb_location As d On c.location_no = d.location_no
+		where a.pid = #{pid}
+		order by a.reg_date desc
+	</select> <!-- and c.use_flag = 'Y' -->
+	
+	<select id="list_user" parameterType="WingShow" resultType="WingShow">
+		select a.*
+			, b.menu_name, b.menu_price, b.menu_price_cny, b.menu_coupon, b.start_date, b.end_date, b.image as image_thumb
+			, c.title as store_title
+			, d.name as location_name
+		from tb_mycart As a
+		inner join tb_store_menu As b On a.menu_no = b.menu_no and b.use_flag = 'Y'
+		inner join tb_store As c On b.store_no = c.store_no 
+		inner join tb_location As d On c.location_no = d.location_no
+		where a.user_no = #{user_no}
+		order by a.reg_date desc
+	</select> <!-- and c.use_flag = 'Y' -->
+	
+	<select id="get_wingshow" parameterType="MyCart" resultType="WingShow">
+		select a.*
+			, b.menu_name, b.menu_price, b.menu_price_cny, b.menu_coupon, b.start_date, b.end_date, b.image_thumb
+			, c.title as store_title
+			, d.name as location_name
+		from tb_mycart As a
+		inner join tb_store_menu As b On a.menu_no = b.menu_no and b.use_flag = 'Y'
+		inner join tb_store As c On b.store_no = c.store_no 
+		inner join tb_location As d On c.location_no = d.location_no
+		where a.user_no = #{user_no} and cart_id = #{cart_id}
+	</select>
+	
+	
+	<select id="select_userinfo" parameterType="User" resultType="User">
+		select * from tb_member where user_no = #{user_no}
+	</select>
+	
+	
+	<select id="my_reservation_order" parameterType="PayMain" resultType="PayMain">
+		select * from pay_main
+		where pay_used = 'Y' and pay_state = ${pay_state} and pay_type = ${pay_type} and user_no = ${user_no}
+		order by pid desc
+	</select>
+	
+	
+	<select id="my_calendar_item" parameterType="Map" resultType="WingMyItem">
+		select a.pay_method, a.pay_type, a.pay_state, a.pay_date, a.cancel_date, b.*, c.start_date, c.end_date, c.image_thumb
+		from pay_main As a
+		inner join pay_item As b On a.pid = b.pid
+		inner join tb_store_menu As c On c.menu_no = b.menu_no
+		inner join tb_store As d On c.store_no = d.store_no
+		<![CDATA[ 
+			where b.cancel_yn = 'N' and a.pay_state < '20' and (a.pay_type = '10' or a.pay_type = '30')
+			and a.user_no = #{user_no} and date_format(b.used_date, '%Y%m') = date_format(#{used_date}, '%Y%m')
+			order by b.used_date asc
+		 ]]>
+	</select>
+	
+	<select id="my_payment_item" parameterType="string" resultType="WingMyItem">
+		select a.pay_method, a.pay_type, a.pay_state, a.pay_date, a.cancel_date, b.*, c.start_date, c.end_date, c.image_thumb
+		from pay_main As a
+		inner join pay_item As b On a.pid = b.pid
+		inner join tb_store_menu As c On c.menu_no = b.menu_no
+		inner join tb_store As d On c.store_no = d.store_no
+		where b.cancel_yn = 'N' and a.pid = #{pid}
+		order by item_id asc
+	</select>
+	
+	
+	<select id="my_payment_order" parameterType="PayMain" resultType="PayMain">
+	<![CDATA[
+		select * from pay_main
+		where pay_used = 'Y' and (
+			(pay_type = '10' and (pay_state >= '10' or pay_state < '20')) or (pay_type = '30' and pay_state = '19')
+		) and user_no = #{user_no}
+		order by pid desc
+	]]>
+	</select>
+	
+	
+	<select id="my_refund_order" parameterType="PayMain" resultType="PayMain">
+	<![CDATA[
+		select * from pay_main
+		where pay_used = 'Y' and (pay_type = '10' or pay_type = '30') and (pay_state >= '30' and pay_state < '40') and user_no = ${user_no}
+		order by pid desc
+	]]>
+	</select>
+	
+	<select id="my_paydeal_order" parameterType="PayMain" resultType="Map">
+		<![CDATA[
+		select a.*, b.name, b.phone, b.area, b.address from pay_main as a, pay_area as b
+		where a.pid = b.pid and a.pay_used = 'Y' and a.pay_type = '40' and (a.pay_state >= '10' and a.pay_state < '20') and a.user_no = #{user_no}
+		order by pid desc
+		]]>
+	</select>
+	
+	<select id="my_refund_deal_order" parameterType="PayMain" resultType="Map">
+	<![CDATA[
+		select a.*, b.name, b.phone, b.area, b.address from pay_main as a, pay_area as b
+		where a.pid = b.pid and a.pay_used = 'Y' and a.pay_type = '40' and (a.pay_state >= '30' and a.pay_state < '40') and a.user_no = #{user_no}
+		order by pid desc
+	]]>
+	</select>
+	
+	
+</mapper>

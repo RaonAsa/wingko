@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>한도회</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/public/css/style.css">
+  <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="/public/js/hth-main.js"></script>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+
+<div id="band" class="container">
+<div id="tour" class="container">
+<div id="contact" class="container">
+
+<!-- Navbar start -->
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Logo</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#home">HOME</a></li>
+				<li><a href="#prodduct">상품</a></li>
+				<li><a href="#service">Service</a></li>
+				<li><a href="#contact">Contact</a></li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Merchandise</a></li>
+						<li><a href="#">Extras</a></li>
+						<li><a href="#">Media</a></li>
+					</ul>
+				</li>
+				<li><a href="#"><span class="glyphicon glyphicon-search"</span></a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<!-- Navbar End -->
+
+<!-- Carousel start -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	<!-- Indicators -->
+	<ol class="carousel-indicators">
+		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		<li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+		<li data-target="#myCarousel" data-slide-to="2" class="active"></li>
+	</ol>
+
+	<!-- Wrapper for slides -->
+	<div class="carousel-inner" role="listbox">
+		<div class="item active">
+			<img src="/public/img/hth-slide01.jpg" alt="한도회1">
+			<div class="carousel-caption">
+				<h3>한도회1</h3>
+				<p>한도회 첫번째 Slide</p>
+			</div>
+		</div>
+		<div class="item">
+			<img src="/public/img/chicago.jpg" alt="한도회2">
+			<div class="carousel-caption">
+				<h3>한도회2</h3>
+				<p>한도회 두번째 Slide</p>
+			</div>
+		</div>
+		<div class="item">
+			<img src="/public/img/la.jpg" alt="한도회3">
+			<div class="carousel-caption">
+				<h3>한도회3</h3>
+				<p>한도회 세번째 Slide</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Left and right controls -->
+	<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		<span class="sr-only">Previous</span>
+	</a>
+	<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+		<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+	</a>
+</div>
+<!-- Carousel end -->
+
+<div class="container text-center">
+  <h3>한도회</h3>
+  <p><em>한중 제휴!!!</em></p>
+  <p>한중 제휴를 통한 발전적 제품 서비스 제공!!! 한도회!!!</p>
+  <br/>
+  <div class="row">
+  	<div class="col-sm-4">
+  		<p class="text-center"><strong>Name</strong></p><br/>
+  		<a href="#demo1" data-toggle="collapse">
+  			<img src="/public/img/bandmember.jpg" class="img-circle person" alt="Random Name" />
+  		</a>
+  		<div id="demo1" class="collapse">
+  			<p>상품 1</p>
+  			<p>상기 상품은 ....</p>
+  			<p>특징은 ...</p>
+  		</div>
+  	</div>
+  	<div class="col-sm-4">
+  		<p class="text-center"><strong>Name</strong></p><br/>
+  		<a href="#demo2" data-toggle="collapse">
+  			<img src="/public/img/bandmember.jpg" class="img-circle person" alt="Random Name" />
+  		</a>
+  		<div id="demo2" class="collapse">
+  			<p>상품 2</p>
+  			<p>상기 상품은 ....</p>
+  			<p>특징은 ...</p>
+  		</div>
+  	</div>
+  	<div class="col-sm-4">
+  		<p class="text-center"><strong>Name</strong></p><br/>
+  		<a href="#demo3" data-toggle="collapse">
+  			<img src="/public/img/bandmember.jpg" class="img-circle person" alt="Random Name" />
+  		</a>
+  		<div id="demo3" class="collapse">
+  			<p>상품 3</p>
+  			<p>상기 상품은 ....</p>
+  			<p>특징은 ...</p>
+  		</div>
+  	</div>
+</div>
+
+<!-- Tour Section start -->
+<div class="bg-1">
+	<div class="container">
+		<h3 class="text-center">TOUR DATES</h3>
+		<p class="text-center">한도회 상품 예약주문!!<br/> 기억하세요! 한도회에서 제공하는 최상의 상품을</p>
+
+		<ul class="list-group">
+			<li class="list-group-item">상품1 <span class="label label-danger">완판!!!</span></li>
+			<li class="list-group-item">상품2 <span class="label label-danger">완판!!!</span></li>
+			<li class="list-group-item">상품3 <span class="badge">100</span></li>
+		</ul>
+		<div class="row text-center">
+			<div class="col-sm-4">
+				<div class="thumbnail">
+					<img src="/public/img/paris.jpg" alt="Paris">
+					<p><strong>Paris</strong></p>
+					<p>Fri. 27 November 2016</p>
+					<button class="btn" data-toggle="modal" data-target="#myModal">Buy tickets</button>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="thumbnail">
+					<img src="/public/img/newyork.jpg" alt="New York">
+					<p><strong>New York</strong></p>
+					<p>Fri. 28 November 2016</p>
+					<button class="btn" data-toggle="modal" data-target="#myModal">Buy tickets</button>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="thumbnail">
+					<img src="/public/img/sanfran.jpg" alt="San Francisco">
+					<p><strong>San Francisco</strong></p>
+					<p>Fri. 27 November 2016</p>
+					<button class="btn" data-toggle="modal" data-target="#myModal">Buy tickets</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Modal start -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal Content -->
+			<div class="modal=content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4><span class="glyphicon glyphicon-lock"></span>
+						Tickets</h4>
+				</div>
+				<div class="modal-body">
+					<form role="form">
+						<div class="form-group">
+							<label for="psw"><span class="glyphicon glyphicon-shopping-cart"></span>Tickets, 20,000won per item</label>
+							<input type="number" class="form-control" id="psw" placeholder="How many?">
+						</div>
+						<div class="form-group">
+							<label for="username"><span class="glyphicon glyphicon-shopping-user"></span>Send To</label>
+							<input type="text" class="form-control" id="username" placeholder="Enter E-mail">
+						</div>
+						<button type="submit" class="btn btn-block">Pay<span class="glyphicon glyphicon-ok"></span></button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+					<p>Need <a href="#">Help?</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Tour Section end -->
+
+<!-- Contract Container start -->
+<div class="container">
+	<h3 class="text-center">연락</h3>
+	<p class="text-center"><em>고객을 사랑합니다.!!</em></p>
+	<div class="row test">
+		<div class="col-md-4">
+			<p>고객님! 의견을 남겨주세요.</p>
+			<p><span class="glyphicon glyphicon-map-marker"></span>Chicago, US</p>
+			<p><span class="glyphicon glyphicon-phone"></span>+82 +10 xxxxx</p>
+			<p><span class="glyphicon glyphicon-envelope"></span>Email : mail@hth.com</p>
+		</div>
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-sm-6 form-group">
+					<input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+				</div>
+				<div class="col-sm-6 form-group">
+					<input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+				</div>
+				<textarea class="form-control" id="comments" name="comments" placeholder="Comments" rows="5"></textarea>
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<button class="btn pull-right" type="submit">Send</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<h3 class="text-center">From the Blog</h3>
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#home">상품1</a></li>
+		<li><a data-toggle="tab" href="#menu1">상품2</a></li>
+		<li><a data-toggle="tab" href="#menu2">상품3</a></li>
+	</ul>
+	<div class="tab-content">
+		<div id="home" class="tab-pane fade in active">
+			<h2>상품 1</h2>
+			<p> 좋은 상품1 입니다.</p>
+		</div>
+		<div id="menu1" class="tab-pane fade">
+			<h2>상품 2</h2>
+			<p> 좋은 상품2 입니다.</p>
+		</div>
+		<div id="menu2" class="tab-pane fade">
+			<h2>상품 2</h2>
+			<p> 좋은 상품2 입니다.</p>
+		</div>
+	</div>
+
+
+</div>
+<!-- Contract Container end -->
+
+<div id="googleMap"></div>
+
+<!-- Add Google Maps -->
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script>
+	var myCenter = new google.maps.LatLng(37.538961, 126.838783);
+
+	function initialize() {
+	var mapProp = {
+		center:myCenter,
+		zoom:12,
+		scrollwheel:false,
+		draggable:false,
+		mapTypeId:google.maps.MapTypeId.ROADMAP
+	};
+
+	var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+	var marker = new google.maps.Marker({
+		position:myCenter,
+	});
+
+	marker.setMap(map);
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<footer class="text-center">
+	<a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+		<span class="glyphicon glyphicon-chevron-up"></span></a><br/><br />
+	<p>Made by <a href="http://www.hth.com" data-toggle="tooltip" title="Visit 한도회">www.hth.com</a></p>
+</footer>
+
+</body>
+</html>

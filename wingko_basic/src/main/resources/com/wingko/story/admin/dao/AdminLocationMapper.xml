@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminLocationMapper">
+
+	<select id="list" parameterType="Location" resultType="Location">
+		select
+		    *
+		  , ( case parent_location_no
+		      when '0' then ''
+		      else (select name from tb_location where location_no = A.parent_location_no)
+		      end
+		    ) as parent_location_name
+		  , ( case parent_location_no
+		      when '0' then ''
+		      else (select name_ko from tb_location where location_no = A.parent_location_no)
+		      end
+		    ) as parent_location_name_ko
+		from tb_location A
+		<if test="location_no != null and location_no != ''">
+			where parent_location_no = #{location_no}
+		</if>
+		order by location_no asc
+	</select>
+	
+	<select id="select" parameterType="String" resultType="Location">
+		select * from tb_location where location_no = #{location_no}
+	</select>
+
+	<insert id="insert" parameterType="HashMap">
+		insert tb_location (name, name_ko, header_info, memo, depth, parent_location_no, x, y, image, reg_date)
+		values(#{name}, #{name_ko},  #{header_info}, #{memo},  #{depth}, #{parent_location_no}, #{x}, #{y}, #{image}, sysdate())
+	</insert>
+	
+	<update id="update" parameterType="HashMap">
+		update tb_location
+		set name = #{name}, name_ko = #{name_ko}, header_info = #{header_info}, memo = #{memo}, depth = #{depth}, parent_location_no = #{parent_location_no}, x = #{x}, y = #{y}
+		<if test="image != null and image != ''">
+			, image = #{image}
+		</if>
+		where location_no = #{location_no}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from tb_location
+		where location_no = #{location_no}
+	</delete>
+	
+	<select id="getDepthForInsert" parameterType="String" resultType="String">
+		select depth+1 from tb_location where location_no = #{location_no}
+	</select>
+	
+	<select id="getLocationForSelect" resultType="SelectData">
+		select
+		  	concat(name, '(', name_ko, ')') as title
+		  , location_no as value
+		from tb_location A
+		where depth = 1
+		order by parent_location_no asc, location_no asc
+	</select>
+	  <!-- (case depth
+	    when 1 then concat(name, '(', name_ko, ')')
+	    else concat( (select concat(name, '(', name_ko, ')') from tb_location where location_no = A.parent_location_no ), ' > ', name, '(', name_ko, ')' )
+	  end) as title -->
+	  
+	  
+	  
+	<select id="getHotPlaceList" parameterType="HotPlace" resultType="HotPlace">
+		select
+			A.*, B.name as location_name, B.name_ko as location_name_ko, B.image
+		from
+			tb_hot_place A,
+			tb_location B
+		where A.location_no = B.location_no
+		<if test="parent_location_no != null and parent_location_no != ''">
+			and A.parent_location_no = #{parent_location_no}
+		</if>
+		order by sort
+	</select>
+	
+	<select id="getHotPlaceSelect" parameterType="Integer" resultType="HotPlace">
+		select
+			A.*, B.name as location_name,
+			(select name from tb_location where location_no = #{parent_location_no}) as parent_location_name
+		from
+			tb_hot_place A,
+			tb_location B
+		where A.location_no = B.location_no and no = #{no} 
+	</select>
+	
+	<insert id="setHotPlaceInsert" parameterType="HotPlace">
+		<selectKey resultType="Integer" keyProperty="sort" order="BEFORE">
+			select IFNULL(max(sort), 0) + 1 from tb_hot_place where parent_location_no = #{parent_location_no}
+		</selectKey>
+		insert into tb_hot_place (parent_location_no, location_no, sort, use_flag, edit_date, reg_date)
+		values(#{parent_location_no}, #{location_no}, #{sort}, 'Y', sysdate(), sysdate())
+	</insert>
+	
+	<update id="setHotPlaceUpdate" parameterType="HotPlace">
+		update tb_hot_place
+		set sort = #{sort}
+		where no = #{no}
+	</update>
+	
+	<delete id="setHotPlaceDelete" parameterType="HotPlace">
+		delete from tb_hot_place where no = #{no}
+	</delete>
+	
+	<update id="setHotPlaceUpdatePlus" parameterType="HotPlace">
+		<![CDATA[
+		update tb_hot_place
+		set sort = sort + 1
+		where parent_location_no = #{parent_location_no} and sort >= #{sort} and sort <= #{org_sort} and no > 0
+		]]>
+	</update>
+	
+	<update id="setHotPlaceUpdateMinus" parameterType="HotPlace">
+		<![CDATA[
+		update tb_hot_place
+		set sort = sort - 1
+		where parent_location_no = #{parent_location_no} and sort <= #{sort} and sort >= #{org_sort} and no > 0
+		]]>
+	</update>
+
+	<select id="getLocationForHotPlaceInsert" parameterType="Integer" resultType="SelectData">
+		select
+		    name_ko as title, location_no as value
+		from
+			tb_location
+		where
+				parent_location_no = #{parent_location_no}
+			and location_no not in(select location_no from tb_hot_place where parent_location_no = #{parent_location_no})
+		order by location_no asc
+	</select>
+</mapper>
