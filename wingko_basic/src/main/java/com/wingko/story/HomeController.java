@@ -197,15 +197,20 @@ public class HomeController {
 		data = data.replaceAll("\n", "|");
 		String[] array;
 		array= data.split("\\|");
-		ex_date = ex_date.substring( ex_date.indexOf("<font color=\"#48668F\">")+23, ex_date.indexOf("</font>")-3 );
+		try {
+			ex_date = ex_date.substring( ex_date.indexOf("<div class='date'>\n<p>")+22, ex_date.indexOf("<div class='date'>\n<p>")+22+16 );
+			array[0] = "0.0";
+			model.addAttribute("ex_date", ex_date);
+			model.addAttribute("ex_buy", array[1]);
+			model.addAttribute("ex_sell", array[2]);
+			model.addAttribute("ex_now", array[0]);
 
-		model.addAttribute("ex_date", ex_date);
-		model.addAttribute("ex_buy", array[2]);
-		model.addAttribute("ex_sell", array[3]);
-		model.addAttribute("ex_now", array[7]);
-
-    	int rnd = (int) (Math.floor(Math.random() * 10) + 1);
-    	model.addAttribute("rnd", rnd%3);
+	    	int rnd = (int) (Math.floor(Math.random() * 10) + 1);
+	    	model.addAttribute("rnd", rnd%3);
+			
+		} catch (Exception e) {
+			
+		}
 
 		return "index";
 	}
