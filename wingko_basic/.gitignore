@@ -1,4 +1,15 @@
+/bin
+/tmp
 /target
+*.tmp
+*.bak
+*.log
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
 /.svn
 /.setting
 .DS_Store

@@ -187,17 +187,18 @@ public class HomeController {
 		/*
 		 * 환율 정보 가져오기
 		 */
-		String data = HttpUtil.getString("http://community.fxkeb.com/fxportal/jsp/RS/DEPLOY_EXRATE/fxrate_all.html", "EUC-KR");
-		String ex_date = data;
-		
-		data = data.substring(data.indexOf("CNY"),  data.indexOf("</tr>", data.indexOf("CNY")));
-		data = data.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
-		data = data.replaceAll("\t", "");
-		data = data.replaceAll(" ", "");
-		data = data.replaceAll("\n", "|");
-		String[] array;
-		array= data.split("\\|");
 		try {
+			String data = HttpUtil.getString("http://community.fxkeb.com/fxportal/jsp/RS/DEPLOY_EXRATE/fxrate_all.html", "EUC-KR");
+			String ex_date = data;
+			
+			data = data.substring(data.indexOf("CNY"),  data.indexOf("</tr>", data.indexOf("CNY")));
+			data = data.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+			data = data.replaceAll("\t", "");
+			data = data.replaceAll(" ", "");
+			data = data.replaceAll("\n", "|");
+			String[] array;
+			array= data.split("\\|");
+
 			ex_date = ex_date.substring( ex_date.indexOf("<div class='date'>\n<p>")+22, ex_date.indexOf("<div class='date'>\n<p>")+22+16 );
 			array[0] = "0.0";
 			model.addAttribute("ex_date", ex_date);
@@ -209,7 +210,10 @@ public class HomeController {
 	    	model.addAttribute("rnd", rnd%3);
 			
 		} catch (Exception e) {
-			
+			model.addAttribute("ex_date", null);
+			model.addAttribute("ex_buy", "0");
+			model.addAttribute("ex_sell", "0");
+			model.addAttribute("rnd", "0");
 		}
 
 		return "index";
