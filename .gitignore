@@ -1,6 +1,7 @@
 /bin
 /tmp
 /target
+.DS_Store
 *.tmp
 *.bak
 *.log
@@ -10,8 +11,9 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-/.svn
-/.setting
+/wingko_basic/.svn
+/wingko_basic/.settings
+/wingko_basic/target
 .DS_Store
 /src/main/webapp/resources/img/main/*.png
 
