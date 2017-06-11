@@ -12,7 +12,7 @@ local.properties
 .loadpath
 .recommenders
 /wingko_basic/.svn
-/wingko_basic/.settings
+/wingko_basic/.settings/
 /wingko_basic/target
 .DS_Store
 /src/main/webapp/resources/img/main/*.png

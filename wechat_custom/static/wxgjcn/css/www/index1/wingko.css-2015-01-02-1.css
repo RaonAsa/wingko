@@ -190,7 +190,7 @@ input, textarea, select, option, td, th {
 }
 
 .nav h1 {
-    width: 200px;
+    width: 180px;
     height: 50px;
     margin-top:5px;
     background: url(../../../img/www/index1/weimob-logo.png) no-repeat 0 0;
@@ -210,7 +210,7 @@ input, textarea, select, option, td, th {
 }
 
 .city {
-    width: 100px;
+    width: 20px;
     height: 45px;
     line-height: 50px
 }
@@ -257,7 +257,7 @@ input, textarea, select, option, td, th {
 */
 .nav .line-li {
     margin-top: 12px;
-    width: 650px;
+    width: 740px;
     font-weight: bold;
     font-family: '맑은고딕', Malgun Gothic, ng, '돋움', dotum, tahoma, sans-serif;
 
@@ -281,7 +281,7 @@ input, textarea, select, option, td, th {
     text-decoration: none;
     text-shadow: none;
     font-size: 15px;
-    padding: 9px;
+    padding: 9px 3px;
     margin: 0 3px;
 }
 
@@ -302,11 +302,11 @@ input, textarea, select, option, td, th {
 .nav .line-li li a.hover, .nav .line-li li a.navtwo {
     display: inline-block;
     color: #fff;
-   
+
 }
 
 .nav .line-li .account {
-    
+
     display: inline-block;
 }
 
@@ -416,7 +416,7 @@ font-family: '맑은고딕', Malgun Gothic, ng, '돋움', dotum, tahoma, sans-se
 
 .full-height {
     margin-top: 60px
-        
+
 }
 
 .line {
@@ -684,6 +684,16 @@ font-family: '맑은고딕', Malgun Gothic, ng, '돋움', dotum, tahoma, sans-se
     no-repeat right center
 }
 
+.feature-content dd.vborder div.cllist {
+    margin-left: 3px;
+    margin-top: 3px;
+}
+
+.feature-content dd.vborder div img.cliimg {
+    width: 100px;
+    height: 80px;
+}
+
 .feature-content dd .fimg {
     margin: 0 auto;
     margin-bottom: 15px;
@@ -869,7 +879,7 @@ font-family: '맑은고딕', Malgun Gothic, ng, '돋움', dotum, tahoma, sans-se
     -o-background-size: 100% 100%;
     -webkit-background-size: 100% 100%;
     -ms-background-size: 100% 100%;
-	
+
 }
 
 .hd-c .banner {
@@ -1100,6 +1110,13 @@ font-family: '맑은고딕', Malgun Gothic, ng, '돋움', dotum, tahoma, sans-se
     content: '';
     border-radius: 50%;
     box-shadow: 0 -10px 3px #ffffff;
+}
+
+.list_carousel li img.ad {
+    width: 310px;
+    height: 170px;
+    margin: 5px auto;
+    display: inline;
 }
 
 .list_carousel li img {
@@ -1386,7 +1403,7 @@ font-family: '맑은고딕', Malgun Gothic, ng, '돋움', dotum, tahoma, sans-se
 .Public {
     width: 1000px;
     margin: 0 auto;
-    padding: 40px 0;	
+    padding: 40px 0;
 }
 
 .Public-h1 {
@@ -1611,7 +1628,7 @@ font-family: '맑은고딕', Malgun Gothic, ng, '돋움', dotum, tahoma, sans-se
     padding-top: 4px;
     font-size: 11px;
     color: #38373a;
-    font-weight: bold;	
+    font-weight: bold;
 }
 
 .wm_case_desc {
@@ -3363,7 +3380,7 @@ font-family: '맑은고딕', Malgun Gothic, ng, '돋움', dotum, tahoma, sans-se
     background: rgba(255, 255, 255, 0.8);
     min-height: 400px;
     border-radius: 5px;
-	
+
 }
 
 .Proxy-news {
@@ -3583,7 +3600,7 @@ select {
     left: 50% !important;
     margin-left: -300px;
 }
-.	
+.
 #notice_message .title {
     width: 600px;
     height: 20px;
@@ -4351,6 +4368,11 @@ div.notice_customers {
     ;
 }
 
+.videopopup4 {
+    background-image: url(/wingko/img/clients/관공서/2018평창.png) /* tpa=httpimg/www/index1/video_07.png */;
+    background-size: 310px 170px;
+}
+
 .videopopup:hover .play-button {
     background-position: 0 -57px
 }
@@ -4406,7 +4428,7 @@ div.notice_customers {
 
 /* wingko change
 	font-family: "Microsoft Yahei";
-	=> 
+	=>
 	'맑은고딕', Malgun Gothic, ng, '돋움', dotum, tahoma, sans-serif;
 */
 .agents_search h2, h3 {
@@ -4600,14 +4622,14 @@ div.notice_customers {
 }
 
 #bd .content {
-	
+
 	height: 580px;
-	
+
 	padding: 25px 59px 0;
-	
+
 	width: 523px;
 	margin-top: 15%;
-	
+
 }
 
 .reg-wrapper22 {
@@ -4617,7 +4639,7 @@ div.notice_customers {
 	_background: url(/media/images//reg/10bdbg4.png) no-repeat;
 
 	height: 780px;
-	
+
 
 	padding-top: 14px
 
@@ -4665,7 +4687,7 @@ div.notice_customers {
 
 .login-switch {
     font-size: 12px;
-   
+
 
 }
 .logint-switch .msg {
@@ -4690,9 +4712,9 @@ div.notice_customers {
     background:url('../../../img/www/index1/chinabiz.jpg') repeat center;
     width: 990px;
     height: 712px;
-    display: block;  
-    margin:auto; 
-    
+    display: block;
+    margin:auto;
+
 }
 
 .chinabiz div {
@@ -4708,3 +4730,91 @@ div.notice_customers {
     text-align: right;
 
 }
+
+.clients-content dd {
+    float: left;
+    padding: 30px 40px 0;
+    /*width: 120px;*/
+    height: 120px
+}
+
+.clients-content dd.vborder {
+    background: url(../../../img/www/index1/v_spliter.jpg) /*tpa=httpimg/www/index1/v_spliter.jpg*/
+    no-repeat right center
+}
+
+.clients-content div.cllist {
+    /*margin-left: 30px;*/
+    /*margin-top: 30px;*/
+}
+
+.clients-content div img.cliimg {
+    width: 120px;
+    height: 80px;
+}
+
+/* 광고 carousel start */
+.adlist_carousel {
+    position: relative;
+    width: 960px;
+    margin: 10px auto;
+    margin-top:20px;
+}
+
+.adlist_carousel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: block;
+}
+
+.adlist_carousel li {
+    font-size: 40px;
+    color: #999;
+    text-align: center;
+    width: 240px;
+    height: 170px;
+    padding: 0;
+    display: block;
+    float: left;
+}
+
+.adlist_carousel li a {
+    display: block;
+    width: 250px;
+    margin: auto;
+    position: relative;
+    box-shadow: 0 10px 5px rgba(0, 0, 0, .3);
+    border-top: 1px solid #ececec;
+    border-radius: 5px 5px 0 0;
+    _background: url(../../../img/www/index1/case-bg.png) /*tpa=httpimg/www/index1/case-bg.png*/
+    0 bottom no-repeat;
+}
+
+.adlist_carousel li a:after {
+    position: absolute;
+    bottom: -29px;
+    left: 0;
+    overflow: hidden;
+    background: #ffffff;
+    width: 100%;
+    height: 15px;
+    content: '';
+    border-radius: 50%;
+    box-shadow: 0 -10px 3px #ffffff;
+}
+
+.adlist_carousel li img {
+    width: 245px;
+    height: 160px;
+    margin: 5px auto;
+    display: inline;
+}
+
+.adlist_carousel.responsive {
+    width: auto;
+    margin-left: 0;
+}
+
+/* 광고 carousel end */
+

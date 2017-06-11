@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="uyan_auth" content="04a3f6938d" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="Wechat 마케팅, Wechat 대리운용, Wechat 개발 솔루션, Wechat Site, Wechat Template, Message Push, Wechat ShoppingMall" name="Keywords">
+  <meta content="Wechat 공식 계정 관리 Platform，제공서비스：Customizing Menu、Template、 MemberShip、 Event、 ShoppingMall, Service, 통계, 기업마케팅" name="Description">
+    <script src="/static/wxgjcn/src/html5.js" ></script>
+    <link rel="stylesheet" type="text/css" href="/static/wxgjcn/css/www/index1/wingko.css-2015-01-02-1.css"  media="all" />
+<script type="text/javascript" src="/static/wxgjcn/src/jQuery.js-2014-03-07-1.js" ></script>
+<script type="text/javascript" src="/static/wxgjcn/src/www/index1/weimob-index.js-2014-03-07-1.js" ></script>
+<title>WECHATKOREA</title>
+  <link rel="shortcut icon" href="httpimg/favicon.ico" />
+</head>
+<body>
+  <!--[if lte IE 8]>  <script language="javascript">$(function (){$.browser.msie&&$("#ie9-tips").show().find("#stopSuggestA").click(function(){$("#ie9-tips").hide()})})</script><![endif]-->
+<div class="nav clearfix">
+  <div class="nav-content">
+    <h1 class="left"><a href="/"   title="Wechat 공식 계정 관리 Platform">Wechat 공식 계정 관리 Platform</a></h1>
+    <div class="left city">
+      <!--<h2>全国</h2>
+              <a href="/static/wxgjcn/city1.htm" >
+          切换城市<i class="tri4"></i>
+        </a> -->
+    </div>
+    <div class="right line-li">
+       <ul>
+            <li><a href="/" >MAIN</a></li>
+            <li><a href="/static/wxgjcn/case1.htm"  >성공사례</a></li>
+          <!--<li class="nav_menu_li_1"><a style="width:70px; text-align:left;" class="_hover"><font face="方正粗圆简体" >기능</font><i></i></a>
+               <div class="sub-nav">
+                 <a href="/static/wxgjcn/package.htm"  target="_black"><font face="方正粗圆简体" >服务套餐</font></a>
+                 <a href="/static/wxgjcn/guide1.htm" ><font face="方正粗圆简体" >기능소개</font></a>
+
+
+               </div>
+
+          </li>-->
+            <li><a href="/static/wxgjcn/guide1.htm"  >기능소개</a></li>
+            <li><a href="/static/wxgjcn/proxy1.htm"  >사업제휴</a></li>
+            <!--
+            <li><a href="/static/wxgjcn/help.htm"   target="_black"><font face="方正粗圆简体" >HELP</font></a></li>
+            -->
+            <li><a href="/login.html">로그인</a></li>
+            <li><span>|</span></li>
+            <li><a href="/static/wxgjcn/chinabiz.htm">중국마케팅</a></li>
+            <li><a href="/static/wxgjcn/clients.htm" class="hover">클라이언트</a></li>
+            <li><a href="/wingko/brochure/wechat_brochure.pdf" target="_blank">위챗서비스소개</a></li>
+            <li><a href="/wingko/brochure/koishop_brochure.pdf" target="_blank">코이샵소개</a></li>
+        </ul>
+<!--
+      <div class="account">
+            <a href="/reg.html"  class="btn-reg btn0" target="_black">가입</a>
+              <a href="/static/wxgjcn/chinabiz.htm" class="btn-login btn0">중국마케팅</a>
+      </div>
+ -->
+    </div>
+  </div>
+</div>
+
+
+<div id="ie9-tips" class="clearfix">
+  <div id="tipsPanel">
+    <div id="tipsDesc">系统检测到您所使用的浏览器版本较低，推荐使用<a   target="_blank">Firefox</a>或<a   target="_blank">Chrome</a>浏览器打开，否则将无法体验完整产品功能。</div>
+    <a id="stopSuggestA" href="javascript:;">×</a>
+  </div>
+</div>
+
+<script>
+var $do_submit = false;
+
+// 绑定回车键
+$('#loginBox').keydown(function(e){
+  if(13 == event.keyCode){
+    login();
+  }
+});
+
+  function login()
+  {
+    if (true == $do_submit)
+    {
+      return false;
+    }
+
+    var $pre_submit = '登录', $done_submit = '登录中...';
+    var $username = $('#username').val(), $password = $('#password').val(), $keepalive = $('#rememberPwdIcon').val();
+    $('#login_button').text($done_submit);
+    $do_submit = true;
+
+    // check
+    if ('' == $username || '' == $password)
+    {
+      $('#err_tips').text('您输入的微企—国内优秀的微信公众服务平台号或密码错误，请重新输入！');
+      $('#err_area').show();
+      $('#login_button').text($pre_submit);
+      $do_submit = false;
+      return false;
+    }
+
+    var $login_data = {
+      username:$username,
+      password:$password,
+      keepalive:$keepalive
+    };
+    $.post('/login', $login_data, function(rs){
+      if(rs.errno == 200)
+      {
+        location.href = rs.url_route;
+      }
+      else
+      {
+        $('#err_tips').text(rs.error);
+        $('#err_area').show();
+        $('#login_button').text($pre_submit);
+      }
+      $do_submit = false;
+    }, 'json');
+  }
+</script>
+
+<div class="Public-content">
+  <div class="Public">
+    <h1 class="Public-h1">클라이언트</h1>
+    <div class="Public-box">
+
+<div class="content clearfix">
+  <div class="clients-content">
+    <dl class="clearfix">
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/관공서/2018평창.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/관공서/2018평창올림픽추진단.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/관공서/강원도1.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/관공서/강원도관광협회.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd>
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/관공서/경남.png"/>
+          </div>
+        </a>
+      </dd>
+    </dl>
+    <div class="line"></div>
+    <dl class="clearfix">
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/관공서/경남도청로고.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/관공서/아리랑티비.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/관공서/코트라.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/관공서/평창.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd>
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/관공서/at센터.png"/>
+          </div>
+        </a>
+      </dd>
+    </dl>
+    <div class="line"></div>
+    <dl class="clearfix">
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/갤러리아.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/그라지아.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/글라스락.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/네이처리퍼블릭.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd>
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/뉴발란스.png"/>
+          </div>
+        </a>
+      </dd>
+    </dl>
+    <div class="line"></div>
+    <dl class="clearfix">
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/동원.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/라피도.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/라피도1.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/락앤락.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd>
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/로드fc.png"/>
+          </div>
+        </a>
+      </dd>
+    </dl>
+    <div class="line"></div>
+    <dl class="clearfix">
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/리츠칼튼호텔.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/만다리나덕1.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/몰리올리.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/미구하라.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd>
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/빈폴.png"/>
+          </div>
+        </a>
+      </dd>
+    </dl>
+    <div class="line"></div>
+    <dl class="clearfix">
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/샘표.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/숨37-1.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/슈마커.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/스코필드.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd>
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/스톤헨지.png"/>
+          </div>
+        </a>
+      </dd>
+    </dl>
+    <div class="line"></div>
+    <dl class="clearfix">
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/아토팜.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/어바웃미.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/엠비오.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/엠비오1.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd>
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/오휘.png"/>
+          </div>
+        </a>
+      </dd>
+    </dl>
+    <div class="line"></div>
+    <dl class="clearfix">
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/유니웰.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/이랜드키즈1.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/임블리.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/청담지엔.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd>
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/코데즈컴바인.png"/>
+          </div>
+        </a>
+      </dd>
+    </dl>
+    <div class="line"></div>
+    <dl class="clearfix">
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/코오롱.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/쿠스쿠칭.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/크린랩.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/타임.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd>
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/태진미디어.png"/>
+          </div>
+        </a>
+      </dd>
+    </dl>
+    <div class="line"></div>
+    <dl class="clearfix">
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/티니위니.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/포인포.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/풀무원.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/플라자호텔.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd>
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/한식왕.png"/>
+          </div>
+        </a>
+      </dd>
+    </dl>
+    <div class="line"></div>
+    <dl class="clearfix">
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/현대백화.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/회오리감자2.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/ASHLEY.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/basichouse.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd>
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/belif1.png"/>
+          </div>
+        </a>
+      </dd>
+    </dl>
+    <div class="line"></div>
+    <dl class="clearfix">
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/CNP.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/G마켓.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/HAAN.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/LG.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd>
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/Michael_Kors.png"/>
+          </div>
+        </a>
+      </dd>
+    </dl>
+    <div class="line"></div>
+    <dl class="clearfix">
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/MINE.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/SATIN.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/SJSJ.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/system.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd>
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/UGIZ.png"/>
+          </div>
+        </a>
+      </dd>
+    </dl>
+    <div class="line"></div>
+    <dl class="clearfix">
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/기업/WeChat Image_20170501170112.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/병의원/뉴페이스치과.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/병의원/라비앙.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/병의원/베네치아치과.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd>
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/병의원/시크릿.png"/>
+          </div>
+        </a>
+      </dd>
+    </dl>
+    <div class="line"></div>
+    <dl class="clearfix">
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/병의원/아이플란트치과.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/병의원/이데아-성형외과.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/병의원/투명치과.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd class="vborder">
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/병의원/허쉬성형.png"/>
+          </div>
+        </a>
+      </dd>
+      <dd>
+        <a href="" >
+          <div class="cllist">
+            <img class="cliimg" src="/wingko/img/clients/병의원/DA.png"/>
+          </div>
+        </a>
+      </dd>
+    </dl>
+  </div>
+</div>
+
+
+
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var erwei_time = null;
+    $(".erwei").hover(function(){
+      $(".erwei_big").show();
+    }).mouseleave(function(){
+        erwei_time = setTimeout(function(){
+          $(".erwei_big").hide();
+        },1000);
+      });
+    $(".erwei_big").mouseenter(function(){
+      if(erwei_time){
+        clearTimeout(erwei_time);
+      }
+    }).mouseleave(function(){
+        erwei_time = setTimeout(function(){
+          $(".erwei_big").hide();
+        },1000);
+      });
+  });
+</script>
+<!-- 意见反馈 -->
+<div class="feedback" id="feedback">
+  <p class="feedsize"><b>亲爱的用户</b><a class="close" href="javascript:;" onclick= "$('#feedback, #feedback_cover').toggleClass('on');">×</a></p>
+  <p class="bbottom">欢迎您访问微企—国内优秀的微信公众服务平台官方网站！您对微企—国内优秀的微信公众服务平台有任何意见和建议，或在使用过程中遇到问题，请在本页面反馈。我们会实时关注您的反馈不断优化，您的建议将帮助我们改进，为您提供更好的服务！</p>
+  <p class="feedsize"><b>请留下您的宝贵意见和建议！（请填写）</b></p>
+  <form>
+    <textarea  id="feedback-text" name="" id="feedback-text" placeholder="输入文本..."></textarea>
+    <p class="feedsize"><b>您常用的电子邮箱是？（请填写）</b></p>
+    <p style="color:#666; text-indent:1em;"><b class="blue">★</b>请尽量填写，以便我们尽快回复您！</p>
+    <input type="text" placeholder="如：@163.com" id="feedback-input" />
+       <p class="feedsize"><b>验证码</b></p>
+        <input type="text" name="captcha" id="feedback-Captcha" maxlength="4" onClick="">
+        <span name="feedback_captcha" id="feedback_captcha">
+        <img title="看不清？点击更换" style="cursor: pointer;" src="captcha-f=feedback&v=8098740.png"  id="yanzhen" width="60" height="20" border="1">
+      </span>
+      <br />
+    <input type="button"  class="feed-btn" value="" onClick="feedbackSubmit(); return false;" />
+  </form>
+</div>
+<div id="feedback_cover" class="feedback_cover"></div>
+<!--QQ咨询-->
+<script charset="utf-8" type="text/javascript" src="/static/wxgjcn//static.b.qq.com/account/bizqq/js/wpa.js-wty=1&type=13&kfuin=2943747028&ws=http---www.weimob.com-&title=企业QQ售前&cot1=国内最大的微企—国内优秀的微信公众服务平台&btn1=企业QQ咨询&fsty=0&fposX=2&fposY=1&tx=2&aty=1&a=1001.js" ></script>
+
+<div class="footer">
+  <div class="footer-content clearfix">
+      <div class="foot-menu">
+      <p>
+        <a href="/static/wxgjcn/index1.htm"  target="_blank">윙코커뮤니케이션(주) │ 사업자등록번호 109-86-41054 통신판매업신고번호 2013-서울강서-0811호</a>&nbsp;&nbsp;
+
+      </p>
+      <p>대표 이주연 │ 개인정보관리책임자 이주연</p>
+      <p>고객센터 02-6365-1030 │ Fax 02-6365-1040 │ 이메일 wechat@wingkostory.com </p>
+      <p>157-925 서울특별시 강서구 화곡동 1081-39번지 3층 (강서로31길 52)</p>
+      <p>중국지사 : 201105 上海市 闵行区 吴中路 2708号 4楼 </p>
+    </div>
+    <div class="copyright">
+      Copyright  2011-2014  All Rights Reserved
+    </div>
+  </div>
+</div>
+
+<!--
+<a class="feedbackbot" href="javascript:;" onclick= "$('#feedback, #feedback_cover').toggleClass('on');"></a>
+<div style="display:none;"><script type="text/javascript" src="/static/wxgjcn/src/www/index1/huishuo.js-v=2014-03-07-1.js" ></script></div>
+-->
+
+<script>
+  $(document).ready(function(){
+    $("#yanzhen").click(function(){
+      var img_src= 'captcha-f=feedback&v=.png'/*tpa=http://www.weimob.com/site/captcha?f=feedback&v=*/;
+      $(this).attr({"src":img_src + Math.random()*100000});
+    });
+  });
+  function feedbackSubmit(){
+    var $data = {
+      feedback: $('#feedback-text').val(),
+      email: $('#feedback-input').val(),
+      captcha: $('#feedback-Captcha').val(),
+      url: self.location.hrefy
+    };
+    $.post('/site/feedback', $data, function(rs){
+      alert(rs.error);
+      if (200 == rs.code)
+      {
+        $('#feedback, #feedback_cover').toggleClass('on');
+      }
+    }, 'json');
+  }
+</script>
+
+
+
+
+</body>
+</html>
+
