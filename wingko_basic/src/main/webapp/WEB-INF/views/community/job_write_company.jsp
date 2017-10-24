@@ -5,7 +5,6 @@
   -
   -
   --%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -27,6 +26,7 @@
 <script src="/resources/js/jquery-1.9.1.js"></script>
 <script src="/resources/js/message.js"></script>
 <script>
+	
 	
 	if ("${pass}") {
 		alert(m.password.different);
@@ -138,6 +138,33 @@
             	<th>其他招聘条件</th><!--기타 구인조건-->
                 <td colspan="3"><form:textarea path="job.company_etc" cssClass="txtarea2" /></td>
             </tr>
+            <!-- display captcha image start -->
+			<tr>
+				<td colspan="4"><font color="red"><c:out
+					value="${message}"></c:out></font></td>
+			</tr>            
+			<tr>
+				<th>Image#</th>
+				<td>
+					<div>
+						<img id="captcha_id" name="imgCaptcha" src="captcha.jpg">
+					</div>
+				</td> 
+				<th>Image#1</th>
+				<td align="left"><a href="javascript:;"
+                        title="change captcha text"
+                        onclick="document.getElementById('captcha_id').src = 'captcha.jpg?' + Math.random();  return false">
+                            <img src="images/refresh.png" /></a>
+                 </td>
+			</tr>
+			<tr>
+				<td colspan="2"><form:errors path="captcha" cssClass="error" /></td>
+			</tr>
+			<tr>
+				<td>Enter above Image text#</td>
+				<td><form:input path="job.captcha" cssClass="txt"/></td>
+			</tr>            
+            <!-- display captcha image end -->
      </table>
         <div class="bt_center" style="margin-top:20px;">
        		<c:if test="${sessionScope.user_no == '8' }">

@@ -482,7 +482,7 @@ public class CommunityController {
 
 	@RequestMapping(value="/community/job_write.do", method=RequestMethod.GET)
 	public String jobWrite(HttpServletResponse res, Model model, HttpSession session, Job job) throws Exception {
-
+ 
 		if (job.getJob_no() > 0) {
 			int page = job.getPage();
 			String input_pwd = job.getPwd();
@@ -508,7 +508,7 @@ public class CommunityController {
 
 	@RequestMapping(value="/community/job_write.do", method=RequestMethod.POST)
 	public String jobWriteSubmit(HttpServletRequest req, Model model, HttpSession session) {
-		
+		logger.info("job_write.do");
 		try {
 			MultipartRequestWithSameFileTag multi = null;
 			multi = new MultipartRequestWithSameFileTag(req, uploadTempPath+"/job", size, "UTF-8", new TimestampFileRenamePolicy());
@@ -525,6 +525,29 @@ public class CommunityController {
 			}
 
 			logger.info(params.toString());
+
+			// add, check captcha logic for block bot insert
+			String captcha = null;
+			try { 
+				captcha = (String)session.getAttribute("CAPTCHA");
+			} catch (Exception e) {
+				;
+			}
+			String param_captcha = params.get("captcha");
+			logger.info("session - captcha : {}, param captcha : {}", captcha, param_captcha);
+			if(captcha == null || (captcha != null && !captcha.equals(param_captcha))) {
+				Job job = new Job();
+				job.setCompany_title(params.get("company_title"));
+				job.setTitle(params.get("title"));
+				job.setCompany_desc(params.get("company_desc"));
+//				job.setPage(Integer.parseInt(params.get("page")));
+				job.setJob_type(params.get("job_type"));
+				
+				model.addAttribute("job", job);
+	            model.addAttribute("message", "Captcha does not match");
+	            return "/community/job_write_company";
+	        }
+
 			if ( multi.getParameter("job_no") != null && Integer.parseInt( multi.getParameter("job_no")) > 0) {
 				dao.setJobUpdate(params);
 			} else {

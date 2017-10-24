@@ -49,9 +49,14 @@ public class Job extends Page {
 	private String edit_date;
 	private String reg_date;
 	private int hit;
+	private String captcha;
 	
 	private String search_type = "";
 	private String search_string = "";
+	
+	public Job() {
+		
+	}
 	
 	public int getJob_no() {
 		return job_no;
@@ -315,7 +320,13 @@ public class Job extends Page {
 				+ hunter_career5 + ", hunter_about=" + hunter_about
 				+ ", edit_date=" + edit_date + ", reg_date=" + reg_date
 				+ ", hit=" + hit + ", search_type=" + search_type
-				+ ", search_string=" + search_string + "]";
+				+ ", search_string=" + search_string + ",captcha=" + captcha + "]";
+	}
+	public String getCaptcha() {
+		return captcha;
+	}
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
 	}
 	
 }
