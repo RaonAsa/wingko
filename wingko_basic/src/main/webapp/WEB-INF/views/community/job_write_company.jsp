@@ -27,12 +27,12 @@
 <script src="/resources/js/message.js"></script>
 <script>
 	
-	
 	if ("${pass}") {
 		alert(m.password.different);
 		history.back(-1);
+	} else if ("${error}") {
+		alert(${error});
 	}
-	
 	
 	$(document).ready(function(){
 	});
@@ -41,6 +41,9 @@
 		if ($("#pwd").val() == '') {
 			alert(m.password.blank);
 			$("#pwd").focus();
+		} else if ($("#captcha").val() == '') {
+			alert(m.captcha.blank);
+			$("#captcha").focus();
 		} else {
 			if (confirm(m.confirm.insert)) {
 				$("#frm").submit();	
@@ -140,29 +143,18 @@
             </tr>
             <!-- display captcha image start -->
 			<tr>
-				<td colspan="4"><font color="red"><c:out
-					value="${message}"></c:out></font></td>
-			</tr>            
-			<tr>
-				<th>Image#</th>
+				<th>图像值#</th> <!-- Image -->
 				<td>
-					<div>
-						<img id="captcha_id" name="imgCaptcha" src="captcha.jpg">
-					</div>
-				</td> 
-				<th>Image#1</th>
-				<td align="left"><a href="javascript:;"
+					<img id="captcha_id" name="imgCaptcha" src="/captcha.jpg">
+					<a href="javascript:;"
                         title="change captcha text"
-                        onclick="document.getElementById('captcha_id').src = 'captcha.jpg?' + Math.random();  return false">
-                            <img src="images/refresh.png" /></a>
-                 </td>
+                        onclick="document.getElementById('captcha_id').src = '/captcha.jpg?' + Math.random();  return false">
+                            <img src="/resources/img/button/btn_refresh.png" /></a>
+				</td> 
+				<th>图像值#1</th>
+				<td><form:input path="job.captcha" cssClass="txt"/><br></br>输入图像值#</td> <!-- Image값을 입력하세요. -->
 			</tr>
 			<tr>
-				<td colspan="2"><form:errors path="captcha" cssClass="error" /></td>
-			</tr>
-			<tr>
-				<td>Enter above Image text#</td>
-				<td><form:input path="job.captcha" cssClass="txt"/></td>
 			</tr>            
             <!-- display captcha image end -->
      </table>

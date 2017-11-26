@@ -14,10 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.wingko.story.util.CaptchaUtil;
 
 public class CaptchaGenServlet extends HttpServlet {
 
+	Logger logger = LoggerFactory.getLogger(CaptchaGenServlet.class);
+	
 	/**
 	 * 
 	 */
@@ -27,7 +32,7 @@ public class CaptchaGenServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		logger.info("CaptchaGenServlet -> doPost");
 		response.setHeader("Cache-Control", "no-cache");
 		response.setDateHeader("Expires", 0);
 		response.setHeader("Pragma", "no-cache");

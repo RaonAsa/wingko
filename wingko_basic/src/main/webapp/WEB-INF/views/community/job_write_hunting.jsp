@@ -31,6 +31,8 @@
 	if ("${pass}") {
 		alert(m.password.different);
 		history.back(-1);
+	} else if ("${error}") {
+		alert(${error});
 	}
 
 	$(document).ready(function(){
@@ -43,6 +45,9 @@
 		if ($("#pwd").val() == '') {
 			alert(m.password.blank);
 			$("#pwd").focus();
+		} else if ($("#captcha").val() == '') {
+			alert(m.captcha.blank);
+			$("#captcha").focus();
 		} else {
 			if (confirm(m.confirm.insert)) {
 				$("#frm").submit();	
@@ -136,6 +141,23 @@
             	<th>自我介绍</th><!--자기소개-->
                 <td colspan="3"><form:textarea path="job.hunter_about" cssClass="txtarea2" cssStyle="height:200px;" /></td>
             </tr>
+            <!-- display captcha image start -->
+			<tr>
+				<th>图像值#</th> <!-- Image -->
+				<td>
+					<img id="captcha_id" name="imgCaptcha" src="/captcha.jpg">
+					<a href="javascript:;"
+                        title="change captcha text"
+                        onclick="document.getElementById('captcha_id').src = '/captcha.jpg?' + Math.random();  return false">
+                            <img src="/resources/img/button/btn_refresh.png" /></a>
+				</td> 
+				<th>图像值#1</th>
+				<td><form:input path="job.captcha" cssClass="txt"/><br></br>输入图像值#</td> <!-- Image값을 입력하세요. -->
+			</tr>
+			<tr>
+			</tr>            
+            <!-- display captcha image end -->
+            
      </table>
      	<div class="bt_center" style="margin-top:20px;">
        		<c:if test="${sessionScope.user_no == '8' }">
